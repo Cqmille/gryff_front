@@ -1,5 +1,3 @@
-
-test commit Bruno
 # Stencil App Starter
 
 Stencil is a compiler for building fast web apps using Web Components.
