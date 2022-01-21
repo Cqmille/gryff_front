@@ -7,7 +7,7 @@ let AppRoot = class {
     registerInstance(this, hostRef);
   }
   render() {
-    return (h("div", null, h("header", null, h("h1", null, "Stencil App Starter")), h("main", null, h("stencil-router", null, h("stencil-route-switch", { scrollTopOffset: 0 }, h("stencil-route", { url: "/", component: "app-home", exact: true }), h("stencil-route", { url: "/profile/:name", component: "app-profile" }))))));
+    return (h("div", null, h("main", null, h("stencil-router", null, h("stencil-route-switch", { scrollTopOffset: 0 }, h("stencil-route", { url: "/", component: "app-home", exact: true }), h("stencil-route", { url: "/profile/:name", component: "app-profile" }), h("stencil-route", { component: "public-not-found" }))))));
   }
 };
 AppRoot.style = appRootCss;

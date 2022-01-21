@@ -1,11 +1,11 @@
 import { Component, h } from '@stencil/core';
 
 @Component({
-    tag:'app-nav',
+    tag:'public-footer',
     shadow: false,
 })
 
-export class AppNav {
+export class PublicFooter {
     render(){
         return (
             <div>

@@ -1,6 +1,6 @@
 import { r as registerInstance, h } from './index-0bdf7134.js';
 
-let AppNav = class {
+let PublicNav = class {
   constructor(hostRef) {
     registerInstance(this, hostRef);
   }
@@ -9,4 +9,4 @@ let AppNav = class {
   }
 };
 
-export { AppNav as app_nav };
+export { PublicNav as public_nav };

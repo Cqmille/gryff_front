@@ -9,12 +9,16 @@ import { MatchResults } from "@stencil/router";
 export namespace Components {
     interface AppHome {
     }
-    interface AppNav {
-    }
     interface AppProfile {
         "match": MatchResults;
     }
     interface AppRoot {
+    }
+    interface PublicFooter {
+    }
+    interface PublicNav {
+    }
+    interface PublicNotFound {
     }
 }
 declare global {
@@ -23,12 +27,6 @@ declare global {
     var HTMLAppHomeElement: {
         prototype: HTMLAppHomeElement;
         new (): HTMLAppHomeElement;
-    };
-    interface HTMLAppNavElement extends Components.AppNav, HTMLStencilElement {
-    }
-    var HTMLAppNavElement: {
-        prototype: HTMLAppNavElement;
-        new (): HTMLAppNavElement;
     };
     interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {
     }
@@ -42,28 +40,54 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLPublicFooterElement extends Components.PublicFooter, HTMLStencilElement {
+    }
+    var HTMLPublicFooterElement: {
+        prototype: HTMLPublicFooterElement;
+        new (): HTMLPublicFooterElement;
+    };
+    interface HTMLPublicNavElement extends Components.PublicNav, HTMLStencilElement {
+    }
+    var HTMLPublicNavElement: {
+        prototype: HTMLPublicNavElement;
+        new (): HTMLPublicNavElement;
+    };
+    interface HTMLPublicNotFoundElement extends Components.PublicNotFound, HTMLStencilElement {
+    }
+    var HTMLPublicNotFoundElement: {
+        prototype: HTMLPublicNotFoundElement;
+        new (): HTMLPublicNotFoundElement;
+    };
     interface HTMLElementTagNameMap {
         "app-home": HTMLAppHomeElement;
-        "app-nav": HTMLAppNavElement;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
+        "public-footer": HTMLPublicFooterElement;
+        "public-nav": HTMLPublicNavElement;
+        "public-not-found": HTMLPublicNotFoundElement;
     }
 }
 declare namespace LocalJSX {
     interface AppHome {
-    }
-    interface AppNav {
     }
     interface AppProfile {
         "match"?: MatchResults;
     }
     interface AppRoot {
     }
+    interface PublicFooter {
+    }
+    interface PublicNav {
+    }
+    interface PublicNotFound {
+    }
     interface IntrinsicElements {
         "app-home": AppHome;
-        "app-nav": AppNav;
         "app-profile": AppProfile;
         "app-root": AppRoot;
+        "public-footer": PublicFooter;
+        "public-nav": PublicNav;
+        "public-not-found": PublicNotFound;
     }
 }
 export { LocalJSX as JSX };
@@ -71,9 +95,11 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
-            "app-nav": LocalJSX.AppNav & JSXBase.HTMLAttributes<HTMLAppNavElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "public-footer": LocalJSX.PublicFooter & JSXBase.HTMLAttributes<HTMLPublicFooterElement>;
+            "public-nav": LocalJSX.PublicNav & JSXBase.HTMLAttributes<HTMLPublicNavElement>;
+            "public-not-found": LocalJSX.PublicNotFound & JSXBase.HTMLAttributes<HTMLPublicNotFoundElement>;
         }
     }
 }
