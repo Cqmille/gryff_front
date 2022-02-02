@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MatchResults } from "@stencil/router";
+import { MatchResults, RouterHistory } from "@stencil/router";
 export namespace Components {
     interface AppHome {
     }
@@ -14,11 +14,14 @@ export namespace Components {
     }
     interface AppRoot {
     }
-    interface PublicFooter {
-    }
-    interface PublicNav {
-    }
     interface PublicNotFound {
+    }
+    interface PubliqFooter {
+    }
+    interface PubliqNav {
+    }
+    interface UserConnexion {
+        "history": RouterHistory;
     }
 }
 declare global {
@@ -40,31 +43,38 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
-    interface HTMLPublicFooterElement extends Components.PublicFooter, HTMLStencilElement {
-    }
-    var HTMLPublicFooterElement: {
-        prototype: HTMLPublicFooterElement;
-        new (): HTMLPublicFooterElement;
-    };
-    interface HTMLPublicNavElement extends Components.PublicNav, HTMLStencilElement {
-    }
-    var HTMLPublicNavElement: {
-        prototype: HTMLPublicNavElement;
-        new (): HTMLPublicNavElement;
-    };
     interface HTMLPublicNotFoundElement extends Components.PublicNotFound, HTMLStencilElement {
     }
     var HTMLPublicNotFoundElement: {
         prototype: HTMLPublicNotFoundElement;
         new (): HTMLPublicNotFoundElement;
     };
+    interface HTMLPubliqFooterElement extends Components.PubliqFooter, HTMLStencilElement {
+    }
+    var HTMLPubliqFooterElement: {
+        prototype: HTMLPubliqFooterElement;
+        new (): HTMLPubliqFooterElement;
+    };
+    interface HTMLPubliqNavElement extends Components.PubliqNav, HTMLStencilElement {
+    }
+    var HTMLPubliqNavElement: {
+        prototype: HTMLPubliqNavElement;
+        new (): HTMLPubliqNavElement;
+    };
+    interface HTMLUserConnexionElement extends Components.UserConnexion, HTMLStencilElement {
+    }
+    var HTMLUserConnexionElement: {
+        prototype: HTMLUserConnexionElement;
+        new (): HTMLUserConnexionElement;
+    };
     interface HTMLElementTagNameMap {
         "app-home": HTMLAppHomeElement;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
-        "public-footer": HTMLPublicFooterElement;
-        "public-nav": HTMLPublicNavElement;
         "public-not-found": HTMLPublicNotFoundElement;
+        "publiq-footer": HTMLPubliqFooterElement;
+        "publiq-nav": HTMLPubliqNavElement;
+        "user-connexion": HTMLUserConnexionElement;
     }
 }
 declare namespace LocalJSX {
@@ -75,19 +85,23 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
-    interface PublicFooter {
-    }
-    interface PublicNav {
-    }
     interface PublicNotFound {
+    }
+    interface PubliqFooter {
+    }
+    interface PubliqNav {
+    }
+    interface UserConnexion {
+        "history"?: RouterHistory;
     }
     interface IntrinsicElements {
         "app-home": AppHome;
         "app-profile": AppProfile;
         "app-root": AppRoot;
-        "public-footer": PublicFooter;
-        "public-nav": PublicNav;
         "public-not-found": PublicNotFound;
+        "publiq-footer": PubliqFooter;
+        "publiq-nav": PubliqNav;
+        "user-connexion": UserConnexion;
     }
 }
 export { LocalJSX as JSX };
@@ -97,9 +111,10 @@ declare module "@stencil/core" {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
-            "public-footer": LocalJSX.PublicFooter & JSXBase.HTMLAttributes<HTMLPublicFooterElement>;
-            "public-nav": LocalJSX.PublicNav & JSXBase.HTMLAttributes<HTMLPublicNavElement>;
             "public-not-found": LocalJSX.PublicNotFound & JSXBase.HTMLAttributes<HTMLPublicNotFoundElement>;
+            "publiq-footer": LocalJSX.PubliqFooter & JSXBase.HTMLAttributes<HTMLPubliqFooterElement>;
+            "publiq-nav": LocalJSX.PubliqNav & JSXBase.HTMLAttributes<HTMLPubliqNavElement>;
+            "user-connexion": LocalJSX.UserConnexion & JSXBase.HTMLAttributes<HTMLUserConnexionElement>;
         }
     }
 }

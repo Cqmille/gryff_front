@@ -9,15 +9,18 @@ export class AppRoot {
   render() {
     return (
       <div>
+        <publiq-nav></publiq-nav>
         <main>
           <stencil-router>
             <stencil-route-switch scrollTopOffset={0}>
               <stencil-route url="/" component="app-home" exact={true} />
               <stencil-route url="/profile/:name" component="app-profile" />
+              <stencil-route url="/connexion" component="user-connexion" />
               <stencil-route component="public-not-found" />
             </stencil-route-switch>
           </stencil-router>
         </main>
+        <publiq-footer></publiq-footer>
       </div>
     );
   }
