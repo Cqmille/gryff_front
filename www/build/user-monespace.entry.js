@@ -19,15 +19,15 @@ let UserMonespace = class {
         }
       });
       let reponseBack = await response.json();
-      this.ressources = reponseBack.articles;
-      console.log(this.ressources);
+      this.mesRessources = reponseBack.articles;
+      console.log(this.mesRessources);
     }
     catch (err) {
       console.log('fetch failed', err);
     }
   }
   render() {
-    return (h("div", null, this.ressources.map((ressource) => h("div", null, h("p", null, " Etat: ", ressource.etatRessource, " - Date de publication: ", ressource.datePublication, " - titre: ", ressource.titre, " ")))));
+    return (h("div", null, this.mesRessources.map((ressource) => h("div", null, h("p", null, " Etat: ", ressource.etatRessource, " - Date de publication: ", ressource.datePublication, " - titre: ", ressource.titre, " ")))));
   }
 };
 

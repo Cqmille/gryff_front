@@ -9,7 +9,7 @@ import { Ressources } from '../../utils/Ressources';
 
 export class UserMonespace {
 
-    @State() ressources:Ressources[];
+    @State() mesRessources:Ressources[];
 
     connectedCallback() {
         console.log('Connected Callback');
@@ -27,8 +27,8 @@ export class UserMonespace {
                 }
             });
             let reponseBack = await response.json();
-            this.ressources = reponseBack.articles;
-            console.log(this.ressources)
+            this.mesRessources = reponseBack.articles;
+            console.log(this.mesRessources)
         }
         catch (err){
             console.log('fetch failed', err);
@@ -38,7 +38,8 @@ export class UserMonespace {
     render(){
         return (
             <div>
-                {this.ressources.map((ressource : Ressources) =>
+                
+                {this.mesRessources.map((ressource : Ressources) =>
                     <div>
                         <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} </p>
                     </div>
