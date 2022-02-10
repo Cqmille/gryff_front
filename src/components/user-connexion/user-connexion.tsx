@@ -1,6 +1,8 @@
 import { Component, Prop, h, State } from '@stencil/core';
 import { RouterHistory } from '@stencil/router';
 
+import { UserConnected } from '../../utils/UserConnected';
+
 @Component({
   tag: 'user-connexion',
   shadow: false,
@@ -12,6 +14,7 @@ export class UserConnexion {
     @State() email: String;
     @State() password: String;
     @State() reponseServer: JSON;
+    @State() user: UserConnected;
 
     async envoiConnexion(e){
         e.preventDefault();
@@ -25,9 +28,10 @@ export class UserConnexion {
               'Content-Type': 'application/json',
             },
         });
-        this.reponseServer = await response.json();
-        console.log(this.reponseServer)
-        //this.history.replace(`/`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
+        this.user = await response.json();
+        localStorage.setItem("userId", this.user.userId);
+        localStorage.setItem("token", this.user.token);
+        this.history.replace(`/monEspace`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
     }
 
     chargeState(event){

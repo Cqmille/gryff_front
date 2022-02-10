@@ -23,6 +23,8 @@ export namespace Components {
     interface UserConnexion {
         "history": RouterHistory;
     }
+    interface UserMonespace {
+    }
 }
 declare global {
     interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
@@ -67,6 +69,12 @@ declare global {
         prototype: HTMLUserConnexionElement;
         new (): HTMLUserConnexionElement;
     };
+    interface HTMLUserMonespaceElement extends Components.UserMonespace, HTMLStencilElement {
+    }
+    var HTMLUserMonespaceElement: {
+        prototype: HTMLUserMonespaceElement;
+        new (): HTMLUserMonespaceElement;
+    };
     interface HTMLElementTagNameMap {
         "app-home": HTMLAppHomeElement;
         "app-profile": HTMLAppProfileElement;
@@ -75,6 +83,7 @@ declare global {
         "publiq-footer": HTMLPubliqFooterElement;
         "publiq-nav": HTMLPubliqNavElement;
         "user-connexion": HTMLUserConnexionElement;
+        "user-monespace": HTMLUserMonespaceElement;
     }
 }
 declare namespace LocalJSX {
@@ -94,6 +103,8 @@ declare namespace LocalJSX {
     interface UserConnexion {
         "history"?: RouterHistory;
     }
+    interface UserMonespace {
+    }
     interface IntrinsicElements {
         "app-home": AppHome;
         "app-profile": AppProfile;
@@ -102,6 +113,7 @@ declare namespace LocalJSX {
         "publiq-footer": PubliqFooter;
         "publiq-nav": PubliqNav;
         "user-connexion": UserConnexion;
+        "user-monespace": UserMonespace;
     }
 }
 export { LocalJSX as JSX };
@@ -115,6 +127,7 @@ declare module "@stencil/core" {
             "publiq-footer": LocalJSX.PubliqFooter & JSXBase.HTMLAttributes<HTMLPubliqFooterElement>;
             "publiq-nav": LocalJSX.PubliqNav & JSXBase.HTMLAttributes<HTMLPubliqNavElement>;
             "user-connexion": LocalJSX.UserConnexion & JSXBase.HTMLAttributes<HTMLUserConnexionElement>;
+            "user-monespace": LocalJSX.UserMonespace & JSXBase.HTMLAttributes<HTMLUserMonespaceElement>;
         }
     }
 }

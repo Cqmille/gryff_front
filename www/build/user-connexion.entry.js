@@ -16,9 +16,10 @@ let UserConnexion = class {
         'Content-Type': 'application/json',
       },
     });
-    this.reponseServer = await response.json();
-    console.log(this.reponseServer);
-    //this.history.replace(`/`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
+    this.user = await response.json();
+    localStorage.setItem("userId", this.user.userId);
+    localStorage.setItem("token", this.user.token);
+    this.history.replace(`/monEspace`, {}); // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
   }
   chargeState(event) {
     switch (event.target.name) {
