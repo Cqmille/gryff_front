@@ -16,6 +16,8 @@ export class AppRoot {
               <stencil-route url="/" component="app-home" exact={true} />
               <stencil-route url="/profile/:name" component="app-profile" />
               <stencil-route url="/connexion" component="user-connexion" />
+              <stencil-route url="/monEspace" component="user-monespace" />
+
               <stencil-route component="public-not-found" />
             </stencil-route-switch>
           </stencil-router>
