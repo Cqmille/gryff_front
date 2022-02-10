@@ -10,7 +10,6 @@ import { Ressources } from '../../utils/Ressources';
 export class UserMonespace {
 
     @State() ressources:Ressources[];
-    @State() uneRessource: Ressources;
 
     connectedCallback() {
         console.log('Connected Callback');
@@ -29,9 +28,7 @@ export class UserMonespace {
             });
             let reponseBack = await response.json();
             this.ressources = reponseBack.articles;
-            this.uneRessource = this.ressources[0];
             console.log(this.ressources)
-            console.log(this.uneRessource)
         }
         catch (err){
             console.log('fetch failed', err);
@@ -43,7 +40,7 @@ export class UserMonespace {
             <div>
                 {this.ressources.map((ressource : Ressources) =>
                     <div>
-                        <p> Etat: {ressource.EtatRessource} - Date de publication: {ressource.date_publication} - titre: {ressource.titre}  - auteur: {ressource.auteur} </p>
+                        <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} </p>
                     </div>
                         )}
             </div>

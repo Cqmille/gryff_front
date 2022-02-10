@@ -20,16 +20,14 @@ let UserMonespace = class {
       });
       let reponseBack = await response.json();
       this.ressources = reponseBack.articles;
-      this.uneRessource = this.ressources[0];
       console.log(this.ressources);
-      console.log(this.uneRessource);
     }
     catch (err) {
       console.log('fetch failed', err);
     }
   }
   render() {
-    return (h("div", null, this.ressources.map((ressource) => h("div", null, h("p", null, " Etat: ", ressource.EtatRessource, " - Date de publication: ", ressource.date_publication, " - titre: ", ressource.titre, "  - auteur: ", ressource.auteur, " ")))));
+    return (h("div", null, this.ressources.map((ressource) => h("div", null, h("p", null, " Etat: ", ressource.etatRessource, " - Date de publication: ", ressource.datePublication, " - titre: ", ressource.titre, " ")))));
   }
 };
 

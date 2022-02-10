@@ -1,9 +1,8 @@
 export interface Ressources {
-    id: string,
+    _id: string,
     type:string,
-    EtatRessource: string,
+    etatRessource: string,
     titre: string,
     resume:string,
-    auteur: string,
-    date_publication: Date,
+    datePublication: string,
 }
