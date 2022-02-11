@@ -27,7 +27,7 @@ export class UserMonespace {
                 }
             });
             let reponseBack = await response.json();
-            this.mesRessources = reponseBack.articles;
+            this.mesRessources = await reponseBack.articles;
             console.log(this.mesRessources)
         }
         catch (err){
@@ -38,13 +38,13 @@ export class UserMonespace {
     render(){
         return (
             <div>
-                
                 {this.mesRessources.map((ressource : Ressources) =>
                     <div>
                         <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} </p>
                     </div>
-                        )}
+                )}
             </div>
         )
     }
+
 }

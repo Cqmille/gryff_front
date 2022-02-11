@@ -19,7 +19,7 @@ let UserMonespace = class {
         }
       });
       let reponseBack = await response.json();
-      this.mesRessources = reponseBack.articles;
+      this.mesRessources = await reponseBack.articles;
       console.log(this.mesRessources);
     }
     catch (err) {
