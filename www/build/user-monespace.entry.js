@@ -27,7 +27,9 @@ let UserMonespace = class {
     }
   }
   render() {
-    return (h("div", null, this.mesRessources.map((ressource) => h("div", null, h("p", null, " Etat: ", ressource.etatRessource, " - Date de publication: ", ressource.datePublication, " - titre: ", ressource.titre, " ")))));
+    if (this.mesRessources) {
+      return (h("div", null, this.mesRessources.map((ressource) => h("div", null, h("p", null, " Etat: ", ressource.etatRessource, " - Date de publication: ", ressource.datePublication, " - titre: ", ressource.titre, " ")))));
+    }
   }
 };
 

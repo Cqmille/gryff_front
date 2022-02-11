@@ -36,15 +36,27 @@ export class UserMonespace {
     }
 
     render(){
-        return (
-            <div>
-                {this.mesRessources.map((ressource : Ressources) =>
-                    <div>
-                        <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} </p>
-                    </div>
-                )}
-            </div>
-        )
-    }
 
+        if(this.mesRessources){
+            return (
+                <div>
+                    {this.mesRessources.map((ressource : Ressources) =>
+                        <div>
+                            <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} </p>
+                        </div>)}
+                </div>
+            )
+        }
+    }
 }
+
+// return (
+//     <div>
+        
+//         {this.mesRessources.map((ressource : Ressources) =>
+//             <div>
+//                 <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} </p>
+//             </div>
+//                 )}
+//     </div>
+// )
