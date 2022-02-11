@@ -10,9 +10,9 @@ import { Ressources } from '../../utils/Ressources';
 export class UserMonespace {
 
     @State() mesRessources:Ressources[];
+    @State() message: string;
 
-    connectedCallback() {
-        console.log('Connected Callback');
+    async componentWillLoad() {
         this._getData();
     }
 
@@ -25,10 +25,11 @@ export class UserMonespace {
                     authorization: localStorage.getItem('token'),
                     userid: localStorage.getItem('userId')
                 }
-            });
-            let reponseBack = await response.json();
-            this.mesRessources = await reponseBack.articles;
-            console.log(this.mesRessources)
+            })
+            console.log()
+            if(response.status == 401) {this.message = (await response.json()).message}
+            this.mesRessources = await response.json();
+            // console.log(this.message)
         }
         catch (err){
             console.log('fetch failed', err);
@@ -36,7 +37,6 @@ export class UserMonespace {
     }
 
     render(){
-
         if(this.mesRessources){
             return (
                 <div>
@@ -47,16 +47,12 @@ export class UserMonespace {
                 </div>
             )
         }
+        if(this.message){
+            return (
+                <div>
+                    <p>{this.message}</p>
+                </div>
+            )
+        }
     }
 }
-
-// return (
-//     <div>
-        
-//         {this.mesRessources.map((ressource : Ressources) =>
-//             <div>
-//                 <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} </p>
-//             </div>
-//                 )}
-//     </div>
-// )
