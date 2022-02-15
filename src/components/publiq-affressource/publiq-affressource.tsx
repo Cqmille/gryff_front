@@ -25,8 +25,8 @@ export class affressource {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    //authorization: localStorage.getItem('token'),
-                    userid: "61eee4fc0d617e873a46d769"
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
                     ressourceid: "620b95d1e1c6a6ec68548fed"
@@ -46,8 +46,8 @@ export class affressource {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    //authorization: localStorage.getItem('token'),
-                    userid: "61eee4fc0d617e873a46d769"
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
                     ressourceid: "620b95d1e1c6a6ec68548fed"
@@ -67,8 +67,8 @@ export class affressource {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    //authorization: localStorage.getItem('token'),
-                    userid: "61eee4fc0d617e873a46d769"
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
                     commentaireid: commentaireid.target.value
@@ -88,8 +88,8 @@ export class affressource {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    //authorization: localStorage.getItem('token'),
-                    userid: "61eee4fc0d617e873a46d769"
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
                     ressourceid: "620b95d1e1c6a6ec68548fed"
@@ -109,8 +109,8 @@ export class affressource {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    //authorization: localStorage.getItem('token'),
-                    userid: "61eee4fc0d617e873a46d769"
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
                     ressourceid: "620b95d1e1c6a6ec68548fed"
@@ -130,8 +130,8 @@ export class affressource {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    //authorization: localStorage.getItem('token'),
-                    userid: "61eee4fc0d617e873a46d769"
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
                     utilisateursSuivis: idUser.target.value
@@ -151,8 +151,8 @@ export class affressource {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    //authorization: localStorage.getItem('token'),
-                    userid: "61eee4fc0d617e873a46d769"
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
                     utilisateursSuivis: idUser.target.value
@@ -166,6 +166,27 @@ export class affressource {
         }
     }
 
+    async addComment(event){
+        try{
+            let response = await fetch(`http://localhost:3000/users/commente`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
+                },
+                body: JSON.stringify({
+                    _id: "620b95d1e1c6a6ec68548fed",
+                    commentaireText: event.target.value
+                }),
+            })
+            if(response.status == 401) {this.message = (await response.json()).message}
+            console.log(this.message)
+        }
+        catch (err){
+            console.log('fetch failed', err);
+        }
+    }
 
     async _getData(){
         try{
@@ -196,12 +217,19 @@ export class affressource {
                     - type: {this.afficherRessources.type} <br />
                     - tags: {this.afficherRessources.tags} <br />
                     - auteur: {this.afficherRessources.prenomNomUser} <br />
+                    - PDF:<hive-pdf-viewer src="http://localhost:3000/file/doc-1644917417087.pdf"></hive-pdf-viewer>
                     - stats (nombre de vue): {nbrVue} <br />
                     - favoris ressource: <button onClick={this.favorisRessource}>ressourcefavoris</button> <br />
                     - supprimer favoris ressource: <button onClick={this.supprimerFavorisRessource}>suprimer ressourcefavoris</button> <br />
                     - suivre utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button> <br />
                     - supprimer suivi utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button> <br />
                     - signaler ressource : <button onClick={this.signalerRessource}>signalerRessource</button> <br />
+                    <form>
+                        <label>ajouterCommentaire
+                            <input type="text" name='commenttext' onInput={(event) => this.addComment(event)}/>
+                        </label>
+                            <input type='submit' value='submit'> </input> <br />
+                    </form>
                     - commentaires  {this.afficherRessources.commentaires.map((d,idx)=>{
                         return  (<li key={idx}>
                             - Prenom, Nom : {d.prenomNomUser} <br /> 
