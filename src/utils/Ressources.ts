@@ -4,5 +4,6 @@ export interface Ressources {
     etatRessource: string,
     titre: string,
     resume:string,
-    datePublication: string,
+    datePublication: Date,
+    idUser:string,
 }
