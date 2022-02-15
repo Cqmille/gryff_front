@@ -16,6 +16,8 @@ export namespace Components {
     }
     interface PublicNotFound {
     }
+    interface PubliqAffressource {
+    }
     interface PubliqFooter {
     }
     interface PubliqNav {
@@ -53,6 +55,12 @@ declare global {
         prototype: HTMLPublicNotFoundElement;
         new (): HTMLPublicNotFoundElement;
     };
+    interface HTMLPubliqAffressourceElement extends Components.PubliqAffressource, HTMLStencilElement {
+    }
+    var HTMLPubliqAffressourceElement: {
+        prototype: HTMLPubliqAffressourceElement;
+        new (): HTMLPubliqAffressourceElement;
+    };
     interface HTMLPubliqFooterElement extends Components.PubliqFooter, HTMLStencilElement {
     }
     var HTMLPubliqFooterElement: {
@@ -88,6 +96,7 @@ declare global {
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
         "public-not-found": HTMLPublicNotFoundElement;
+        "publiq-affressource": HTMLPubliqAffressourceElement;
         "publiq-footer": HTMLPubliqFooterElement;
         "publiq-nav": HTMLPubliqNavElement;
         "user-connexion": HTMLUserConnexionElement;
@@ -105,6 +114,8 @@ declare namespace LocalJSX {
     }
     interface PublicNotFound {
     }
+    interface PubliqAffressource {
+    }
     interface PubliqFooter {
     }
     interface PubliqNav {
@@ -121,6 +132,7 @@ declare namespace LocalJSX {
         "app-profile": AppProfile;
         "app-root": AppRoot;
         "public-not-found": PublicNotFound;
+        "publiq-affressource": PubliqAffressource;
         "publiq-footer": PubliqFooter;
         "publiq-nav": PubliqNav;
         "user-connexion": UserConnexion;
@@ -136,6 +148,7 @@ declare module "@stencil/core" {
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "public-not-found": LocalJSX.PublicNotFound & JSXBase.HTMLAttributes<HTMLPublicNotFoundElement>;
+            "publiq-affressource": LocalJSX.PubliqAffressource & JSXBase.HTMLAttributes<HTMLPubliqAffressourceElement>;
             "publiq-footer": LocalJSX.PubliqFooter & JSXBase.HTMLAttributes<HTMLPubliqFooterElement>;
             "publiq-nav": LocalJSX.PubliqNav & JSXBase.HTMLAttributes<HTMLPubliqNavElement>;
             "user-connexion": LocalJSX.UserConnexion & JSXBase.HTMLAttributes<HTMLUserConnexionElement>;
