@@ -181,3 +181,15 @@ test/**/hydrate/*
 .stencil
 /dependencies.json
 coverage/**
+www/build/active-router-33b7574e.js
+www/build/active-router-62b522e9.js
+www/build/app-globals-9393530e.js
+www/build/app-root.entry.js
+www/build/app.esm.js
+www/build/dom-utils-8e73e88b.js
+www/build/index-f1e2a249.js
+www/build/path-5d0f272b.js
+www/build/publiq-nav.entry.js
+www/build/stencil-router.entry.js
+www/build/user-connexion.entry.js
+www/build/user-creationressource.entry.js
