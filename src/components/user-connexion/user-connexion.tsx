@@ -1,5 +1,6 @@
 import { Component, Prop, h, State } from '@stencil/core';
 import { RouterHistory } from '@stencil/router';
+import {PATH} from '../../utils/path.js';
 
 import { UserConnected } from '../../utils/UserConnected';
 
@@ -18,7 +19,7 @@ export class UserConnexion {
 
     async envoiConnexion(e){
         e.preventDefault();
-        let response = await fetch('http://localhost:3000/public/connexion', {
+        let response = await fetch(PATH.back +'/public/connexion', {
             method: 'POST',
             body: JSON.stringify({
                 email: this.email,
