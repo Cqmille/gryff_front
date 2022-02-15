@@ -20,6 +20,7 @@ export class AppRoot {
               <stencil-route url="/connexion" component="user-connexion" />
               <stencil-route url="/monEspace" component="user-monespace" />
               <stencil-route url="/newRessource" component="user-creationressource" />
+              <stencil-route url="/afficherRessource" component="publiq-affressource" />
               <stencil-route component="public-not-found" />
             </stencil-route-switch>
           </stencil-router>
