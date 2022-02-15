@@ -8,8 +8,10 @@ import { Component, h } from '@stencil/core';
 export class AppRoot {
   render() {
     return (
-      <div>
-        <publiq-nav></publiq-nav>
+      <body>
+        <header>
+          <publiq-nav></publiq-nav>
+        </header>
         <main>
           <stencil-router>
             <stencil-route-switch scrollTopOffset={0}>
@@ -18,13 +20,11 @@ export class AppRoot {
               <stencil-route url="/connexion" component="user-connexion" />
               <stencil-route url="/monEspace" component="user-monespace" />
               <stencil-route url="/newRessource" component="user-creationressource" />
-
               <stencil-route component="public-not-found" />
             </stencil-route-switch>
           </stencil-router>
         </main>
-        <publiq-footer></publiq-footer>
-      </div>
+      </body>
     );
   }
 }
