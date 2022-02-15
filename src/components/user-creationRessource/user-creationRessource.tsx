@@ -58,10 +58,10 @@ export class UserCreationRessource {
                         <select name='tags' onInput={(event) => this.alimRessource(event)}>
                             <option value="sante">Santé</option>
                             <option value="education">Education</option>
-                            <option value="Sport">sport</option>
-                            <option value="Association">Association</option>
-                            <option value="Emploi">Emploi</option>
-                            <option value="Senior">Sénior</option>
+                            <option value="sport">sport</option>
+                            <option value="association">Association</option>
+                            <option value="emploi">Emploi</option>
+                            <option value="senior">Sénior</option>
                         </select>
                     </label>
                     <label>titre
