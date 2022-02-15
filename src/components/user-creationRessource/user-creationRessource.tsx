@@ -12,6 +12,7 @@ export class UserCreationRessource {
     @State() file: File;
     @State() titre: string;
     @State() resume: string;
+    @State() tags: string;
     @State () response;
 
     // lancement d'une instance d'un objet de Ressources
@@ -23,9 +24,14 @@ export class UserCreationRessource {
         e.preventDefault();
         this.formNewRessource.append('titre',this.titre);
         this.formNewRessource.append('resume',this.resume);
+        this.formNewRessource.append('tags',this.tags);
         let response = await fetch(PATH.back +'/users/createRessource',{
             method: 'POST',
-            body: this.formNewRessource
+            body: this.formNewRessource,
+            headers: {
+                authorization: localStorage.getItem('token'),
+                userid: localStorage.getItem('userId')
+            }
         });
         this.response = await response.json();
         console.log(this.formNewRessource)
@@ -35,6 +41,7 @@ export class UserCreationRessource {
         switch(event.target.name){
             case 'titre': this.titre = event.target.value; break;
             case 'resume': this.resume = event.target.value; break;
+            case 'tags': this.tags = event.target.value; break;
         }
     }
 
@@ -47,14 +54,21 @@ export class UserCreationRessource {
         return (
             <div>
                 <form onSubmit={(e) => this.envoiRessource(e)}>
-                    {/* <label>titre
-                        <select name='titre' onInput={(event) => this.alimRessource(event)}/>
-                    </label> */}
+                    <label>type
+                        <select name='tags' onInput={(event) => this.alimRessource(event)}>
+                            <option value="sante">Santé</option>
+                            <option value="education">Education</option>
+                            <option value="Sport">sport</option>
+                            <option value="Association">Association</option>
+                            <option value="Emploi">Emploi</option>
+                            <option value="Senior">Sénior</option>
+                        </select>
+                    </label>
                     <label>titre
                         <input type="text" name='titre' onInput={(event) => this.alimRessource(event)}/>
                     </label>
                     <label>resume
-                        <input type="text" name='resume' onInput={(event) => this.alimRessource(event)}/>
+                        <textarea name='resume' onInput={(event) => this.alimRessource(event)}/>
                     </label>
                     <label>fichier
                         <input type="file" name='uploaded_file' onChange={(event) => this.uploadPdf(event)}/>
