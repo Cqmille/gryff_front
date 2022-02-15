@@ -1,4 +1,5 @@
 import { r as registerInstance, h } from './index-c37bab2d.js';
+import { P as PATH } from './path-5d0f272b.js';
 
 let UserConnexion = class {
   constructor(hostRef) {
@@ -6,7 +7,7 @@ let UserConnexion = class {
   }
   async envoiConnexion(e) {
     e.preventDefault();
-    let response = await fetch('http://localhost:3000/public/connexion', {
+    let response = await fetch(PATH.back + '/public/connexion', {
       method: 'POST',
       body: JSON.stringify({
         email: this.email,

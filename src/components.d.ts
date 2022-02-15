@@ -23,6 +23,8 @@ export namespace Components {
     interface UserConnexion {
         "history": RouterHistory;
     }
+    interface UserCreationressource {
+    }
     interface UserMonespace {
     }
 }
@@ -69,6 +71,12 @@ declare global {
         prototype: HTMLUserConnexionElement;
         new (): HTMLUserConnexionElement;
     };
+    interface HTMLUserCreationressourceElement extends Components.UserCreationressource, HTMLStencilElement {
+    }
+    var HTMLUserCreationressourceElement: {
+        prototype: HTMLUserCreationressourceElement;
+        new (): HTMLUserCreationressourceElement;
+    };
     interface HTMLUserMonespaceElement extends Components.UserMonespace, HTMLStencilElement {
     }
     var HTMLUserMonespaceElement: {
@@ -83,6 +91,7 @@ declare global {
         "publiq-footer": HTMLPubliqFooterElement;
         "publiq-nav": HTMLPubliqNavElement;
         "user-connexion": HTMLUserConnexionElement;
+        "user-creationressource": HTMLUserCreationressourceElement;
         "user-monespace": HTMLUserMonespaceElement;
     }
 }
@@ -103,6 +112,8 @@ declare namespace LocalJSX {
     interface UserConnexion {
         "history"?: RouterHistory;
     }
+    interface UserCreationressource {
+    }
     interface UserMonespace {
     }
     interface IntrinsicElements {
@@ -113,6 +124,7 @@ declare namespace LocalJSX {
         "publiq-footer": PubliqFooter;
         "publiq-nav": PubliqNav;
         "user-connexion": UserConnexion;
+        "user-creationressource": UserCreationressource;
         "user-monespace": UserMonespace;
     }
 }
@@ -127,6 +139,7 @@ declare module "@stencil/core" {
             "publiq-footer": LocalJSX.PubliqFooter & JSXBase.HTMLAttributes<HTMLPubliqFooterElement>;
             "publiq-nav": LocalJSX.PubliqNav & JSXBase.HTMLAttributes<HTMLPubliqNavElement>;
             "user-connexion": LocalJSX.UserConnexion & JSXBase.HTMLAttributes<HTMLUserConnexionElement>;
+            "user-creationressource": LocalJSX.UserCreationressource & JSXBase.HTMLAttributes<HTMLUserCreationressourceElement>;
             "user-monespace": LocalJSX.UserMonespace & JSXBase.HTMLAttributes<HTMLUserMonespaceElement>;
         }
     }
