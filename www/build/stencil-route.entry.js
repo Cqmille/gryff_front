@@ -1,6 +1,6 @@
-import { r as registerInstance, h, g as getElement } from './index-c37bab2d.js';
+import { r as registerInstance, h, g as getElement } from './index-15e5713e.js';
 import { m as matchPath, a as matchesAreEqual } from './match-path-760e1797.js';
-import { A as ActiveRouter } from './active-router-75cf6213.js';
+import { A as ActiveRouter } from './active-router-33b7574e.js';
 import './location-utils-fea12957.js';
 
 const routeCss = "stencil-route.inactive{display:none}";

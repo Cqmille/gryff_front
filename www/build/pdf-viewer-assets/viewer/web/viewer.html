@@ -1,0 +1,487 @@
+﻿<!DOCTYPE html>
+<!--
+Copyright 2012 Mozilla Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Adobe CMap resources are covered by their own copyright but the same license:
+
+    Copyright 1990-2015 Adobe Systems Incorporated.
+
+See https://github.com/adobe-type-tools/cmap-resources
+-->
+<html dir="ltr" mozdisallowselectionprint>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google" content="notranslate">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PDF.js viewer</title>
+
+
+    <link rel="stylesheet" href="viewer.css">
+
+
+<!-- This snippet is used in production (included from viewer.html) -->
+<link rel="resource" type="application/l10n" href="locale/locale.properties">
+<script src="../build/pdf.js"></script>
+
+
+  <script src="viewer.js"></script>
+
+  </head>
+
+  <body tabindex="1">
+    <div id="outerContainer">
+
+      <div id="sidebarContainer">
+        <div id="toolbarSidebar" class="hidden">
+          <div class="splitToolbarButton toggled">
+            <button id="viewThumbnail" class="toolbarButton toggled" title="Show Thumbnails" tabindex="2" data-l10n-id="thumbs">
+               <span data-l10n-id="thumbs_label">Thumbnails</span>
+            </button>
+            <button id="viewOutline" class="toolbarButton" title="Show Document Outline (double-click to expand/collapse all items)" tabindex="3" data-l10n-id="document_outline">
+               <span data-l10n-id="document_outline_label">Document Outline</span>
+            </button>
+            <button id="viewAttachments" class="toolbarButton" title="Show Attachments" tabindex="4" data-l10n-id="attachments">
+               <span data-l10n-id="attachments_label">Attachments</span>
+            </button>
+            <button id="viewLayers" class="toolbarButton" title="Show Layers (double-click to reset all layers to the default state)" tabindex="5" data-l10n-id="layers">
+               <span data-l10n-id="layers_label">Layers</span>
+            </button>
+          </div>
+        </div>
+        <div id="sidebarContent">
+          <div id="thumbnailView">
+          </div>
+          <div id="outlineView" class="hidden">
+          </div>
+          <div id="attachmentsView" class="hidden">
+          </div>
+          <div id="layersView" class="hidden">
+          </div>
+        </div>
+        <div id="sidebarResizer"></div>
+      </div>  <!-- sidebarContainer -->
+
+      <div id="mainContainer">
+        <div class="findbar hidden" id="findbar">
+          <input id="findInput" class="search-input" autocomplete="off" title="Find" placeholder="Find in document…" tabindex="91" data-l10n-id="find_input">
+          <button id="findPrevious" class="toolbar-button findPrevious" title="Find the previous occurrence of the phrase" tabindex="92" data-l10n-id="find_previous">
+            <svg viewBox="0 0 100 100">
+              <path d="M45.3,23.6L2,66.9c-2.6,2.6-2.6,6.9,0,9.5c2.6,2.6,6.9,2.6,9.5,0L50,37.8l38.6,38.6c2.6,2.6,6.9,2.6,9.5,0
+                c1.3-1.3,2-2.9,2-4.7c0-1.8-0.7-3.5-2-4.7L54.7,23.6c-1.3-1.3-2.9-2-4.7-2C48.2,21.6,46.5,22.3,45.3,23.6z"/>
+            </svg>
+          </button>
+          <button id="findNext" class="toolbar-button findNext" title="Find the next occurrence of the phrase" tabindex="93" data-l10n-id="find_next">
+            <svg viewBox="0 0 100 100">
+              <path d="M45.3,23.6L2,66.9c-2.6,2.6-2.6,6.9,0,9.5c2.6,2.6,6.9,2.6,9.5,0L50,37.8l38.6,38.6c2.6,2.6,6.9,2.6,9.5,0
+                c1.3-1.3,2-2.9,2-4.7c0-1.8-0.7-3.5-2-4.7L54.7,23.6c-1.3-1.3-2.9-2-4.7-2C48.2,21.6,46.5,22.3,45.3,23.6z"/>
+            </svg>
+          </button>
+
+          <div class="search-meta">
+            <span id="findResultsCount" class="meta-label hidden"></span>
+            <span id="findMsg" class="meta-label"></span>
+          </div>
+
+          <div hidden id="findbarOptionsOneContainer">
+            <input type="checkbox" id="findHighlightAll" class="toolbarField" tabindex="94">
+            <label for="findHighlightAll" class="toolbarLabel" data-l10n-id="find_highlight">Highlight all</label>
+            <input type="checkbox" id="findMatchCase" class="toolbarField" tabindex="95">
+            <label for="findMatchCase" class="toolbarLabel" data-l10n-id="find_match_case_label">Match case</label>
+          </div>
+          <div hidden id="findbarOptionsTwoContainer">
+            <input type="checkbox" id="findEntireWord" class="toolbarField" tabindex="96">
+            <label for="findEntireWord" class="toolbarLabel" data-l10n-id="find_entire_word_label">Whole words</label>
+            <span id="findResultsCount" class="toolbarLabel hidden"></span>
+          </div>
+        </div>  <!-- findbar -->
+
+        <div id="secondaryToolbar" class="secondaryToolbar hidden doorHangerRight">
+          <div id="secondaryToolbarButtonContainer">
+            <button id="secondaryPresentationMode" class="secondaryToolbarButton presentationMode visibleLargeView" title="Switch to Presentation Mode" tabindex="51" data-l10n-id="presentation_mode">
+              <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
+            </button>
+
+            <button id="secondaryOpenFile" class="secondaryToolbarButton openFile visibleLargeView" title="Open File" tabindex="52" data-l10n-id="open_file">
+              <span data-l10n-id="open_file_label">Open</span>
+            </button>
+
+            <button id="secondaryPrint" class="secondaryToolbarButton print visibleMediumView" title="Print" tabindex="53" data-l10n-id="print">
+              <span data-l10n-id="print_label">Print</span>
+            </button>
+
+            <button id="secondaryDownload" class="secondaryToolbarButton download visibleMediumView" title="Download" tabindex="54" data-l10n-id="download">
+              <span data-l10n-id="download_label">Download</span>
+            </button>
+
+            <a href="#" id="secondaryViewBookmark" class="secondaryToolbarButton bookmark visibleSmallView" title="Current view (copy or open in new window)" tabindex="55" data-l10n-id="bookmark">
+              <span data-l10n-id="bookmark_label">Current View</span>
+            </a>
+
+            <div class="horizontalToolbarSeparator visibleLargeView"></div>
+
+            <button id="firstPage" class="secondaryToolbarButton firstPage" title="Go to First Page" tabindex="56" data-l10n-id="first_page">
+              <span data-l10n-id="first_page_label">Go to First Page</span>
+            </button>
+            <button id="lastPage" class="secondaryToolbarButton lastPage" title="Go to Last Page" tabindex="57" data-l10n-id="last_page">
+              <span data-l10n-id="last_page_label">Go to Last Page</span>
+            </button>
+
+            <div class="horizontalToolbarSeparator"></div>
+
+            <button id="pageRotateCw" class="secondaryToolbarButton rotateCw" title="Rotate Clockwise" tabindex="58" data-l10n-id="page_rotate_cw">
+              <span data-l10n-id="page_rotate_cw_label">Rotate Clockwise</span>
+            </button>
+            <button id="pageRotateCcw" class="secondaryToolbarButton rotateCcw" title="Rotate Counterclockwise" tabindex="59" data-l10n-id="page_rotate_ccw">
+              <span data-l10n-id="page_rotate_ccw_label">Rotate Counterclockwise</span>
+            </button>
+
+            <div class="horizontalToolbarSeparator"></div>
+
+            <button id="cursorSelectTool" class="secondaryToolbarButton selectTool toggled" title="Enable Text Selection Tool" tabindex="60" data-l10n-id="cursor_text_select_tool">
+              <span data-l10n-id="cursor_text_select_tool_label">Text Selection Tool</span>
+            </button>
+            <button id="cursorHandTool" class="secondaryToolbarButton handTool" title="Enable Hand Tool" tabindex="61" data-l10n-id="cursor_hand_tool">
+              <span data-l10n-id="cursor_hand_tool_label">Hand Tool</span>
+            </button>
+
+            <div class="horizontalToolbarSeparator"></div>
+
+            <button id="scrollVertical" class="secondaryToolbarButton scrollModeButtons scrollVertical toggled" title="Use Vertical Scrolling" tabindex="62" data-l10n-id="scroll_vertical">
+              <span data-l10n-id="scroll_vertical_label">Vertical Scrolling</span>
+            </button>
+            <button id="scrollHorizontal" class="secondaryToolbarButton scrollModeButtons scrollHorizontal" title="Use Horizontal Scrolling" tabindex="63" data-l10n-id="scroll_horizontal">
+              <span data-l10n-id="scroll_horizontal_label">Horizontal Scrolling</span>
+            </button>
+            <button id="scrollWrapped" class="secondaryToolbarButton scrollModeButtons scrollWrapped" title="Use Wrapped Scrolling" tabindex="64" data-l10n-id="scroll_wrapped">
+              <span data-l10n-id="scroll_wrapped_label">Wrapped Scrolling</span>
+            </button>
+
+            <div class="horizontalToolbarSeparator scrollModeButtons"></div>
+
+            <button id="spreadNone" class="secondaryToolbarButton spreadModeButtons spreadNone toggled" title="Do not join page spreads" tabindex="65" data-l10n-id="spread_none">
+              <span data-l10n-id="spread_none_label">No Spreads</span>
+            </button>
+            <button id="spreadOdd" class="secondaryToolbarButton spreadModeButtons spreadOdd" title="Join page spreads starting with odd-numbered pages" tabindex="66" data-l10n-id="spread_odd">
+              <span data-l10n-id="spread_odd_label">Odd Spreads</span>
+            </button>
+            <button id="spreadEven" class="secondaryToolbarButton spreadModeButtons spreadEven" title="Join page spreads starting with even-numbered pages" tabindex="67" data-l10n-id="spread_even">
+              <span data-l10n-id="spread_even_label">Even Spreads</span>
+            </button>
+
+            <div class="horizontalToolbarSeparator spreadModeButtons"></div>
+
+            <button id="documentProperties" class="secondaryToolbarButton documentProperties" title="Document Properties…" tabindex="68" data-l10n-id="document_properties">
+              <span data-l10n-id="document_properties_label">Document Properties…</span>
+            </button>
+          </div>
+        </div>  <!-- secondaryToolbar -->
+
+        <div class="toolbar">
+          <div id="toolbarContainer">
+            <div id="toolbarViewer">
+              <div id="toolbarViewerLeft">
+                <button id="sidebarToggle" class="toolbar-button" title="Toggle Sidebar" tabindex="11" data-l10n-id="toggle_sidebar">
+                  <svg viewBox="0 0 100 100">
+                    <path d="M86.1,3.2H47.9H14.9c-5.3,0-9.6,4.3-9.6,9.6v74.4c0,5.3,4.3,9.6,9.6,9.6h32.9h38.2c4.7,0,8.5-3.8,8.5-8.5V11.8
+                      C94.6,7.1,90.8,3.2,86.1,3.2z M35.1,81.9c0,1.2-1,2.1-2.1,2.1H20.2c-1.2,0-2.1-1-2.1-2.1V69.1c0-1.2,1-2.1,2.1-2.1H33
+                      c1.2,0,2.1,1,2.1,2.1V81.9z M35.1,56.4c0,1.2-1,2.1-2.1,2.1H20.2c-1.2,0-2.1-1-2.1-2.1V43.6c0-1.2,1-2.1,2.1-2.1H33
+                      c1.2,0,2.1,1,2.1,2.1V56.4z M35.1,30.9c0,1.2-1,2.1-2.1,2.1H20.2c-1.2,0-2.1-1-2.1-2.1V18.1c0-1.2,1-2.1,2.1-2.1H33
+                      c1.2,0,2.1,1,2.1,2.1V30.9z M81.9,79.8c0,2.3-1.9,4.2-4.2,4.2H47.9V16h29.8c2.3,0,4.2,1.9,4.2,4.2V79.8z"/>
+                  </svg>
+                </button>
+
+                <div class="separator"></div>
+
+                <div class="pager">
+                  <button class="toolbar-button prev" title="Previous Page" id="previous" tabindex="13" data-l10n-id="previous">
+                    <svg viewBox="0 0 100 100">
+                      <path d="M45.3,23.6L2,66.9c-2.6,2.6-2.6,6.9,0,9.5c2.6,2.6,6.9,2.6,9.5,0L50,37.8l38.6,38.6c2.6,2.6,6.9,2.6,9.5,0
+                        c1.3-1.3,2-2.9,2-4.7c0-1.8-0.7-3.5-2-4.7L54.7,23.6c-1.3-1.3-2.9-2-4.7-2C48.2,21.6,46.5,22.3,45.3,23.6z"/>
+                    </svg>
+                  </button>
+                  <input type="number" id="pageNumber" title="Page" size="4" min="1" tabindex="15" data-l10n-id="page" />
+                  <span id="numPages"></span>
+                  <button class="toolbar-button next" title="Next Page" id="next" tabindex="14" data-l10n-id="next">
+                    <svg viewBox="0 0 100 100">
+                      <path d="M45.3,23.6L2,66.9c-2.6,2.6-2.6,6.9,0,9.5c2.6,2.6,6.9,2.6,9.5,0L50,37.8l38.6,38.6c2.6,2.6,6.9,2.6,9.5,0
+                        c1.3-1.3,2-2.9,2-4.7c0-1.8-0.7-3.5-2-4.7L54.7,23.6c-1.3-1.3-2.9-2-4.7-2C48.2,21.6,46.5,22.3,45.3,23.6z"/>
+                    </svg>
+                  </button>
+                </div>
+
+                <!-- <div class="separator"></div> -->
+
+                <div class="floating-buttons">
+                  <button id="zoomIn" class="toolbar-button" title="Zoom In" tabindex="22" data-l10n-id="zoom_in">
+                    <svg x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+                      <path d="M5.6,14.5c0.5,0.8,1,1.6,1.7,2.2c0.7,0.7,1.4,1.3,2.2,1.7l0,0l-4.7,4.7c-1.1,1.1-2.9,1.1-4,0
+                        c-1.1-1.1-1.1-2.9,0-4l0,0L5.6,14.5z M14.8,0c2.4,0,4.7,0.9,6.4,2.7C23,4.4,24,6.7,24,9.1c0,2.4-0.9,4.7-2.7,6.4
+                        c-1.7,1.7-4,2.7-6.4,2.7c-2.4,0-4.7-0.9-6.4-2.7C4.8,12,4.8,6.2,8.4,2.7C10.1,0.9,12.4,0,14.8,0z M14.8,2.4c-1.8,0-3.5,0.7-4.7,2
+                        c-2.6,2.6-2.6,6.9,0,9.5c1.3,1.3,3,2,4.7,2s3.5-0.7,4.7-2c1.3-1.3,2-3,2-4.7c0-1.8-0.7-3.5-2-4.7C18.3,3.1,16.6,2.4,14.8,2.4z
+                        M14.8,4.8C15.5,4.8,16,5.4,16,6l0,0v1.9l1.9,0c0.7,0,1.2,0.5,1.2,1.2c0,0.7-0.5,1.2-1.2,1.2l0,0l-1.9,0v1.9c0,0.7-0.5,1.2-1.2,1.2
+                        c-0.7,0-1.2-0.5-1.2-1.2l0,0v-1.9l-1.9,0c-0.7,0-1.2-0.5-1.2-1.2c0-0.7,0.5-1.2,1.2-1.2l0,0l1.9,0V6C13.6,5.4,14.2,4.8,14.8,4.8z"/>
+                    </svg>
+                  </button>
+                  <button id="zoomOut" class="toolbar-button" title="Zoom Out" tabindex="21" data-l10n-id="zoom_out">
+                    <svg x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+                      <path d="M5.6,14.5c0.5,0.8,1,1.6,1.7,2.2c0.7,0.7,1.4,1.3,2.2,1.7l0,0l-4.7,4.7c-1.1,1.1-2.9,1.1-4,0
+                        c-1.1-1.1-1.1-2.9,0-4l0,0L5.6,14.5z M14.9,0c2.4,0,4.7,0.9,6.4,2.7C23,4.4,24,6.7,24,9.1s-0.9,4.7-2.7,6.4c-1.7,1.7-4,2.7-6.4,2.7
+                        c-2.4,0-4.7-0.9-6.4-2.7C4.9,12,4.9,6.2,8.4,2.7C10.1,0.9,12.4,0,14.9,0z M14.9,2.4c-1.8,0-3.5,0.7-4.7,2c-2.6,2.6-2.6,6.9,0,9.5
+                        c1.3,1.3,3,2,4.7,2c1.8,0,3.5-0.7,4.7-2c1.3-1.3,2-3,2-4.7c0-1.8-0.7-3.5-2-4.7C18.3,3.1,16.6,2.4,14.9,2.4z M17.9,7.9
+                        c0.7,0,1.2,0.5,1.2,1.2c0,0.7-0.5,1.2-1.2,1.2l0,0l-6.2,0c-0.7,0-1.2-0.5-1.2-1.2c0-0.7,0.5-1.2,1.2-1.2l0,0L17.9,7.9z"/>
+                    </svg>
+                  </button>
+
+                  <button id="fitPage" class="toolbar-button">
+                    <svg x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+                      <path d="M21.2,0H2.8C1.3,0,0,1.3,0,2.8v18.4C0,22.7,1.3,24,2.8,24h18.4c1.6,0,2.8-1.3,2.8-2.8V2.8
+                        C24,1.3,22.7,0,21.2,0z M22.1,21.2c0,0.5-0.4,0.9-0.9,0.9H12l4.1-4.1l-1.3-1.3L13,18.5V15h-1.9v3.6l-1.9-1.9l-1.3,1.3l4.1,4.1H2.8
+                        c-0.5,0-0.9-0.4-0.9-0.9V2.8c0-0.5,0.4-0.9,0.9-0.9H12L7.9,5.9l1.3,1.3l1.9-1.9V9H13V5.5l1.8,1.8l1.3-1.3L12,1.9h9.2
+                        c0.5,0,0.9,0.4,0.9,0.9V21.2z"/>
+                    </svg>
+                  </button>
+                  <button id="fitWidth" class="toolbar-button hidden">
+                    <svg x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+                      <path d="M24,21.2V2.8C24,1.3,22.7,0,21.2,0H2.8C1.3,0,0,1.3,0,2.8v18.4C0,22.7,1.3,24,2.8,24h18.4
+                        C22.7,24,24,22.7,24,21.2z M2.8,22.1c-0.5,0-0.9-0.4-0.9-0.9V12l4.1,4.1l1.3-1.3L5.5,13H9v-1.9H5.4l1.9-1.9L5.9,7.9L1.9,12V2.8
+                        c0-0.5,0.4-0.9,0.9-0.9h18.4c0.5,0,0.9,0.4,0.9,0.9V12l-4.1-4.1l-1.3,1.3l1.9,1.9H15V13h3.5l-1.8,1.8l1.3,1.3l4.1-4.1v9.2
+                        c0,0.5-0.4,0.9-0.9,0.9H2.8z"/>
+                    </svg>
+                  </button>
+                  <button
+                      id="fullscreen"
+                      class="toolbar-button"
+                      title="Fullscreen"
+                      tabindex="21"
+                      >
+                      <svg
+                          id="fullscreenIcon"
+                          x="0px"
+                          y="0px"
+                          viewBox="0 0 16 16"
+                          style="enable-background: new 0 0 24 24"
+                          xml:space="preserve"
+                      >
+                          <path
+                          d="M0.167605647,15.6726579 L0.157,15.658 L0.122572672,15.6111698 L0.122572672,15.6111698 C0.109407826,15.5910149 0.097027667,15.5700275 0.0856709597,15.5484182 C0.0808374204,15.5392964 0.0764808162,15.5305656 0.0723050787,15.5217704 C0.0595579565,15.4949819 0.0480533613,15.4665221 0.0383029283,15.4372605 C0.0360445555,15.4303168 0.0341201114,15.4242456 0.0322747969,15.4181555 C0.0209186005,15.381066 0.012293779,15.3419231 0.006846616,15.3017706 L-7.86481991e-13,15.2 L-7.86481991e-13,11.06 C-7.86481991e-13,10.6457864 0.335786438,10.31 0.75,10.31 C1.12969577,10.31 1.44349096,10.5921539 1.49315338,10.9582294 L1.5,11.06 L1.5,13.388 L4.28966991,10.5996699 C4.58256313,10.3067767 5.05743687,10.3067767 5.35033009,10.5996699 C5.61659665,10.8659365 5.6408027,11.2826002 5.42294824,11.5762117 L5.35033009,11.6603301 L2.561,14.449 L4.89,14.45 C5.26969577,14.45 5.58349096,14.7321539 5.63315338,15.0982294 L5.64,15.2 C5.64,15.5796958 5.35784612,15.893491 4.99177056,15.9431534 L4.89,15.95 L0.75,15.95 C0.703154419,15.95 0.657311962,15.9457051 0.612844912,15.9374876 C0.601967183,15.9354242 0.590273899,15.9329853 0.578632978,15.9302653 C0.555172799,15.9248291 0.532716548,15.9184207 0.51071635,15.9110197 C0.500908688,15.907697 0.490543505,15.9039715 0.480248087,15.9000107 C0.460905791,15.8925505 0.442486079,15.884555 0.424467167,15.8758602 L0.380954676,15.8531392 L0.380954676,15.8531392 C0.363491944,15.843187 0.34634194,15.8325387 0.329670931,15.8212371 C0.319338772,15.8143147 0.308870915,15.8068243 0.298558422,15.7990323 L0.218,15.729 L0.215,15.726 L0.167605647,15.6726579 L0.167605647,15.6726579 Z M7.99,7.06 C8.50362482,7.06 8.92,7.47637518 8.92,7.99 C8.92,8.50362482 8.50362482,8.92 7.99,8.92 C7.47637518,8.92 7.06,8.50362482 7.06,7.99 C7.06,7.47637518 7.47637518,7.06 7.99,7.06 Z M0.221,0.217 L0.277342058,0.167605647 L0.277342058,0.167605647 L0.292,0.156 L0.296,0.153 L0.338830214,0.122572672 L0.338830214,0.122572672 C0.358985143,0.109407826 0.379972465,0.097027667 0.40158175,0.0856709597 C0.410703624,0.0808374204 0.419434372,0.0764808162 0.428229592,0.0723050787 C0.456605519,0.0588007277 0.486762616,0.0467322039 0.517808664,0.036633988 C0.523107647,0.0349658455 0.527471192,0.0335999189 0.531844456,0.0322747969 C0.568933952,0.0209186005 0.608076886,0.012293779 0.648229443,0.006846616 L0.75,-5.91748872e-14 L4.89,-5.91748872e-14 C5.30421356,-5.91748872e-14 5.64,0.335786438 5.64,0.75 C5.64,1.12969577 5.35784612,1.44349096 4.99177056,1.49315338 L4.89,1.5 L2.561,1.5 L5.35033009,4.28966991 C5.6432233,4.58256313 5.6432233,5.05743687 5.35033009,5.35033009 C5.08406352,5.61659665 4.66739984,5.6408027 4.37378835,5.42294824 L4.28966991,5.35033009 L1.5,2.561 L1.5,4.89 C1.5,5.26969577 1.21784612,5.58349096 0.851770557,5.63315338 L0.75,5.64 C0.370304234,5.64 0.0565090391,5.35784612 0.006846616,4.99177056 L-7.86481991e-13,4.89 L0.000201717092,0.732552017 C0.000664631959,0.71253448 0.00192429453,0.692531945 0.0039807048,0.672596048 L-7.86481991e-13,0.75 C-7.86481991e-13,0.703154419 0.00429488747,0.657311962 0.0125123797,0.612844912 C0.0145758178,0.601967183 0.0170146793,0.590273899 0.0197347182,0.578632978 C0.0251708511,0.555172799 0.0315793494,0.532716548 0.0389803082,0.51071635 C0.0423030091,0.500908688 0.0460284815,0.490543505 0.0499893289,0.480248087 C0.0574495235,0.460905791 0.065445,0.442486079 0.0741398414,0.424467167 L0.0968608111,0.380954676 L0.0968608111,0.380954676 C0.10681304,0.363491944 0.117461256,0.34634194 0.128762902,0.329670931 C0.135685318,0.319338772 0.143175717,0.308870915 0.150967748,0.298558422 L0.22219616,0.217153387 L0.22219616,0.217153387 L0.28,0.167 L0.221,0.217 Z M15.2563742,0.000177771606 C15.2770568,0.000626772083 15.2977241,0.001926285 15.3183193,0.00407624048 L15.313,0.004 L15.3741439,0.0119623004 L15.3741439,0.0119623004 C15.3869781,0.0143304145 15.400671,0.0171849762 15.4142908,0.0204249775 C15.4350158,0.0253079828 15.4547935,0.0309165696 15.4742209,0.0372973568 C15.4867001,0.0414190969 15.4997313,0.0460798335 15.512651,0.0511121176 C15.5327776,0.0589765657 15.5518804,0.0674026646 15.5705459,0.0765819484 C15.5820694,0.0821862608 15.5940452,0.0884600375 15.6058796,0.0950793809 C15.6256759,0.106235225 15.6447934,0.118111136 15.663313,0.130796273 C15.6731759,0.137480701 15.6827414,0.144375015 15.6921762,0.151522115 L15.7725162,0.22183947 L15.7725162,0.22183947 L15.789,0.241 L15.8207116,0.275282913 L15.8207116,0.275282913 L15.832,0.291 L15.8640461,0.333729614 L15.8640461,0.333729614 C15.8771032,0.353373183 15.889371,0.37374012 15.9006699,0.394706365 C15.9076816,0.40762272 15.914245,0.420735411 15.9204001,0.433990735 C15.9304805,0.455677316 15.9397477,0.478398967 15.9479025,0.50164394 L15.9594612,0.537655585 L15.9594612,0.537655585 C15.9666818,0.561917694 15.9727395,0.587151709 15.9774876,0.612844912 C15.9794517,0.623848502 15.9811435,0.634260923 15.9826154,0.644698355 C15.9827812,0.645513896 15.9829691,0.646871092 15.9831534,0.648229443 L15.99,0.75 L15.99,4.89 C15.99,5.30421356 15.6542136,5.64 15.24,5.64 C14.8603042,5.64 14.546509,5.35784612 14.4968466,4.99177056 L14.49,4.89 L14.489,2.557 L11.689679,5.3509804 C11.3964266,5.64351402 10.9215532,5.64293135 10.6290196,5.34967898 C10.3630799,5.08308591 10.3393852,4.66639284 10.5575997,4.37304887 L10.630321,4.2890196 L13.426,1.5 L11.09,1.5 C10.7103042,1.5 10.396509,1.21784612 10.3468466,0.851770557 L10.34,0.75 C10.34,0.370304234 10.6221539,0.0565090391 10.9882294,0.006846616 L11.09,-5.91748872e-14 L15.2563742,0.000177771606 Z M15.693,15.796 L15.693,15.795 L15.689,15.799 L15.6529182,15.8262766 L15.6529182,15.8262766 C15.6339408,15.8387542 15.6139243,15.8507048 15.5933336,15.8617224 L15.5578304,15.8795514 L15.5578304,15.8795514 C15.5325223,15.8914105 15.505752,15.9021586 15.4782724,15.9113591 L15.4589837,15.9174729 L15.4589837,15.9174729 C15.421066,15.9290814 15.3819231,15.9377062 15.3417706,15.9431534 L15.24,15.95 L11.09,15.95 C10.6757864,15.95 10.34,15.6142136 10.34,15.2 C10.34,14.8203042 10.6221539,14.506509 10.9882294,14.4568466 L11.09,14.45 L13.426,14.449 L10.630321,11.6609804 C10.3370686,11.3684468 10.336486,10.8935734 10.6290196,10.600321 C10.8949593,10.333728 11.3115929,10.3090107 11.6054715,10.5265047 L11.689679,10.5990196 L14.489,13.392 L14.49,11.06 C14.49,10.6803042 14.7721539,10.366509 15.1382294,10.3168466 L15.24,10.31 C15.6196958,10.31 15.933491,10.5921539 15.9831534,10.9582294 L15.99,11.06 L15.9898191,15.216528 L15.9885949,15.2460356 L15.9885949,15.2460356 L15.986,15.27 L15.9771142,15.3391602 L15.9771142,15.3391602 L15.971176,15.3674253 L15.971176,15.3674253 C15.9657237,15.3915407 15.9592345,15.4146402 15.9516971,15.4372605 L15.9415089,15.465826 L15.9415089,15.465826 C15.93274,15.488953 15.9230862,15.5110412 15.9124311,15.5325452 C15.9071314,15.5433541 15.9013658,15.5543269 15.8953097,15.5651812 L15.867253,15.6113158 L15.867253,15.6113158 C15.8589822,15.624015 15.8502787,15.6364224 15.8411557,15.6486155 L15.7709804,15.729679 L15.769,15.73 L15.7138342,15.7814368 L15.7138342,15.7814368 L15.697,15.792 L15.693,15.796 Z"
+                          ></path>
+                      </svg>
+                      <svg
+                          class="hidden"
+                          id="collapseIcon"
+                          x="0px"
+                          y="0px"
+                          viewBox="0 0 16 16"
+                      >
+                          <path
+                          d="M4.89,10.31 L4.90645109,10.3101793 C4.92680141,10.310623 4.94713712,10.3118902 4.96740395,10.3139807 L4.89,10.31 C4.93684558,10.31 4.98268804,10.3142949 5.02715509,10.3225124 C5.03803282,10.3245758 5.0497261,10.3270147 5.06136702,10.3297347 C5.0848272,10.3351709 5.10728345,10.3415793 5.12928365,10.3489803 C5.13909131,10.352303 5.14945649,10.3560285 5.15975191,10.3599893 C5.17909421,10.3674495 5.19751392,10.375445 5.21553283,10.3841398 C5.22999086,10.3910584 5.24462442,10.3987019 5.25904532,10.4068608 C5.27650806,10.416813 5.29365806,10.4274613 5.31032907,10.4387629 C5.32066123,10.4456853 5.33112909,10.4531757 5.34144158,10.4609677 C5.3981986,10.5039019 5.44853039,10.5544724 5.49100156,10.611263 L5.42033009,10.5296699 C5.45738336,10.5667232 5.48974911,10.6066889 5.51742733,10.6488302 C5.53059217,10.6689851 5.54297233,10.6899725 5.55432904,10.7115818 C5.55916258,10.7207036 5.56351918,10.7294344 5.56769492,10.7382296 C5.58044204,10.7650181 5.59194664,10.7934779 5.60169707,10.8227395 C5.60395544,10.8296832 5.60587989,10.8357544 5.6077252,10.8418445 C5.6190814,10.878934 5.62770622,10.9180769 5.63315338,10.9582294 L5.64,11.06 L5.64,15.2 C5.64,15.6142136 5.30421356,15.95 4.89,15.95 C4.51030423,15.95 4.19650904,15.6678461 4.14684662,15.3017706 L4.14,15.2 L4.139,12.871 L1.35033009,15.6603301 C1.05743687,15.9532233 0.582563133,15.9532233 0.289669914,15.6603301 C0.0234033516,15.3940635 -0.00080269959,14.9773998 0.217051761,14.6837883 L0.289669914,14.5996699 L3.077,11.811 L0.75,11.81 C0.370304234,11.81 0.0565090391,11.5278461 0.006846616,11.1617706 L-4.52082816e-13,11.06 C-4.52082816e-13,10.6803042 0.282153882,10.366509 0.648229443,10.3168466 L0.75,10.31 L4.89,10.31 Z M15.24,10.31 C15.6542136,10.31 15.99,10.6457864 15.99,11.06 C15.99,11.4396958 15.7078461,11.753491 15.3417706,11.8031534 L15.24,11.81 L12.904,11.811 L15.699679,14.5990196 C15.9929314,14.8915532 15.993514,15.3664266 15.7009804,15.659679 C15.4350407,15.926272 15.0184071,15.9509893 14.7245285,15.7334953 L14.640321,15.6609804 L11.84,12.867 L11.84,15.2 C11.84,15.5796958 11.5578461,15.893491 11.1917706,15.9431534 L11.09,15.95 C10.7103042,15.95 10.396509,15.6678461 10.3468466,15.3017706 L10.34,15.2 L10.34,11.06 L10.3401809,11.043472 C10.3406119,11.0237894 10.3418132,11.0041204 10.3437848,10.984514 L10.34,11.06 C10.34,11.01245 10.344425,10.9659335 10.3528858,10.9208398 C10.3546162,10.9119125 10.3566236,10.9022261 10.358824,10.8925747 C10.3647581,10.8663542 10.3719359,10.8412285 10.3803518,10.8166777 C10.3828304,10.8095191 10.3855959,10.8018276 10.3884911,10.794174 C10.397526,10.7703469 10.4075128,10.7475914 10.4185616,10.7254588 C10.423556,10.7153399 10.4289947,10.705027 10.4346903,10.6948188 C10.4450596,10.6763597 10.456211,10.6582484 10.4680882,10.6406679 C10.4753994,10.6297347 10.4831396,10.6189093 10.4912024,10.60825 C10.5346263,10.5508424 10.5861889,10.4997652 10.6441561,10.4568457 L10.5590196,10.530321 C10.5957405,10.4935099 10.6353345,10.4613104 10.6770818,10.4337234 C10.6960592,10.4212458 10.7160757,10.4092952 10.7366664,10.3982776 C10.7486896,10.3918054 10.7603726,10.3859651 10.7721696,10.3804486 C10.7993888,10.3676918 10.8281943,10.3562665 10.8578087,10.346634 C10.8622914,10.3452255 10.866649,10.3438559 10.8710163,10.3425271 C10.908934,10.3309186 10.9480769,10.3222938 10.9882294,10.3168466 L11.09,10.31 L15.24,10.31 Z M7.99,7.06 C8.50362482,7.06 8.92,7.47637518 8.92,7.99 C8.92,8.50362482 8.50362482,8.92 7.99,8.92 C7.47637518,8.92 7.06,8.50362482 7.06,7.99 C7.06,7.47637518 7.47637518,7.06 7.99,7.06 Z M4.89,-2.66453526e-14 C5.26969577,-2.66453526e-14 5.58349096,0.282153882 5.63315338,0.648229443 L5.64,0.75 L5.64,4.89 L5.63942679,4.91940838 C5.63885421,4.93409054 5.63785266,4.94875909 5.63642213,4.96339361 L5.64,4.89 C5.64,4.93684558 5.63570511,4.98268804 5.62748762,5.02715509 C5.62542418,5.03803282 5.62298532,5.0497261 5.62026528,5.06136702 C5.61482915,5.0848272 5.60842065,5.10728345 5.60101969,5.12928365 C5.59769699,5.13909131 5.59397152,5.14945649 5.59001067,5.15975191 C5.58255048,5.17909421 5.574555,5.19751392 5.56586016,5.21553283 C5.55894157,5.22999086 5.5512981,5.24462442 5.54313919,5.25904532 C5.53318696,5.27650806 5.52253874,5.29365806 5.5112371,5.31032907 C5.50431468,5.32066123 5.49682428,5.33112909 5.48903225,5.34144158 C5.44609807,5.3981986 5.39552763,5.44853039 5.33873696,5.49100156 L5.42033009,5.42033009 C5.38327681,5.45738336 5.34331108,5.48974911 5.30116979,5.51742733 C5.28101486,5.53059217 5.26002753,5.54297233 5.23841825,5.55432904 C5.22929638,5.55916258 5.22056563,5.56351918 5.21177041,5.56769492 C5.18498188,5.58044204 5.15652211,5.59194664 5.12726047,5.60169707 C5.12031678,5.60395544 5.11424558,5.60587989 5.10815554,5.6077252 C5.07106605,5.6190814 5.03192311,5.62770622 4.99177056,5.63315338 L4.89,5.64 L0.75,5.64 C0.335786438,5.64 1.77635684e-15,5.30421356 1.77635684e-15,4.89 C1.77635684e-15,4.51030423 0.282153882,4.19650904 0.648229443,4.14684662 L0.75,4.14 L3.079,4.14 L0.289669914,1.35033009 C-0.0032233047,1.05743687 -0.0032233047,0.582563133 0.289669914,0.289669914 C0.555936477,0.0234033516 0.972600159,-0.000802699589 1.26621165,0.217051761 L1.35033009,0.289669914 L4.14,3.079 L4.14,0.75 C4.14,0.370304234 4.42215388,0.0565090391 4.78822944,0.006846616 L4.89,-2.66453526e-14 Z M11.09,-1.98063788e-13 C11.4696958,-1.98063788e-13 11.783491,0.282153882 11.8331534,0.648229443 L11.84,0.75 L11.84,3.082 L14.640321,0.289019602 C14.9335734,-0.00351401838 15.4084468,-0.00293135166 15.7009804,0.290321025 C15.9669201,0.556914094 15.9906148,0.973607164 15.7724003,1.26695113 L15.699679,1.3509804 L12.903,4.139 L15.24,4.14 C15.6196958,4.14 15.933491,4.42215388 15.9831534,4.78822944 L15.99,4.89 C15.99,5.26969577 15.7078461,5.58349096 15.3417706,5.63315338 L15.24,5.64 L11.09,5.64 L11.0736258,5.63982223 C11.0529432,5.63937323 11.0322759,5.63807371 11.0116807,5.63592376 L11.09,5.64 C11.0442111,5.64 10.9993806,5.63589668 10.9558561,5.6280377 C10.9430219,5.62566959 10.929329,5.62281502 10.9157092,5.61957502 C10.8949842,5.61469202 10.8752065,5.60908343 10.8557791,5.60270264 C10.8432999,5.5985809 10.8302687,5.59392017 10.817349,5.58888788 C10.7965255,5.58075066 10.7767549,5.57199411 10.7574548,5.5624311 C10.7466243,5.55712816 10.7353092,5.55117884 10.7241204,5.54492062 C10.7004583,5.53159919 10.6777111,5.51718625 10.6558344,5.50162898 C10.6496886,5.49732786 10.6437306,5.49295242 10.6378238,5.48847789 C10.5802031,5.44489081 10.528631,5.39266429 10.485418,5.33390934 L10.5590196,5.41967898 C10.5237331,5.38430578 10.4927115,5.34628999 10.4659539,5.30627039 C10.4520763,5.28539964 10.4391047,5.26372087 10.4272307,5.24137004 C10.4209435,5.2296198 10.4151082,5.21787165 10.4095999,5.20600927 C10.3995195,5.18432268 10.3902523,5.16160103 10.3820975,5.13835606 C10.3778257,5.12602631 10.3740324,5.11422004 10.3705388,5.10234442 C10.3632232,5.07776085 10.357103,5.05219147 10.3523277,5.02615184 C10.3504392,5.0154782 10.3488089,5.00540163 10.3473846,4.99530165 C10.3472188,4.9944861 10.3470309,4.99312891 10.3468466,4.99177056 L10.34,4.89 L10.34,0.75 C10.34,0.335786438 10.6757864,-1.98063788e-13 11.09,-1.98063788e-13 Z"
+                          id="collapse"
+                          ></path>
+                      </svg>
+                  </button>
+                </div>
+
+              </div>
+              <div id="toolbarViewerMiddle" class="hidden">
+                <span id="scaleSelectContainer" class="dropdownToolbarButton">
+                  <select id="scaleSelect" title="Zoom" tabindex="23" data-l10n-id="zoom">
+                    <option id="pageAutoOption" title="" value="auto" selected="selected" data-l10n-id="page_scale_auto">Automatic Zoom</option>
+                    <option id="pageActualOption" title="" value="page-actual" data-l10n-id="page_scale_actual">Actual Size</option>
+                    <option id="pageFitOption" title="" value="page-fit" data-l10n-id="page_scale_fit">Page Fit</option>
+                    <option id="pageWidthOption" title="" value="page-width" data-l10n-id="page_scale_width">Page Width</option>
+                    <option id="customScaleOption" title="" value="custom" disabled="disabled" hidden="true"></option>
+                    <option title="" value="0.5" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 50 }'>50%</option>
+                    <option title="" value="0.75" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 75 }'>75%</option>
+                    <option title="" value="1" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 100 }'>100%</option>
+                    <option title="" value="1.25" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 125 }'>125%</option>
+                    <option title="" value="1.5" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 150 }'>150%</option>
+                    <option title="" value="2" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 200 }'>200%</option>
+                    <option title="" value="3" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 300 }'>300%</option>
+                    <option title="" value="4" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 400 }'>400%</option>
+                  </select>
+                </span>
+              </div>
+              <div id="toolbarViewerRight">
+                <button id="viewFind" class="toolbar-button" title="Find in Document" tabindex="12" data-l10n-id="findbar">
+                  <svg x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+                    <path  d="M19.7,18.3l-2.8-2.8c3.2-3.9,2.7-9.6-1-13s-9.5-3.2-13,0.3c-3.6,3.6-3.7,9.3-0.3,13s9.1,4.2,13,1l2.8,2.8
+                      c0.2,0.2,0.4,0.3,0.7,0.3s0.5-0.1,0.7-0.3c0.2-0.2,0.3-0.4,0.3-0.7S19.9,18.4,19.7,18.3z M9.5,17c-4.1,0-7.5-3.3-7.5-7.5
+                      c0-4.1,3.3-7.5,7.5-7.5S17,5.4,17,9.5C17,13.6,13.6,17,9.5,17z"/>
+                  </svg>
+                </button>
+
+                <div class="hidden">
+                  <button id="presentationMode" class="toolbarButton presentationMode hiddenLargeView" title="Switch to Presentation Mode" tabindex="31" data-l10n-id="presentation_mode">
+                    <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
+                  </button>
+
+                  <button id="openFile" class="toolbarButton openFile hiddenLargeView" title="Open File" tabindex="32" data-l10n-id="open_file">
+                    <span data-l10n-id="open_file_label">Open</span>
+                  </button>
+
+                  <button id="print" class="toolbarButton print hiddenMediumView" title="Print" tabindex="33" data-l10n-id="print">
+                    <span data-l10n-id="print_label">Print</span>
+                  </button>
+
+                  <button id="download" class="toolbarButton download hiddenMediumView" title="Download" tabindex="34" data-l10n-id="download">
+                    <span data-l10n-id="download_label">Download</span>
+                  </button>
+                  <a href="#" id="viewBookmark" class="toolbarButton bookmark hiddenSmallView" title="Current view (copy or open in new window)" tabindex="35" data-l10n-id="bookmark">
+                    <span data-l10n-id="bookmark_label">Current View</span>
+                  </a>
+
+                  <div class="verticalToolbarSeparator hiddenSmallView"></div>
+
+                  <button id="secondaryToolbarToggle" class="toolbarButton" title="Tools" tabindex="36" data-l10n-id="tools">
+                    <span data-l10n-id="tools_label">Tools</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div id="loadingBar">
+              <div class="progress">
+                <div class="glimmer">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <menu type="context" id="viewerContextMenu">
+          <menuitem id="contextFirstPage" label="First Page"
+                    data-l10n-id="first_page"></menuitem>
+          <menuitem id="contextLastPage" label="Last Page"
+                    data-l10n-id="last_page"></menuitem>
+          <menuitem id="contextPageRotateCw" label="Rotate Clockwise"
+                    data-l10n-id="page_rotate_cw"></menuitem>
+          <menuitem id="contextPageRotateCcw" label="Rotate Counter-Clockwise"
+                    data-l10n-id="page_rotate_ccw"></menuitem>
+        </menu>
+
+        <div id="viewerContainer" tabindex="0">
+          <div id="viewer" class="pdfViewer"></div>
+        </div>
+
+        <div id="errorWrapper" hidden='true'>
+          <svg viewBox="0 0 512 512">
+            <path d="M256 90c44.3 0 86 17.3 117.4 48.6C404.7 170 422 211.7 422 256s-17.3 86-48.6 117.4C342 404.7 300.3 422 256 422s-86-17.3-117.4-48.6C107.3 342 90 300.3 90 256s17.3-86 48.6-117.4C170 107.3 211.7 90 256 90m0-42C141.1 48 48 141.1 48 256s93.1 208 208 208 208-93.1 208-208S370.9 48 256 48z"/>
+            <path d="M360 330.9L330.9 360 256 285.1 181.1 360 152 330.9l74.9-74.9-74.9-74.9 29.1-29.1 74.9 74.9 74.9-74.9 29.1 29.1-74.9 74.9z"/>
+          </svg>
+          <div id="errorContainer">
+            <span id="errorMessage"></span>
+            <button id="errorShowMore" data-l10n-id="error_more_info">
+              More Information
+            </button>
+            <button id="errorShowLess" data-l10n-id="error_less_info" hidden='true'>
+              Less Information
+            </button>
+            <textarea id="errorMoreInfo" hidden='true' readonly="readonly"></textarea>
+
+            <button hidden id="errorClose" data-l10n-id="error_close">
+              Close
+            </button>
+          </div>
+        </div>
+      </div> <!-- mainContainer -->
+
+      <div id="overlayContainer" class="hidden">
+        <div id="passwordOverlay" class="container hidden">
+          <div class="dialog">
+            <div class="row">
+              <p id="passwordText" data-l10n-id="password_label">Enter the password to open this PDF file:</p>
+            </div>
+            <div class="row">
+              <input type="password" id="password" class="toolbarField">
+            </div>
+            <div class="buttonRow">
+              <button id="passwordCancel" class="overlayButton"><span data-l10n-id="password_cancel">Cancel</span></button>
+              <button id="passwordSubmit" class="overlayButton"><span data-l10n-id="password_ok">OK</span></button>
+            </div>
+          </div>
+        </div>
+        <div id="documentPropertiesOverlay" class="container hidden">
+          <div class="dialog">
+            <div class="row">
+              <span data-l10n-id="document_properties_file_name">File name:</span> <p id="fileNameField">-</p>
+            </div>
+            <div class="row">
+              <span data-l10n-id="document_properties_file_size">File size:</span> <p id="fileSizeField">-</p>
+            </div>
+            <div class="separator"></div>
+            <div class="row">
+              <span data-l10n-id="document_properties_title">Title:</span> <p id="titleField">-</p>
+            </div>
+            <div class="row">
+              <span data-l10n-id="document_properties_author">Author:</span> <p id="authorField">-</p>
+            </div>
+            <div class="row">
+              <span data-l10n-id="document_properties_subject">Subject:</span> <p id="subjectField">-</p>
+            </div>
+            <div class="row">
+              <span data-l10n-id="document_properties_keywords">Keywords:</span> <p id="keywordsField">-</p>
+            </div>
+            <div class="row">
+              <span data-l10n-id="document_properties_creation_date">Creation Date:</span> <p id="creationDateField">-</p>
+            </div>
+            <div class="row">
+              <span data-l10n-id="document_properties_modification_date">Modification Date:</span> <p id="modificationDateField">-</p>
+            </div>
+            <div class="row">
+              <span data-l10n-id="document_properties_creator">Creator:</span> <p id="creatorField">-</p>
+            </div>
+            <div class="separator"></div>
+            <div class="row">
+              <span data-l10n-id="document_properties_producer">PDF Producer:</span> <p id="producerField">-</p>
+            </div>
+            <div class="row">
+              <span data-l10n-id="document_properties_version">PDF Version:</span> <p id="versionField">-</p>
+            </div>
+            <div class="row">
+              <span data-l10n-id="document_properties_page_count">Page Count:</span> <p id="pageCountField">-</p>
+            </div>
+            <div class="row">
+              <span data-l10n-id="document_properties_page_size">Page Size:</span> <p id="pageSizeField">-</p>
+            </div>
+            <div class="separator"></div>
+            <div class="row">
+              <span data-l10n-id="document_properties_linearized">Fast Web View:</span> <p id="linearizedField">-</p>
+            </div>
+            <div class="buttonRow">
+              <button id="documentPropertiesClose" class="overlayButton"><span data-l10n-id="document_properties_close">Close</span></button>
+            </div>
+          </div>
+        </div>
+        <div id="printServiceOverlay" class="container hidden">
+          <div class="dialog">
+            <div class="row">
+              <span data-l10n-id="print_progress_message">Preparing document for printing…</span>
+            </div>
+            <div class="row">
+              <progress value="0" max="100"></progress>
+              <span data-l10n-id="print_progress_percent" data-l10n-args='{ "progress": 0 }' class="relative-progress">0%</span>
+            </div>
+            <div class="buttonRow">
+              <button id="printCancel" class="overlayButton"><span data-l10n-id="print_progress_close">Cancel</span></button>
+            </div>
+          </div>
+        </div>
+      </div>  <!-- overlayContainer -->
+
+    </div> <!-- outerContainer -->
+    <div id="printContainer"></div>
+  </body>
+</html>
+

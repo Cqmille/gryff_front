@@ -1,4 +1,6 @@
 import { Component, h } from '@stencil/core';
+import '@teamhive/pdf-viewer/dist/index';
+
 
 @Component({
   tag: 'app-home',

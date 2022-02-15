@@ -41,12 +41,15 @@ export class UserCreationRessource {
     async uploadPdf(event){ console.log(event)
         this.formNewRessource.append('file', event.target.files[0])
     }
-
+// url pour tester affichage pdf : http://localhost:3000/file/doc-1644917417087.pdf
 
     render(){
         return (
             <div>
                 <form onSubmit={(e) => this.envoiRessource(e)}>
+                    {/* <label>titre
+                        <select name='titre' onInput={(event) => this.alimRessource(event)}/>
+                    </label> */}
                     <label>titre
                         <input type="text" name='titre' onInput={(event) => this.alimRessource(event)}/>
                     </label>
@@ -57,7 +60,9 @@ export class UserCreationRessource {
                         <input type="file" name='uploaded_file' onChange={(event) => this.uploadPdf(event)}/>
                     </label>
                     <input type="submit" value="Submit" />
+                    <hive-pdf-viewer src="http://localhost:3000/file/doc-1644917417087.pdf"></hive-pdf-viewer>
                 </form>
+
             </div>
         )
     }

@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-c37bab2d.js';
+import { r as registerInstance, h } from './index-15e5713e.js';
 import { P as PATH } from './path-5d0f272b.js';
 
 let UserCreationRessource = class {
@@ -34,8 +34,9 @@ let UserCreationRessource = class {
     console.log(event);
     this.formNewRessource.append('file', event.target.files[0]);
   }
+  // url pour tester affichage pdf : http://localhost:3000/file/doc-1644917417087.pdf
   render() {
-    return (h("div", null, h("form", { onSubmit: (e) => this.envoiRessource(e) }, h("label", null, "titre", h("input", { type: "text", name: 'titre', onInput: (event) => this.alimRessource(event) })), h("label", null, "resume", h("input", { type: "text", name: 'resume', onInput: (event) => this.alimRessource(event) })), h("label", null, "fichier", h("input", { type: "file", name: 'uploaded_file', onChange: (event) => this.uploadPdf(event) })), h("input", { type: "submit", value: "Submit" }))));
+    return (h("div", null, h("form", { onSubmit: (e) => this.envoiRessource(e) }, h("label", null, "titre", h("input", { type: "text", name: 'titre', onInput: (event) => this.alimRessource(event) })), h("label", null, "resume", h("input", { type: "text", name: 'resume', onInput: (event) => this.alimRessource(event) })), h("label", null, "fichier", h("input", { type: "file", name: 'uploaded_file', onChange: (event) => this.uploadPdf(event) })), h("input", { type: "submit", value: "Submit" }), h("hive-pdf-viewer", { src: "http://localhost:3000/file/doc-1644917417087.pdf" }))));
   }
 };
 
