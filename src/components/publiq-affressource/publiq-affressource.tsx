@@ -217,6 +217,7 @@ export class affressource {
                     - type: {this.afficherRessources.type} <br />
                     - tags: {this.afficherRessources.tags} <br />
                     - auteur: {this.afficherRessources.prenomNomUser} <br />
+                    - PDF:<hive-pdf-viewer src="http://localhost:3000/file/doc-1644917417087.pdf"></hive-pdf-viewer>
                     - stats (nombre de vue): {nbrVue} <br />
                     - favoris ressource: <button onClick={this.favorisRessource}>ressourcefavoris</button> <br />
                     - supprimer favoris ressource: <button onClick={this.supprimerFavorisRessource}>suprimer ressourcefavoris</button> <br />
