@@ -10,15 +10,42 @@ import { Ressources } from '../../utils/Ressources';
 export class ModMonespace {
 
     @State() modRessource:Ressources[];
+    @State() modComment:Ressources[];
     @State() message: string;
-    @State() ressourceid: string;
+    @State() ressourceId: string;
+    @State() etatRE: string;
 
     async componentWillLoad() {
         this._getData();
+        this.affcomment();
     }
 
-    async validate(event) {
-        console.log(event.target.value)
+    async validate(e) {
+        e.preventDefault()
+        try{
+            let response = await fetch(`http://localhost:3000/moder/moderationRessource`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
+                },
+                body: JSON.stringify({
+                    ressourceid: this.ressourceId,
+                    etatRessource: this.etatRE
+                }),
+            })
+            console.log()
+            if(response.status == 401) {this.message = (await response.json()).message}
+            window.location.reload()
+            // console.log(this.message)
+        }
+        catch (err){
+            console.log('fetch failed', err);
+        }
+    }
+
+    async supprimerComment(commentaireid) {
         try{
             let response = await fetch(`http://localhost:3000/moder/moderationComment`, {
                 method: 'POST',
@@ -28,13 +55,12 @@ export class ModMonespace {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: this.ressourceid,
-                    etatRessource: event.target.value
+                    commentaireid: commentaireid.target.value,
                 }),
             })
             console.log()
             if(response.status == 401) {this.message = (await response.json()).message}
-            this.modRessource = await response.json();
+            window.location.reload()
             // console.log(this.message)
         }
         catch (err){
@@ -62,8 +88,32 @@ export class ModMonespace {
         }
     }
 
+    async affcomment(){
+        try{
+            let response = await fetch(`http://localhost:3000/moder/afficheCommentaireSignale`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
+                }
+            })
+            console.log()
+            if(response.status == 401) {this.message = (await response.json()).message}
+            this.modComment = await response.json();
+            // console.log(this.message)
+        }
+        catch (err){
+            console.log('fetch failed', err);
+        }
+    }
+
+    async alldata(event){
+        this.etatRE=event.target.value
+    }
+
     render(){
-        if(this.modRessource){
+        if(this.modRessource && this.modComment ){
             return (
                 <div>
                     {this.modRessource.map((ressource : Ressources) =>
@@ -74,15 +124,34 @@ export class ModMonespace {
                             - titre: {ressource.titre} 
                             - resume: {ressource.resume}
                             - Prenom Nom {ressource.prenomNomUser}
-                            {this.ressourceid=ressource._id}
-                            <form>
+                            <style>.hiden{this.ressourceId=ressource._id}</style>
+                            <form onSubmit={(e)=>this.validate(e)}>
                             <label>validerchoix
-                            <input type="text" name='valide' onInput={(event) => this.validate(event)}/>
+                            <select name='valide' onInput={(event) => this.alldata(event)}>
+                                <option value="valide">valider</option>
+                                <option value="archive">Archiver</option>
+                                <option value="refuse">Refuser</option>
+                            </select>
                             </label>
                             <input type='submit' value='submit'> </input> <br />
                             </form>
                             </p>
                         </div>)}
+                        <div>
+                    {this.modComment.map((comment : Ressources) =>
+                        <div>
+                            <p>
+                            - commentaires  {comment.commentaires.map((d,idx)=>{
+                            return  (<li key={idx}>
+                            - Prenom, Nom : {d.prenomNomUser} <br /> 
+                            - texte: {d.commentaireText} <br /> 
+                            - date de publication: {d.datePublicationComment}
+                            <button value={d._id} onClick={commentaireid=>this.supprimerComment(commentaireid)}>supprimer commentaire</button> <br />
+                            </li>)
+                            })}
+                            </p>
+                        </div>)}
+                </div>
                 </div>
             )
         }
