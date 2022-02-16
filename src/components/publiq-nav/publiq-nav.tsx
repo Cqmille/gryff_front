@@ -29,12 +29,12 @@ export class PubliqNav {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catégories </a>
                                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                                        <li><a class="dropdown-item" href="/tags-ressources/sante">Santé</a></li>
-                                        <li><a class="dropdown-item" href="/tags-ressources/education">Éducation</a></li>
-                                        <li><a class="dropdown-item" href="/tags-ressources/sport">Sports</a></li>
-                                        <li><a class="dropdown-item" href="/tags-ressources/association">Associations</a></li>
-                                        <li><a class="dropdown-item" href="/tags-ressources/emploi">Emploi</a></li>
-                                        <li><a class="dropdown-item" href="/tags-ressources/senior">Sénior</a></li>
+                                        <li><stencil-route-link url="/tags-ressources/sante"><a class="dropdown-item" >Santé</a></stencil-route-link></li>
+                                        <li><stencil-route-link url="/tags-ressources/education"><a class="dropdown-item" >Éducation</a></stencil-route-link></li>
+                                        <li><stencil-route-link url="/tags-ressources/sport"><a class="dropdown-item" >Sports</a></stencil-route-link></li>
+                                        <li><stencil-route-link url="/tags-ressources/association"><a class="dropdown-item" >Associations</a></stencil-route-link></li>
+                                        <li><stencil-route-link url="/tags-ressources/emploi"><a class="dropdown-item" >Emploi</a></stencil-route-link></li>
+                                        <li><stencil-route-link url="/tags-ressources/senior"><a class="dropdown-item" >Sénior</a></stencil-route-link></li>
                                         <li>
                                             <hr class="dropdown-divider"></hr>
                                         </li>
