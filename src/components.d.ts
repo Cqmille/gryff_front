@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { MatchResults, RouterHistory } from "@stencil/router";
 export namespace Components {
     interface AppHome {
+        "history": RouterHistory;
     }
     interface AppProfile {
         "match": MatchResults;
@@ -23,11 +24,21 @@ export namespace Components {
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "history": RouterHistory;
+    }
+    interface PubliqRessourceTags {
+        "match": any;
     }
     interface UserConnexion {
         "history": RouterHistory;
     }
     interface UserCreationressource {
+    }
+    interface UserInscription {
+        "history": RouterHistory;
+    }
+    interface UserInscriptionValid {
+        "history": RouterHistory;
     }
     interface UserMonespace {
     }
@@ -81,6 +92,12 @@ declare global {
         prototype: HTMLPubliqNavElement;
         new (): HTMLPubliqNavElement;
     };
+    interface HTMLPubliqRessourceTagsElement extends Components.PubliqRessourceTags, HTMLStencilElement {
+    }
+    var HTMLPubliqRessourceTagsElement: {
+        prototype: HTMLPubliqRessourceTagsElement;
+        new (): HTMLPubliqRessourceTagsElement;
+    };
     interface HTMLUserConnexionElement extends Components.UserConnexion, HTMLStencilElement {
     }
     var HTMLUserConnexionElement: {
@@ -92,6 +109,18 @@ declare global {
     var HTMLUserCreationressourceElement: {
         prototype: HTMLUserCreationressourceElement;
         new (): HTMLUserCreationressourceElement;
+    };
+    interface HTMLUserInscriptionElement extends Components.UserInscription, HTMLStencilElement {
+    }
+    var HTMLUserInscriptionElement: {
+        prototype: HTMLUserInscriptionElement;
+        new (): HTMLUserInscriptionElement;
+    };
+    interface HTMLUserInscriptionValidElement extends Components.UserInscriptionValid, HTMLStencilElement {
+    }
+    var HTMLUserInscriptionValidElement: {
+        prototype: HTMLUserInscriptionValidElement;
+        new (): HTMLUserInscriptionValidElement;
     };
     interface HTMLUserMonespaceElement extends Components.UserMonespace, HTMLStencilElement {
     }
@@ -108,13 +137,17 @@ declare global {
         "publiq-affressource": HTMLPubliqAffressourceElement;
         "publiq-footer": HTMLPubliqFooterElement;
         "publiq-nav": HTMLPubliqNavElement;
+        "publiq-ressource-tags": HTMLPubliqRessourceTagsElement;
         "user-connexion": HTMLUserConnexionElement;
         "user-creationressource": HTMLUserCreationressourceElement;
+        "user-inscription": HTMLUserInscriptionElement;
+        "user-inscription-valid": HTMLUserInscriptionValidElement;
         "user-monespace": HTMLUserMonespaceElement;
     }
 }
 declare namespace LocalJSX {
     interface AppHome {
+        "history"?: RouterHistory;
     }
     interface AppProfile {
         "match"?: MatchResults;
@@ -130,11 +163,21 @@ declare namespace LocalJSX {
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "history"?: RouterHistory;
+    }
+    interface PubliqRessourceTags {
+        "match"?: any;
     }
     interface UserConnexion {
         "history"?: RouterHistory;
     }
     interface UserCreationressource {
+    }
+    interface UserInscription {
+        "history"?: RouterHistory;
+    }
+    interface UserInscriptionValid {
+        "history"?: RouterHistory;
     }
     interface UserMonespace {
     }
@@ -147,8 +190,11 @@ declare namespace LocalJSX {
         "publiq-affressource": PubliqAffressource;
         "publiq-footer": PubliqFooter;
         "publiq-nav": PubliqNav;
+        "publiq-ressource-tags": PubliqRessourceTags;
         "user-connexion": UserConnexion;
         "user-creationressource": UserCreationressource;
+        "user-inscription": UserInscription;
+        "user-inscription-valid": UserInscriptionValid;
         "user-monespace": UserMonespace;
     }
 }
@@ -164,8 +210,11 @@ declare module "@stencil/core" {
             "publiq-affressource": LocalJSX.PubliqAffressource & JSXBase.HTMLAttributes<HTMLPubliqAffressourceElement>;
             "publiq-footer": LocalJSX.PubliqFooter & JSXBase.HTMLAttributes<HTMLPubliqFooterElement>;
             "publiq-nav": LocalJSX.PubliqNav & JSXBase.HTMLAttributes<HTMLPubliqNavElement>;
+            "publiq-ressource-tags": LocalJSX.PubliqRessourceTags & JSXBase.HTMLAttributes<HTMLPubliqRessourceTagsElement>;
             "user-connexion": LocalJSX.UserConnexion & JSXBase.HTMLAttributes<HTMLUserConnexionElement>;
             "user-creationressource": LocalJSX.UserCreationressource & JSXBase.HTMLAttributes<HTMLUserCreationressourceElement>;
+            "user-inscription": LocalJSX.UserInscription & JSXBase.HTMLAttributes<HTMLUserInscriptionElement>;
+            "user-inscription-valid": LocalJSX.UserInscriptionValid & JSXBase.HTMLAttributes<HTMLUserInscriptionValidElement>;
             "user-monespace": LocalJSX.UserMonespace & JSXBase.HTMLAttributes<HTMLUserMonespaceElement>;
         }
     }
