@@ -17,6 +17,7 @@ export class UserConnexion {
     @State() password: String;
     @State() reponseServer: JSON;
     @State() user: UserConnected;
+    @State() habilitation: string;
 
     async envoiConnexion(e){
         e.preventDefault();
@@ -33,6 +34,12 @@ export class UserConnexion {
         this.user = await response.json();
         localStorage.setItem("userId", this.user.userId);
         localStorage.setItem("token", this.user.token);
+        localStorage.setItem('habilitation',this.user.habilitation)
+
+        const navBar = window.document.querySelector('publiq-nav')
+        navBar.setAttribute('connected', 'true')
+        console.log(navBar)
+
         this.history.replace(`/monEspace`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
     }
 
