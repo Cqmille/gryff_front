@@ -14,6 +14,8 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface ModMonespace {
+    }
     interface PublicNotFound {
     }
     interface PubliqAffressource {
@@ -48,6 +50,12 @@ declare global {
     var HTMLAppRootElement: {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
+    };
+    interface HTMLModMonespaceElement extends Components.ModMonespace, HTMLStencilElement {
+    }
+    var HTMLModMonespaceElement: {
+        prototype: HTMLModMonespaceElement;
+        new (): HTMLModMonespaceElement;
     };
     interface HTMLPublicNotFoundElement extends Components.PublicNotFound, HTMLStencilElement {
     }
@@ -95,6 +103,7 @@ declare global {
         "app-home": HTMLAppHomeElement;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
+        "mod-monespace": HTMLModMonespaceElement;
         "public-not-found": HTMLPublicNotFoundElement;
         "publiq-affressource": HTMLPubliqAffressourceElement;
         "publiq-footer": HTMLPubliqFooterElement;
@@ -111,6 +120,8 @@ declare namespace LocalJSX {
         "match"?: MatchResults;
     }
     interface AppRoot {
+    }
+    interface ModMonespace {
     }
     interface PublicNotFound {
     }
@@ -131,6 +142,7 @@ declare namespace LocalJSX {
         "app-home": AppHome;
         "app-profile": AppProfile;
         "app-root": AppRoot;
+        "mod-monespace": ModMonespace;
         "public-not-found": PublicNotFound;
         "publiq-affressource": PubliqAffressource;
         "publiq-footer": PubliqFooter;
@@ -147,6 +159,7 @@ declare module "@stencil/core" {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "mod-monespace": LocalJSX.ModMonespace & JSXBase.HTMLAttributes<HTMLModMonespaceElement>;
             "public-not-found": LocalJSX.PublicNotFound & JSXBase.HTMLAttributes<HTMLPublicNotFoundElement>;
             "publiq-affressource": LocalJSX.PubliqAffressource & JSXBase.HTMLAttributes<HTMLPubliqAffressourceElement>;
             "publiq-footer": LocalJSX.PubliqFooter & JSXBase.HTMLAttributes<HTMLPubliqFooterElement>;

@@ -1,9 +1,6 @@
 import { Component, h, State } from '@stencil/core';
 
 import { Ressources } from '../../utils/Ressources';
-
-import { UserConnected } from '../../utils/UserConnected';
-
 @Component({
     tag:'publiq-affressource',
     shadow: false,
@@ -12,7 +9,7 @@ import { UserConnected } from '../../utils/UserConnected';
 export class affressource {
 
     @State() afficherRessources:Ressources;
-    @State() afficherprofile:UserConnected;
+    @State() commenttext:string;
     @State() message: string;
 
     async componentWillLoad() {
@@ -166,7 +163,8 @@ export class affressource {
         }
     }
 
-    async addComment(event){
+    async addComment(e){
+        e.preventDefault()
         try{
             let response = await fetch(`http://localhost:3000/users/commente`, {
                 method: 'POST',
@@ -177,11 +175,12 @@ export class affressource {
                 },
                 body: JSON.stringify({
                     _id: "620b95d1e1c6a6ec68548fed",
-                    commentaireText: event.target.value
+                    commentaireText: this.commenttext
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
             console.log(this.message)
+            window.location.reload()
         }
         catch (err){
             console.log('fetch failed', err);
@@ -205,6 +204,10 @@ export class affressource {
         }
     }
 
+    async alldata(event){
+        this.commenttext=(event.target.value)
+    }
+
     render(){
         if(this.afficherRessources){
             const nbrVue=this.afficherRessources.stats.vuesConnecte + this.afficherRessources.stats.vuesnonConnecte
@@ -224,9 +227,9 @@ export class affressource {
                     - suivre utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button> <br />
                     - supprimer suivi utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button> <br />
                     - signaler ressource : <button onClick={this.signalerRessource}>signalerRessource</button> <br />
-                    <form>
+                    <form onSubmit={(e)=>this.addComment(e)}>
                         <label>ajouterCommentaire
-                            <input type="text" name='commenttext' onInput={(event) => this.addComment(event)}/>
+                            <input type="text" name='commenttext' onInput={(event) => this.alldata(event)}/>
                         </label>
                             <input type='submit' value='submit'> </input> <br />
                     </form>
@@ -239,17 +242,6 @@ export class affressource {
                     })}
                     </p>
                     {this.vueplus1()}
-                </div>
-            )
-        }
-        if(this.afficherprofile){
-            return(
-                <div>
-                    <p>
-                    - afficher profil de l'auteur de la ressource: 
-                    - Nom {this.afficherprofile.nom} <br />
-                    - Prenom {this.afficherprofile.prenom} <br />
-                    </p>
                 </div>
             )
         }
