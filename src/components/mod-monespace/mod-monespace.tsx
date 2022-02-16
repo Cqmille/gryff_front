@@ -22,8 +22,6 @@ export class ModMonespace {
 
     async validate(e) {
         e.preventDefault()
-        console.log(this.ressourceId)
-        console.log(this.etatRE)
         try{
             let response = await fetch(`http://localhost:3000/moder/moderationRessource`, {
                 method: 'POST',
@@ -39,7 +37,7 @@ export class ModMonespace {
             })
             console.log()
             if(response.status == 401) {this.message = (await response.json()).message}
-            //window.location.reload()
+            window.location.reload()
             // console.log(this.message)
         }
         catch (err){
@@ -127,11 +125,12 @@ export class ModMonespace {
                             - titre: {ressource.titre} 
                             - resume: {ressource.resume}
                             - Prenom Nom {ressource.prenomNomUser}
-                            {this.ressourceId=ressource._id}
+                            <style>.hiden{this.ressourceId=ressource._id}</style>
                             <form onSubmit={(e)=>this.validate(e)}>
                             <label>validerchoix
                             <select name='valider' onInput={(event) => this.alldata(event)}>
-                                <option value="valide" selected>valider</option>
+                                <option value="selectionner la variable"></option>
+                                <option value="valide" >valider</option>
                                 <option value="archive">Archiver</option>
                                 <option value="refuse">Refuser</option>
                             </select>
