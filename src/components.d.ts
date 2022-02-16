@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { MatchResults, RouterHistory } from "@stencil/router";
 export namespace Components {
     interface AppHome {
+        "history": RouterHistory;
     }
     interface AppProfile {
         "match": MatchResults;
@@ -21,6 +22,10 @@ export namespace Components {
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "history": RouterHistory;
+    }
+    interface PubliqRessourceTags {
+        "match": any;
     }
     interface UserConnexion {
         "history": RouterHistory;
@@ -73,6 +78,12 @@ declare global {
         prototype: HTMLPubliqNavElement;
         new (): HTMLPubliqNavElement;
     };
+    interface HTMLPubliqRessourceTagsElement extends Components.PubliqRessourceTags, HTMLStencilElement {
+    }
+    var HTMLPubliqRessourceTagsElement: {
+        prototype: HTMLPubliqRessourceTagsElement;
+        new (): HTMLPubliqRessourceTagsElement;
+    };
     interface HTMLUserConnexionElement extends Components.UserConnexion, HTMLStencilElement {
     }
     var HTMLUserConnexionElement: {
@@ -99,6 +110,7 @@ declare global {
         "publiq-affressource": HTMLPubliqAffressourceElement;
         "publiq-footer": HTMLPubliqFooterElement;
         "publiq-nav": HTMLPubliqNavElement;
+        "publiq-ressource-tags": HTMLPubliqRessourceTagsElement;
         "user-connexion": HTMLUserConnexionElement;
         "user-creationressource": HTMLUserCreationressourceElement;
         "user-monespace": HTMLUserMonespaceElement;
@@ -106,6 +118,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface AppHome {
+        "history"?: RouterHistory;
     }
     interface AppProfile {
         "match"?: MatchResults;
@@ -119,6 +132,10 @@ declare namespace LocalJSX {
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "history"?: RouterHistory;
+    }
+    interface PubliqRessourceTags {
+        "match"?: any;
     }
     interface UserConnexion {
         "history"?: RouterHistory;
@@ -135,6 +152,7 @@ declare namespace LocalJSX {
         "publiq-affressource": PubliqAffressource;
         "publiq-footer": PubliqFooter;
         "publiq-nav": PubliqNav;
+        "publiq-ressource-tags": PubliqRessourceTags;
         "user-connexion": UserConnexion;
         "user-creationressource": UserCreationressource;
         "user-monespace": UserMonespace;
@@ -151,6 +169,7 @@ declare module "@stencil/core" {
             "publiq-affressource": LocalJSX.PubliqAffressource & JSXBase.HTMLAttributes<HTMLPubliqAffressourceElement>;
             "publiq-footer": LocalJSX.PubliqFooter & JSXBase.HTMLAttributes<HTMLPubliqFooterElement>;
             "publiq-nav": LocalJSX.PubliqNav & JSXBase.HTMLAttributes<HTMLPubliqNavElement>;
+            "publiq-ressource-tags": LocalJSX.PubliqRessourceTags & JSXBase.HTMLAttributes<HTMLPubliqRessourceTagsElement>;
             "user-connexion": LocalJSX.UserConnexion & JSXBase.HTMLAttributes<HTMLUserConnexionElement>;
             "user-creationressource": LocalJSX.UserCreationressource & JSXBase.HTMLAttributes<HTMLUserCreationressourceElement>;
             "user-monespace": LocalJSX.UserMonespace & JSXBase.HTMLAttributes<HTMLUserMonespaceElement>;
