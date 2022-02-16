@@ -6,6 +6,7 @@ export interface Ressources {
     resume:string,
     idUser:string,
     prenomNomUser: string,
+    fileName:string,
     datePublication: string, 
     dateValidation: string,
     dateModif: string,

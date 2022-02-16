@@ -26,7 +26,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620b95d1e1c6a6ec68548fed"
+                    ressourceid: "620caeb3cf2c433f424fb471"
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -47,7 +47,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620b95d1e1c6a6ec68548fed"
+                    ressourceid: "620caeb3cf2c433f424fb471"
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -89,7 +89,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620b95d1e1c6a6ec68548fed"
+                    ressourceid: "620caeb3cf2c433f424fb471"
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -110,7 +110,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620b95d1e1c6a6ec68548fed"
+                    ressourceid: "620caeb3cf2c433f424fb471"
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -174,7 +174,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    _id: "620b95d1e1c6a6ec68548fed",
+                    _id: "620caeb3cf2c433f424fb471",
                     commentaireText: this.commenttext
                 }),
             })
@@ -189,7 +189,7 @@ export class affressource {
 
     async _getData(){
         try{
-            let response = await fetch(`http://localhost:3000/public/afficheRessource/`+"620b95d1e1c6a6ec68548fed", {
+            let response = await fetch(`http://localhost:3000/public/afficheRessource/`+"620caeb3cf2c433f424fb471", {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -220,7 +220,7 @@ export class affressource {
                     - type: {this.afficherRessources.type} <br />
                     - tags: {this.afficherRessources.tags} <br />
                     - auteur: {this.afficherRessources.prenomNomUser} <br />
-                    - PDF:<hive-pdf-viewer src="http://localhost:3000/file/doc-1644917417087.pdf"></hive-pdf-viewer>
+                    - PDF:<hive-pdf-viewer src={"http://localhost:3000/file/"+this.afficherRessources.fileName}></hive-pdf-viewer>
                     - stats (nombre de vue): {nbrVue} <br />
                     - favoris ressource: <button onClick={this.favorisRessource}>ressourcefavoris</button> <br />
                     - supprimer favoris ressource: <button onClick={this.supprimerFavorisRessource}>suprimer ressourcefavoris</button> <br />
