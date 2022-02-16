@@ -22,7 +22,9 @@ export namespace Components {
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "connected": boolean;
         "history": RouterHistory;
+        "test": string;
     }
     interface PubliqRessourceTags {
         "match": any;
@@ -132,7 +134,9 @@ declare namespace LocalJSX {
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "connected"?: boolean;
         "history"?: RouterHistory;
+        "test"?: string;
     }
     interface PubliqRessourceTags {
         "match"?: any;

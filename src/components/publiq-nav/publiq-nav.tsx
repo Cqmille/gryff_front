@@ -1,5 +1,6 @@
-import { Component, h,Prop } from '@stencil/core';
+import { Component, h,Prop, Watch } from '@stencil/core';
 import { RouterHistory } from '@stencil/router';
+import {PATH} from '../../utils/path.js';
 @Component({
     tag:'publiq-nav',
     styleUrl: 'publiq-nav.css',
@@ -9,6 +10,26 @@ import { RouterHistory } from '@stencil/router';
 
 export class PubliqNav {
     @Prop() history: RouterHistory;
+    @Prop() test: string = 'testProps'
+    @Prop() connected: boolean;
+
+    async checkConnexion(){
+        let response = await fetch(PATH.back+'/users/testAuth',{
+            method:'POST',
+            headers: {
+                authorization: localStorage.getItem('token'),
+                userid: localStorage.getItem('userId')
+            }
+        });
+        if(response.status == 201){
+            this.connected = true
+        }
+    }
+
+    async componentWillLoad(){
+        this.checkConnexion()
+    }
+
     async _getData(event){
             this.history.push(`/tags-ressources/${event.target.value}`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
     }
@@ -45,18 +66,27 @@ export class PubliqNav {
                                     <a class="nav-link" href="#">Rechercher</a>
                                 </li>
                             </ul>
-                            <ul class="navbar-nav ms-auto">
-                            <stencil-route-link url="/connexion">
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-target="#myModal" data-bs-toggle="modal">Connexion</a>
-                                </li>
-                            </stencil-route-link>
-                            <stencil-route-link url="/inscription">				
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-target="#myModal" data-bs-toggle="modal">Inscription</a>
-                                </li>
-                            </stencil-route-link>	
-                            </ul>
+                            {this.connected?
+                                <ul class="navbar-nav ms-auto">
+                                    <stencil-route-link url="/monEspace">
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-target="#myModal" data-bs-toggle="modal">Mon espace</a>
+                                    </li>
+                                </stencil-route-link>
+                                </ul>
+
+                                :<ul class="navbar-nav ms-auto">
+                                <stencil-route-link url="/connexion">
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-target="#myModal" data-bs-toggle="modal">Connexion</a>
+                                    </li>
+                                </stencil-route-link>
+                                <stencil-route-link url="/inscription">				
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-target="#myModal" data-bs-toggle="modal">Inscription</a>
+                                    </li>
+                                </stencil-route-link>	
+                                </ul>}
                         </div>
                     </div>
                 </nav>
