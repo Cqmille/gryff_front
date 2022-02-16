@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { MatchResults, RouterHistory } from "@stencil/router";
 export namespace Components {
     interface AppHome {
+        "history": RouterHistory;
     }
     interface AppProfile {
         "match": MatchResults;
@@ -16,9 +17,15 @@ export namespace Components {
     }
     interface PublicNotFound {
     }
+    interface PubliqAffressource {
+    }
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "history": RouterHistory;
+    }
+    interface PubliqRessourceTags {
+        "match": any;
     }
     interface UserConnexion {
         "history": RouterHistory;
@@ -59,6 +66,12 @@ declare global {
         prototype: HTMLPublicNotFoundElement;
         new (): HTMLPublicNotFoundElement;
     };
+    interface HTMLPubliqAffressourceElement extends Components.PubliqAffressource, HTMLStencilElement {
+    }
+    var HTMLPubliqAffressourceElement: {
+        prototype: HTMLPubliqAffressourceElement;
+        new (): HTMLPubliqAffressourceElement;
+    };
     interface HTMLPubliqFooterElement extends Components.PubliqFooter, HTMLStencilElement {
     }
     var HTMLPubliqFooterElement: {
@@ -70,6 +83,12 @@ declare global {
     var HTMLPubliqNavElement: {
         prototype: HTMLPubliqNavElement;
         new (): HTMLPubliqNavElement;
+    };
+    interface HTMLPubliqRessourceTagsElement extends Components.PubliqRessourceTags, HTMLStencilElement {
+    }
+    var HTMLPubliqRessourceTagsElement: {
+        prototype: HTMLPubliqRessourceTagsElement;
+        new (): HTMLPubliqRessourceTagsElement;
     };
     interface HTMLUserConnexionElement extends Components.UserConnexion, HTMLStencilElement {
     }
@@ -106,8 +125,10 @@ declare global {
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
         "public-not-found": HTMLPublicNotFoundElement;
+        "publiq-affressource": HTMLPubliqAffressourceElement;
         "publiq-footer": HTMLPubliqFooterElement;
         "publiq-nav": HTMLPubliqNavElement;
+        "publiq-ressource-tags": HTMLPubliqRessourceTagsElement;
         "user-connexion": HTMLUserConnexionElement;
         "user-creationressource": HTMLUserCreationressourceElement;
         "user-inscription": HTMLUserInscriptionElement;
@@ -117,6 +138,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface AppHome {
+        "history"?: RouterHistory;
     }
     interface AppProfile {
         "match"?: MatchResults;
@@ -125,9 +147,15 @@ declare namespace LocalJSX {
     }
     interface PublicNotFound {
     }
+    interface PubliqAffressource {
+    }
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "history"?: RouterHistory;
+    }
+    interface PubliqRessourceTags {
+        "match"?: any;
     }
     interface UserConnexion {
         "history"?: RouterHistory;
@@ -147,8 +175,10 @@ declare namespace LocalJSX {
         "app-profile": AppProfile;
         "app-root": AppRoot;
         "public-not-found": PublicNotFound;
+        "publiq-affressource": PubliqAffressource;
         "publiq-footer": PubliqFooter;
         "publiq-nav": PubliqNav;
+        "publiq-ressource-tags": PubliqRessourceTags;
         "user-connexion": UserConnexion;
         "user-creationressource": UserCreationressource;
         "user-inscription": UserInscription;
@@ -164,8 +194,10 @@ declare module "@stencil/core" {
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "public-not-found": LocalJSX.PublicNotFound & JSXBase.HTMLAttributes<HTMLPublicNotFoundElement>;
+            "publiq-affressource": LocalJSX.PubliqAffressource & JSXBase.HTMLAttributes<HTMLPubliqAffressourceElement>;
             "publiq-footer": LocalJSX.PubliqFooter & JSXBase.HTMLAttributes<HTMLPubliqFooterElement>;
             "publiq-nav": LocalJSX.PubliqNav & JSXBase.HTMLAttributes<HTMLPubliqNavElement>;
+            "publiq-ressource-tags": LocalJSX.PubliqRessourceTags & JSXBase.HTMLAttributes<HTMLPubliqRessourceTagsElement>;
             "user-connexion": LocalJSX.UserConnexion & JSXBase.HTMLAttributes<HTMLUserConnexionElement>;
             "user-creationressource": LocalJSX.UserCreationressource & JSXBase.HTMLAttributes<HTMLUserCreationressourceElement>;
             "user-inscription": LocalJSX.UserInscription & JSXBase.HTMLAttributes<HTMLUserInscriptionElement>;

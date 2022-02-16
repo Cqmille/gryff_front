@@ -6,6 +6,7 @@ import { UserConnected } from '../../utils/UserConnected';
 
 @Component({
   tag: 'user-connexion',
+  styleUrl: 'user-connexion.css',
   shadow: false,
 })
 export class UserConnexion {
@@ -45,17 +46,24 @@ export class UserConnexion {
 
   render() {
     return (
-      <div>
-          <form onSubmit={(e) => this.envoiConnexion(e)}>
-              <label>email
-                  <input type="text" name='email' onInput={(event) => this.chargeState(event)}/>
-              </label>
-              <label>password
-                  <input type="text" name='password' onInput={(event) => this.chargeState(event)}/>
-              </label>
-              <input type="submit" value="Submit" />
-          </form>
-      </div>
+      <form onSubmit={(e) => this.envoiConnexion(e)}>
+        <div class="row mx-3">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <h1 class="titre">Connexion à mon espace</h1>
+              <label class="mx-2">Adresse e-mail</label>
+              <input type="email" class="form-control" name='email' placeholder="exemple@mail.fr" onInput={(event) => this.chargeState(event)}></input>
+            </div>
+            <div class="form-group mt-2">
+              <label class="mx-2">Mot de passe</label>
+              <input type="password" class="form-control" name='password' placeholder="Mon mot de passe" onInput={(event) => this.chargeState(event)}></input>
+            </div>
+            <button type="submit" class="btn mt-2 bg-secondary border">Se connecter</button>
+          </div>         
+          <div class="col-sm-3"></div>
+        </div>
+      </form>
     );
   }
 }

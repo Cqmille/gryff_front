@@ -1,4 +1,4 @@
-import { r as registerInstance, g as getElement } from './index-15e5713e.js';
+import { r as registerInstance, g as getElement } from './index-f1e2a249.js';
 
 let ContextConsumer = class {
   constructor(hostRef) {
