@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-15e5713e.js';
+import { r as registerInstance, h } from './index-f1e2a249.js';
 
 let UserMonespace = class {
   constructor(hostRef) {

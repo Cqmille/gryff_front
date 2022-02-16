@@ -1,4 +1,4 @@
-import { r as registerInstance, e as createEvent, f as getAssetPath, h, g as getElement } from './index-15e5713e.js';
+import { r as registerInstance, f as createEvent, i as getAssetPath, h, g as getElement } from './index-f1e2a249.js';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
