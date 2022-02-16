@@ -1,8 +1,7 @@
-.nav {
-    background-color: black;
+a {
+    text-decoration: none;
 }
 
-.nolink {
-    text-decoration: none !important;
+.navbar {
+    background-color: #4aa3a5;
 }
-
