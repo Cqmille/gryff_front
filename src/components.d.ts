@@ -25,6 +25,12 @@ export namespace Components {
     }
     interface UserCreationressource {
     }
+    interface UserInscription {
+        "history": RouterHistory;
+    }
+    interface UserInscriptionValid {
+        "history": RouterHistory;
+    }
     interface UserMonespace {
     }
 }
@@ -77,6 +83,18 @@ declare global {
         prototype: HTMLUserCreationressourceElement;
         new (): HTMLUserCreationressourceElement;
     };
+    interface HTMLUserInscriptionElement extends Components.UserInscription, HTMLStencilElement {
+    }
+    var HTMLUserInscriptionElement: {
+        prototype: HTMLUserInscriptionElement;
+        new (): HTMLUserInscriptionElement;
+    };
+    interface HTMLUserInscriptionValidElement extends Components.UserInscriptionValid, HTMLStencilElement {
+    }
+    var HTMLUserInscriptionValidElement: {
+        prototype: HTMLUserInscriptionValidElement;
+        new (): HTMLUserInscriptionValidElement;
+    };
     interface HTMLUserMonespaceElement extends Components.UserMonespace, HTMLStencilElement {
     }
     var HTMLUserMonespaceElement: {
@@ -92,6 +110,8 @@ declare global {
         "publiq-nav": HTMLPubliqNavElement;
         "user-connexion": HTMLUserConnexionElement;
         "user-creationressource": HTMLUserCreationressourceElement;
+        "user-inscription": HTMLUserInscriptionElement;
+        "user-inscription-valid": HTMLUserInscriptionValidElement;
         "user-monespace": HTMLUserMonespaceElement;
     }
 }
@@ -114,6 +134,12 @@ declare namespace LocalJSX {
     }
     interface UserCreationressource {
     }
+    interface UserInscription {
+        "history"?: RouterHistory;
+    }
+    interface UserInscriptionValid {
+        "history"?: RouterHistory;
+    }
     interface UserMonespace {
     }
     interface IntrinsicElements {
@@ -125,6 +151,8 @@ declare namespace LocalJSX {
         "publiq-nav": PubliqNav;
         "user-connexion": UserConnexion;
         "user-creationressource": UserCreationressource;
+        "user-inscription": UserInscription;
+        "user-inscription-valid": UserInscriptionValid;
         "user-monespace": UserMonespace;
     }
 }
@@ -140,6 +168,8 @@ declare module "@stencil/core" {
             "publiq-nav": LocalJSX.PubliqNav & JSXBase.HTMLAttributes<HTMLPubliqNavElement>;
             "user-connexion": LocalJSX.UserConnexion & JSXBase.HTMLAttributes<HTMLUserConnexionElement>;
             "user-creationressource": LocalJSX.UserCreationressource & JSXBase.HTMLAttributes<HTMLUserCreationressourceElement>;
+            "user-inscription": LocalJSX.UserInscription & JSXBase.HTMLAttributes<HTMLUserInscriptionElement>;
+            "user-inscription-valid": LocalJSX.UserInscriptionValid & JSXBase.HTMLAttributes<HTMLUserInscriptionValidElement>;
             "user-monespace": LocalJSX.UserMonespace & JSXBase.HTMLAttributes<HTMLUserMonespaceElement>;
         }
     }

@@ -41,12 +41,12 @@ export class PubliqNav {
                                 </li>
                             </ul>
                             <ul class="navbar-nav ms-auto">
-                            <stencil-route-link url="/">
+                            <stencil-route-link url="/connexion">
                                 <li class="nav-item">
                                     <a class="nav-link nolink" href="" data-bs-target="#myModal" data-bs-toggle="modal">Connexion</a>
                                 </li>
                             </stencil-route-link>
-                            <stencil-route-link url="/connexion">				
+                            <stencil-route-link url="/inscription">				
                                 <li class="nav-item">
                                     <a class="nav-link" href="" data-bs-target="#myModal" data-bs-toggle="modal">Inscription</a>
                                 </li>
