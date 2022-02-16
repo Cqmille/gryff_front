@@ -17,7 +17,7 @@ let affressource = class {
           userid: localStorage.getItem('userId')
         },
         body: JSON.stringify({
-          ressourceid: "620b95d1e1c6a6ec68548fed"
+          ressourceid: "620caeb3cf2c433f424fb471"
         }),
       });
       if (response.status == 401) {
@@ -39,7 +39,7 @@ let affressource = class {
           userid: localStorage.getItem('userId')
         },
         body: JSON.stringify({
-          ressourceid: "620b95d1e1c6a6ec68548fed"
+          ressourceid: "620caeb3cf2c433f424fb471"
         }),
       });
       if (response.status == 401) {
@@ -83,7 +83,7 @@ let affressource = class {
           userid: localStorage.getItem('userId')
         },
         body: JSON.stringify({
-          ressourceid: "620b95d1e1c6a6ec68548fed"
+          ressourceid: "620caeb3cf2c433f424fb471"
         }),
       });
       if (response.status == 401) {
@@ -105,7 +105,7 @@ let affressource = class {
           userid: localStorage.getItem('userId')
         },
         body: JSON.stringify({
-          ressourceid: "620b95d1e1c6a6ec68548fed"
+          ressourceid: "620caeb3cf2c433f424fb471"
         }),
       });
       if (response.status == 401) {
@@ -161,7 +161,8 @@ let affressource = class {
       console.log('fetch failed', err);
     }
   }
-  async addComment(event) {
+  async addComment(e) {
+    e.preventDefault();
     try {
       let response = await fetch(`http://localhost:3000/users/commente`, {
         method: 'POST',
@@ -171,14 +172,15 @@ let affressource = class {
           userid: localStorage.getItem('userId')
         },
         body: JSON.stringify({
-          _id: "620b95d1e1c6a6ec68548fed",
-          commentaireText: event.target.value
+          _id: "620caeb3cf2c433f424fb471",
+          commentaireText: this.commenttext
         }),
       });
       if (response.status == 401) {
         this.message = (await response.json()).message;
       }
       console.log(this.message);
+      window.location.reload();
     }
     catch (err) {
       console.log('fetch failed', err);
@@ -186,7 +188,7 @@ let affressource = class {
   }
   async _getData() {
     try {
-      let response = await fetch(`http://localhost:3000/public/afficheRessource/` + "620b95d1e1c6a6ec68548fed", {
+      let response = await fetch(`http://localhost:3000/public/afficheRessource/` + "620caeb3cf2c433f424fb471", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -202,15 +204,15 @@ let affressource = class {
       console.log('fetch failed', err);
     }
   }
+  async alldata(event) {
+    this.commenttext = (event.target.value);
+  }
   render() {
     if (this.afficherRessources) {
       const nbrVue = this.afficherRessources.stats.vuesConnecte + this.afficherRessources.stats.vuesnonConnecte;
-      return (h("div", null, h("p", null, "Resumer: ", this.afficherRessources.resume, " ", h("br", null), "- Date de publication: ", this.afficherRessources.datePublication, " ", h("br", null), "- titre: ", this.afficherRessources.titre, " ", h("br", null), "- type: ", this.afficherRessources.type, " ", h("br", null), "- tags: ", this.afficherRessources.tags, " ", h("br", null), "- auteur: ", this.afficherRessources.prenomNomUser, " ", h("br", null), "- PDF:", h("hive-pdf-viewer", { src: "http://localhost:3000/file/doc-1644917417087.pdf" }), "- stats (nombre de vue): ", nbrVue, " ", h("br", null), "- favoris ressource: ", h("button", { onClick: this.favorisRessource }, "ressourcefavoris"), " ", h("br", null), "- supprimer favoris ressource: ", h("button", { onClick: this.supprimerFavorisRessource }, "suprimer ressourcefavoris"), " ", h("br", null), "- suivre utilisateur : ", h("button", { value: this.afficherRessources.idUser, onClick: idUser => this.suivreUtilisateur(idUser) }, "suivre utilisateur"), " ", h("br", null), "- supprimer suivi utilisateur : ", h("button", { value: this.afficherRessources.idUser, onClick: idUser => this.supprimerSuivreUtilisateur(idUser) }, "supprimer suivi utilisateur"), " ", h("br", null), "- signaler ressource : ", h("button", { onClick: this.signalerRessource }, "signalerRessource"), " ", h("br", null), h("form", null, h("label", null, "ajouterCommentaire", h("input", { type: "text", name: 'commenttext', onInput: (event) => this.addComment(event) })), h("input", { type: 'submit', value: 'submit' }, " "), " ", h("br", null)), "- commentaires  ", this.afficherRessources.commentaires.map((d, idx) => {
+      return (h("div", null, h("p", null, "Resumer: ", this.afficherRessources.resume, " ", h("br", null), "- Date de publication: ", this.afficherRessources.datePublication, " ", h("br", null), "- titre: ", this.afficherRessources.titre, " ", h("br", null), "- type: ", this.afficherRessources.type, " ", h("br", null), "- tags: ", this.afficherRessources.tags, " ", h("br", null), "- auteur: ", this.afficherRessources.prenomNomUser, " ", h("br", null), "- PDF:", h("hive-pdf-viewer", { src: "http://localhost:3000/file/" + this.afficherRessources.fileName }), "- stats (nombre de vue): ", nbrVue, " ", h("br", null), "- favoris ressource: ", h("button", { onClick: this.favorisRessource }, "ressourcefavoris"), " ", h("br", null), "- supprimer favoris ressource: ", h("button", { onClick: this.supprimerFavorisRessource }, "suprimer ressourcefavoris"), " ", h("br", null), "- suivre utilisateur : ", h("button", { value: this.afficherRessources.idUser, onClick: idUser => this.suivreUtilisateur(idUser) }, "suivre utilisateur"), " ", h("br", null), "- supprimer suivi utilisateur : ", h("button", { value: this.afficherRessources.idUser, onClick: idUser => this.supprimerSuivreUtilisateur(idUser) }, "supprimer suivi utilisateur"), " ", h("br", null), "- signaler ressource : ", h("button", { onClick: this.signalerRessource }, "signalerRessource"), " ", h("br", null), h("form", { onSubmit: (e) => this.addComment(e) }, h("label", null, "ajouterCommentaire", h("input", { type: "text", name: 'commenttext', onInput: (event) => this.alldata(event) })), h("input", { type: 'submit', value: 'submit' }, " "), " ", h("br", null)), "- commentaires  ", this.afficherRessources.commentaires.map((d, idx) => {
         return (h("li", { key: idx }, "- Prenom, Nom : ", d.prenomNomUser, " ", h("br", null), "- texte: ", d.commentaireText, " ", h("br", null), "- date de publication: ", d.datePublicationComment, " ", h("br", null), "- signaler commentaires : ", h("button", { value: d._id, onClick: commentaireid => this.signalerCommentaires(commentaireid) }, " signalerCommentaires"), " ", h("br", null), " "));
       })), this.vueplus1()));
-    }
-    if (this.afficherprofile) {
-      return (h("div", null, h("p", null, "- afficher profil de l'auteur de la ressource: - Nom ", this.afficherprofile.nom, " ", h("br", null), "- Prenom ", this.afficherprofile.prenom, " ", h("br", null))));
     }
     if (this.message) {
       return (h("div", null, h("p", null, this.message)));

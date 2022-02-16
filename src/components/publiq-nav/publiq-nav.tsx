@@ -68,11 +68,13 @@ export class PubliqNav {
                             </ul>
                             {this.connected?
                                 <ul class="navbar-nav ms-auto">
-                                    <stencil-route-link url="/monEspace">
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-target="#myModal" data-bs-toggle="modal">Mon espace</a>
-                                    </li>
-                                </stencil-route-link>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> mon compte </a>
+                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
+                                        <li><stencil-route-link url="/monEspace"><a class="dropdown-item" >mes ressources</a></stencil-route-link></li>
+                                        <li><stencil-route-link url="/newRessource"><a class="dropdown-item" >créer ressource</a></stencil-route-link></li>
+                                    </ul>
+                                </li>
                                 </ul>
 
                                 :<ul class="navbar-nav ms-auto">
