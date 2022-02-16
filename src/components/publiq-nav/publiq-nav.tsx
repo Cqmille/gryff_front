@@ -1,12 +1,17 @@
-import { Component, h } from '@stencil/core';
-
+import { Component, h,Prop } from '@stencil/core';
+import { RouterHistory } from '@stencil/router';
 @Component({
     tag:'publiq-nav',
     styleUrl: 'publiq-nav.css',
     shadow: false,
+    
 })
 
 export class PubliqNav {
+    @Prop() history: RouterHistory;
+    async _getData(event){
+            this.history.push(`/tags-ressources/${event.target.value}`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
+    }
     render(){
         return (
             <header>
@@ -24,12 +29,12 @@ export class PubliqNav {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catégories </a>
                                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                                        <stencil-route-link url="/ressources/sante"><li><a class="dropdown-item" href="#">Santé</a></li></stencil-route-link>
-                                        <li><a class="dropdown-item" href="#">Éducation</a></li>
-                                        <li><a class="dropdown-item" href="#">Sports</a></li>
-                                        <li><a class="dropdown-item" href="#">Associations</a></li>
-                                        <li><a class="dropdown-item" href="#">Emploi</a></li>
-                                        <li><a class="dropdown-item" href="#">Senior</a></li>
+                                        <li><stencil-route-link url="/tags-ressources/sante"><a class="dropdown-item" >Santé</a></stencil-route-link></li>
+                                        <li><stencil-route-link url="/tags-ressources/education"><a class="dropdown-item" >Éducation</a></stencil-route-link></li>
+                                        <li><stencil-route-link url="/tags-ressources/sport"><a class="dropdown-item" >Sports</a></stencil-route-link></li>
+                                        <li><stencil-route-link url="/tags-ressources/association"><a class="dropdown-item" >Associations</a></stencil-route-link></li>
+                                        <li><stencil-route-link url="/tags-ressources/emploi"><a class="dropdown-item" >Emploi</a></stencil-route-link></li>
+                                        <li><stencil-route-link url="/tags-ressources/senior"><a class="dropdown-item" >Sénior</a></stencil-route-link></li>
                                         <li>
                                             <hr class="dropdown-divider"></hr>
                                         </li>
