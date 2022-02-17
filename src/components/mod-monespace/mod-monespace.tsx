@@ -1,5 +1,5 @@
-import { Component, h, State } from '@stencil/core';
-
+import { Component, h, State,Prop } from '@stencil/core';
+import { RouterHistory } from '@stencil/router';
 import { Ressources } from '../../utils/Ressources';
 
 @Component({
@@ -14,10 +14,15 @@ export class ModMonespace {
     @State() message: string;
     @State() ressourceId: string;
     @State() etatRE: string;
+    @Prop() history: RouterHistory;
 
     async componentWillLoad() {
         this._getData();
         this.affcomment();
+    }
+
+    async goto(event){
+        this.history.push(`/afficherRessource/${event.target.value}`, {}); 
     }
 
     async validate(e) {
@@ -143,12 +148,14 @@ export class ModMonespace {
                     {this.modComment.map((comment : Ressources) =>
                         <div>
                             <p>
-                            - commentaires  {comment.commentaires.map((d,idx)=>{
+                                
+                            {comment.commentaires.map((d,idx)=>{
                             return  (<li key={idx}>
                             - Prenom, Nom : {d.prenomNomUser} <br /> 
                             - texte: {d.commentaireText} <br /> 
                             - date de publication: {d.datePublicationComment}
                             <button value={d._id} onClick={commentaireid=>this.supprimerComment(commentaireid)}>supprimer commentaire</button> <br />
+                            <button value={comment._id}  onClick={(event) => this.goto(event)}>detail de la ressource</button> <br />
                             </li>)
                             })}
                             </p>
