@@ -40,16 +40,37 @@ export class UserMonespace {
             this.history.push(`/connexion/la connexion n'est plus valide. Veuillez vous reconnecter`, {});
         }
     }
-
+    async redirect(event){
+        this.history.push(`/afficherRessource/${event.target.value}`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
+}
+    
     render(){
         if(this.mesRessources){
             return (
-                <div>
-                    {this.mesRessources.map((ressource : Ressources) =>
-                        <div>
-                            <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} </p>
-                        </div>)}
+                <div class='container'>
+                    <h1 class='uppercase text-center'>Vos ressources</h1>
+                    <div class="row mx-3 mt-5">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8 ">
+                            {this.mesRessources.map((ressource : Ressources) =>
+                            <div class='border border-primary bg-light rounded mb-3 listshadow'>
+                                <div class='row mt-3'><div class='col-10'><h2 class='ms-3'>{ressource.titre}</h2></div><div class='col-2 fw-bold'>{ressource.etatRessource}</div></div>
+                                
+                                <div class='row ms-5 mt-3 mb-3 fs-5 '><div class='col-11'> Catégorie : {ressource.tags}</div></div>
+
+                                <div class='row mt-3'><div class='col-8'><button class="btn btn-primary border text-light ms-3 mb-3" value={ressource._id} onClick={(event) => this.redirect(event)}>Accéder</button></div>Publié le :{ressource.datePublication}</div>
+                            </div>)}
+                        </div>     
+                        <div class="col-sm-2"></div>
+                    </div>
                 </div>
+
+                // <div>
+                //     {this.mesRessources.map((ressource : Ressources) =>
+                //         <div>
+                //             <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} </p>
+                //         </div>)}
+                // </div>
             )
         }
         if(this.message){
