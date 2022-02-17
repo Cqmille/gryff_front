@@ -73,18 +73,9 @@ export class PubliqNav {
                                     <a class="nav-link" href="#">Rechercher</a>
                                 </li>
                             </ul>
+                            
                             {this.connected?
-                                <ul class="navbar-nav ms-auto">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> mon compte </a>
-                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                                        <li><stencil-route-link url="/monEspace" class="nav-link"><p>Mes ressources</p></stencil-route-link></li>
-                                        <li><stencil-route-link url="/newRessource" class="nav-link"><p>Créer ressource</p></stencil-route-link></li>
-                                        <li><stencil-route-link onClick={() => this.deconnexion()} url="/" class="nav-link"><p>Déconnexion</p></stencil-route-link></li>
-                                    </ul>
-                                </li>
-                                </ul>
-
+                            <connexion-nav class="navbar-nav ms-auto" habilitation= {localStorage.getItem('habilitation')}></connexion-nav>
                                 :<ul class="navbar-nav ms-auto">
                                     <li class="nav-item">
                                         <stencil-route-link url="/connexion/''" class="nav-link">Connexion</stencil-route-link>	
