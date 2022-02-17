@@ -1,4 +1,4 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, State,Prop } from '@stencil/core';
 
 import { Ressources } from '../../utils/Ressources';
 @Component({
@@ -7,12 +7,16 @@ import { Ressources } from '../../utils/Ressources';
 })
 
 export class affressource {
-
+    @Prop() match:any;
+    @State() idRessource:string;
     @State() afficherRessources:Ressources;
     @State() commenttext:string;
     @State() message: string;
 
+    
+
     async componentWillLoad() {
+        this.idRessource= this.match.params.id;
         this._getData();
     }
 
@@ -26,7 +30,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620caeb3cf2c433f424fb471"
+                    ressourceid: this.idRessource
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -39,7 +43,7 @@ export class affressource {
 
     async signalerRessource(){
         try{
-            let response = await fetch(`http://localhost:3000/users/signalerUneRessource/`, {
+            let response = await fetch(`http://localhost:3000/users/signalerUneRessource`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,9 +51,10 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620caeb3cf2c433f424fb471"
+                    ressourceid: this.idRessource
                 }),
             })
+            console.log(response)
             if(response.status == 401) {this.message = (await response.json()).message}
             console.log(this.message)
         }
@@ -81,7 +86,7 @@ export class affressource {
 
     async favorisRessource(){
         try{
-            let response = await fetch(`http://localhost:3000/users/favorisRessource`, {
+            let response = await fetch(`http://localhost:3000/users/favorisRessource/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -89,7 +94,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620caeb3cf2c433f424fb471"
+                    ressourceid: this.idRessource
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -110,7 +115,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620caeb3cf2c433f424fb471"
+                    ressourceid: this.idRessource
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -174,7 +179,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    _id: "620caeb3cf2c433f424fb471",
+                    _id: this.match.params.id,
                     commentaireText: this.commenttext
                 }),
             })
@@ -189,7 +194,7 @@ export class affressource {
 
     async _getData(){
         try{
-            let response = await fetch(`http://localhost:3000/public/afficheRessource/`+"620caeb3cf2c433f424fb471", {
+            let response = await fetch(`http://localhost:3000/public/afficheRessource/` + this.match.params.id, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -241,7 +246,7 @@ export class affressource {
                             - signaler commentaires : <button value={d._id} onClick={commentaireid => this.signalerCommentaires(commentaireid)}> signalerCommentaires</button> <br /> </li>)
                     })}
                     </p>
-                    {this.vueplus1()}
+                    <style>.hidden{this.vueplus1()}</style> 
                 </div>
             )
         }
