@@ -4,6 +4,7 @@ import { Ressources } from '../../utils/Ressources';
 
 @Component({
     tag: 'publiq-ressource-tags',
+    styleUrl: 'publiq-ressource-tags.css',
     shadow: false,
   })
   export class publiqRessourceTags {
@@ -40,13 +41,22 @@ import { Ressources } from '../../utils/Ressources';
     render(){
         if(this.mesRessources){
             return (
-                <div>
-                    <h1>{this.match.params.tags}</h1>
-                    {this.mesRessources.map((ressource : Ressources) =>
-                        <div>
-                            <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} - auteur: {ressource.prenomNomUser} - resume: {ressource.resume}</p>
-                            <button value={ressource._id} onClick={(event) => this.redirect(event)}>En savoir plus</button>
-                        </div>)}
+                <div class='container'>
+                    <h1 class='uppercase text-center'>{this.match.params.tags}</h1>
+                    <div class="row mx-3 mt-5">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8 ">
+                            {this.mesRessources.map((ressource : Ressources) =>
+                            <div class='border border-primary bg-light rounded mb-3 listshadow'>
+                                <div class='row mt-3'><div class='col-10'><h2 class='ms-3'>{ressource.titre}</h2></div><div class='col-2'>{ressource.prenomNomUser}</div></div>
+                                
+                                <div class='row ms-5 mt-3 mb-3 fs-5 '><div class='col-11'><p class='truncate'>{ressource.resume}</p></div></div>
+                                
+                                <div class='row mt-3'><div class='col-8'><button class="btn btn-primary border text-light ms-3 mb-3" value={ressource._id} onClick={(event) => this.redirect(event)}>En savoir plus</button></div>Publié le :{ressource.datePublication}</div>
+                            </div>)}
+                        </div>     
+                        <div class="col-sm-2"></div>
+                    </div>
                 </div>
             )
         }
