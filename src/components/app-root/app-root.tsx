@@ -21,6 +21,7 @@ export class AppRoot {
               <stencil-route url="/monEspace" component="user-monespace" />
               <stencil-route url="/newRessource" component="user-creationressource" />
               <stencil-route url="/afficherressource/:id" component="publiq-affressource" />
+              <stencil-route url="/afficherressourceMod/:id" component="mod-affressource" />
               <stencil-route url="/tags-ressources/:tags" component="publiq-ressource-tags" />
               <stencil-route url="/inscription" component="user-inscription" />
               <stencil-route url="/inscriptionValide" component="user-inscription-valid" />
