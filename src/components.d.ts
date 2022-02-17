@@ -33,6 +33,7 @@ export namespace Components {
     }
     interface UserConnexion {
         "history": RouterHistory;
+        "messageExt": string;
     }
     interface UserCreationressource {
     }
@@ -43,6 +44,7 @@ export namespace Components {
         "history": RouterHistory;
     }
     interface UserMonespace {
+        "history": RouterHistory;
     }
 }
 declare global {
@@ -174,6 +176,7 @@ declare namespace LocalJSX {
     }
     interface UserConnexion {
         "history"?: RouterHistory;
+        "messageExt"?: string;
     }
     interface UserCreationressource {
     }
@@ -184,6 +187,7 @@ declare namespace LocalJSX {
         "history"?: RouterHistory;
     }
     interface UserMonespace {
+        "history"?: RouterHistory;
     }
     interface IntrinsicElements {
         "app-home": AppHome;

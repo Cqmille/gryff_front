@@ -11,7 +11,7 @@ import {PATH} from '../../utils/path.js';
 export class PubliqNav {
     @Prop() history: RouterHistory;
     @Prop() test: string = 'testProps'
-    @Prop() connected: boolean;
+    @Prop() connected: boolean = false;
 
     async checkConnexion(){
         let response = await fetch(PATH.back+'/users/testAuth',{

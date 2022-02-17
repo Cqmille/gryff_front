@@ -12,6 +12,7 @@ import { UserConnected } from '../../utils/UserConnected';
 export class UserConnexion {
 
     @Prop() history: RouterHistory;
+    @Prop() messageExt: string;
 
     @State() email: String;
     @State() password: String;
@@ -19,6 +20,10 @@ export class UserConnexion {
     @State() user: UserConnected;
     @State() habilitation: string;
     @State() messageErr: string;
+
+    componentWillRender(){
+      console.log(this.messageExt)
+    }
 
     async envoiConnexion(e){
         e.preventDefault();
@@ -76,8 +81,10 @@ export class UserConnexion {
             <div class="col-sm-3"></div>
           </div>
         </form>
-        {this.messageErr?
+        {(this.messageErr)?
           <p>{this.messageErr}</p>:null}
+        {(this.messageExt)?
+          <p>{this.messageExt}</p>:null}
       </div>
     );
   }

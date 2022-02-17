@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-c37bab2d.js';
+import { r as registerInstance, h } from './index-156de0d2.js';
 import { P as PATH } from './path-5d0f272b.js';
 
 const publiqNavCss = "a{text-decoration:none}";
@@ -7,6 +7,7 @@ let PubliqNav = class {
   constructor(hostRef) {
     registerInstance(this, hostRef);
     this.test = 'testProps';
+    this.connected = false;
   }
   async checkConnexion() {
     let response = await fetch(PATH.back + '/users/testAuth', {
