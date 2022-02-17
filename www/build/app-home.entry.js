@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-c37bab2d.js';
+import { r as registerInstance, h } from './index-156de0d2.js';
 
 const appHomeCss = "";
 
