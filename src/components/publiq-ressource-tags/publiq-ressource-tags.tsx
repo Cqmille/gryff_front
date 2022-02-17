@@ -1,5 +1,5 @@
 import { Component, h, State,Prop } from '@stencil/core';
-
+import { RouterHistory } from '@stencil/router';
 import { Ressources } from '../../utils/Ressources';
 
 @Component({
@@ -10,6 +10,7 @@ import { Ressources } from '../../utils/Ressources';
     @Prop() match:any;
     @State() mesRessources:Ressources[];
     @State() message: string;
+    @Prop() history: RouterHistory;
 
     async componentWillLoad() {
         this._getData();
@@ -32,6 +33,9 @@ import { Ressources } from '../../utils/Ressources';
             console.log('fetch failed', err);
         }
     }
+    async redirect(event){
+        this.history.push(`/ressources${event.target.value}`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
+}
 
     render(){
         if(this.mesRessources){
@@ -40,7 +44,8 @@ import { Ressources } from '../../utils/Ressources';
                     <h1>{this.match.params.tags}</h1>
                     {this.mesRessources.map((ressource : Ressources) =>
                         <div>
-                            <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} - auteur: {ressource.prenomNomUser} - resume: {ressource.resume}</p>
+                            <p> {ressource._id} Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} - auteur: {ressource.prenomNomUser} - resume: {ressource.resume}</p>
+                            <button value='{ressource._id}' onClick={(event) => this.redirect(event)}>Sénior</button>
                         </div>)}
                 </div>
             )
