@@ -1,21 +1,22 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, State,Prop } from '@stencil/core';
 
 import { Ressources } from '../../utils/Ressources';
-
-import { UserConnected } from '../../utils/UserConnected';
-
 @Component({
     tag:'publiq-affressource',
     shadow: false,
 })
 
 export class affressource {
-
+    @Prop() match:any;
+    @State() idRessource:string;
     @State() afficherRessources:Ressources;
-    @State() afficherprofile:UserConnected;
+    @State() commenttext:string;
     @State() message: string;
 
+    
+
     async componentWillLoad() {
+        this.idRessource= this.match.params.id;
         this._getData();
     }
 
@@ -29,7 +30,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620b95d1e1c6a6ec68548fed"
+                    ressourceid: this.idRessource
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -42,7 +43,7 @@ export class affressource {
 
     async signalerRessource(){
         try{
-            let response = await fetch(`http://localhost:3000/users/signalerUneRessource/`, {
+            let response = await fetch(`http://localhost:3000/users/signalerUneRessource`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,9 +51,10 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620b95d1e1c6a6ec68548fed"
+                    ressourceid: this.idRessource
                 }),
             })
+            console.log(response)
             if(response.status == 401) {this.message = (await response.json()).message}
             console.log(this.message)
         }
@@ -84,7 +86,7 @@ export class affressource {
 
     async favorisRessource(){
         try{
-            let response = await fetch(`http://localhost:3000/users/favorisRessource`, {
+            let response = await fetch(`http://localhost:3000/users/favorisRessource/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -92,7 +94,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620b95d1e1c6a6ec68548fed"
+                    ressourceid: this.idRessource
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -113,7 +115,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: "620b95d1e1c6a6ec68548fed"
+                    ressourceid: this.idRessource
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -166,7 +168,8 @@ export class affressource {
         }
     }
 
-    async addComment(event){
+    async addComment(e){
+        e.preventDefault()
         try{
             let response = await fetch(`http://localhost:3000/users/commente`, {
                 method: 'POST',
@@ -176,12 +179,13 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    _id: "620b95d1e1c6a6ec68548fed",
-                    commentaireText: event.target.value
+                    _id: this.match.params.id,
+                    commentaireText: this.commenttext
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
             console.log(this.message)
+            window.location.reload()
         }
         catch (err){
             console.log('fetch failed', err);
@@ -190,7 +194,7 @@ export class affressource {
 
     async _getData(){
         try{
-            let response = await fetch(`http://localhost:3000/public/afficheRessource/`+"620b95d1e1c6a6ec68548fed", {
+            let response = await fetch(`http://localhost:3000/public/afficheRessource/` + this.match.params.id, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -205,6 +209,10 @@ export class affressource {
         }
     }
 
+    async alldata(event){
+        this.commenttext=(event.target.value)
+    }
+
     render(){
         if(this.afficherRessources){
             const nbrVue=this.afficherRessources.stats.vuesConnecte + this.afficherRessources.stats.vuesnonConnecte
@@ -217,16 +225,16 @@ export class affressource {
                     - type: {this.afficherRessources.type} <br />
                     - tags: {this.afficherRessources.tags} <br />
                     - auteur: {this.afficherRessources.prenomNomUser} <br />
-                    - PDF:<hive-pdf-viewer src="http://localhost:3000/file/doc-1644917417087.pdf"></hive-pdf-viewer>
+                    - PDF:<hive-pdf-viewer src={"http://localhost:3000/file/"+this.afficherRessources.fileName}></hive-pdf-viewer>
                     - stats (nombre de vue): {nbrVue} <br />
                     - favoris ressource: <button onClick={this.favorisRessource}>ressourcefavoris</button> <br />
                     - supprimer favoris ressource: <button onClick={this.supprimerFavorisRessource}>suprimer ressourcefavoris</button> <br />
                     - suivre utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button> <br />
                     - supprimer suivi utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button> <br />
                     - signaler ressource : <button onClick={this.signalerRessource}>signalerRessource</button> <br />
-                    <form>
+                    <form onSubmit={(e)=>this.addComment(e)}>
                         <label>ajouterCommentaire
-                            <input type="text" name='commenttext' onInput={(event) => this.addComment(event)}/>
+                            <input type="text" name='commenttext' onInput={(event) => this.alldata(event)}/>
                         </label>
                             <input type='submit' value='submit'> </input> <br />
                     </form>
@@ -238,18 +246,7 @@ export class affressource {
                             - signaler commentaires : <button value={d._id} onClick={commentaireid => this.signalerCommentaires(commentaireid)}> signalerCommentaires</button> <br /> </li>)
                     })}
                     </p>
-                    {this.vueplus1()}
-                </div>
-            )
-        }
-        if(this.afficherprofile){
-            return(
-                <div>
-                    <p>
-                    - afficher profil de l'auteur de la ressource: 
-                    - Nom {this.afficherprofile.nom} <br />
-                    - Prenom {this.afficherprofile.prenom} <br />
-                    </p>
+                    <style>.hidden{this.vueplus1()}</style> 
                 </div>
             )
         }

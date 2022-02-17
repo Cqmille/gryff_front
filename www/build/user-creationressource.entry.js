@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-f1e2a249.js';
+import { r as registerInstance, h } from './index-25b9a15f.js';
 import { P as PATH } from './path-5d0f272b.js';
 
 let UserCreationRessource = class {
@@ -23,7 +23,7 @@ let UserCreationRessource = class {
       }
     });
     this.response = await response.json();
-    console.log(this.formNewRessource);
+    this.history.push(`/monEspace`, {});
   }
   alimRessource(event) {
     switch (event.target.name) {
@@ -44,7 +44,7 @@ let UserCreationRessource = class {
   }
   // url pour tester affichage pdf : http://localhost:3000/file/doc-1644917417087.pdf
   render() {
-    return (h("div", null, h("form", { onSubmit: (e) => this.envoiRessource(e) }, h("label", null, "type", h("select", { name: 'tags', onInput: (event) => this.alimRessource(event) }, h("option", { value: "sante" }, "Sant\u00E9"), h("option", { value: "education" }, "Education"), h("option", { value: "sport" }, "sport"), h("option", { value: "association" }, "Association"), h("option", { value: "emploi" }, "Emploi"), h("option", { value: "senior" }, "S\u00E9nior"))), h("label", null, "titre", h("input", { type: "text", name: 'titre', onInput: (event) => this.alimRessource(event) })), h("label", null, "resume", h("textarea", { name: 'resume', onInput: (event) => this.alimRessource(event) })), h("label", null, "fichier", h("input", { type: "file", name: 'uploaded_file', onChange: (event) => this.uploadPdf(event) })), h("input", { type: "submit", value: "Submit" }), h("hive-pdf-viewer", { src: "http://localhost:3000/file/doc-1644917417087.pdf" }))));
+    return (h("div", { class: 'row mx-3' }, h("div", { class: "col-sm-3" }), h("div", { class: "col-sm-6" }, h("form", { onSubmit: (e) => this.envoiRessource(e) }, h("div", { class: "form-group" }, h("h1", { class: "titre" }, "Cr\u00E9ation d'une ressource"), h("label", { class: "mx-2" }, "Type"), h("select", { name: 'tags', onInput: (event) => this.alimRessource(event) }, h("option", { value: "sante" }, "Sant\u00E9"), h("option", { value: "education" }, "Education"), h("option", { value: "sport" }, "sport"), h("option", { value: "association" }, "Association"), h("option", { value: "emploi" }, "Emploi"), h("option", { value: "senior" }, "S\u00E9nior"))), h("div", { class: "form-group mt-2" }, h("label", { class: "mx-2" }, "Titre"), h("input", { type: "text", class: "form-control", name: 'titre', onInput: (event) => this.alimRessource(event) })), h("div", { class: "form-group mt-2" }, h("label", { class: "mx-2" }, "Resum\u00E9"), h("textarea", { name: 'resume', class: "form-control", onInput: (event) => this.alimRessource(event) })), h("div", { class: "form-group mt-2" }, h("label", { class: "mx-2" }, "Fichier"), h("input", { type: "file", name: 'uploaded_file', class: "form-control", onChange: (event) => this.uploadPdf(event) })), h("button", { type: "submit", class: "btn mt-2 bg-secondary border" }, "Valider"))), h("div", { class: "col-sm-3" }), h("div", null, h("hive-pdf-viewer", { class: "container-fluid", src: "http://localhost:3000/file/doc-1644917417087.pdf" }))));
   }
 };
 

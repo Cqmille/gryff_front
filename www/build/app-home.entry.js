@@ -1,13 +1,16 @@
-import { r as registerInstance, h } from './index-f1e2a249.js';
+import { r as registerInstance, h } from './index-25b9a15f.js';
 
-const appHomeCss = ".app-home{padding:10px}button{background:#5851ff;color:white;margin:8px;border:none;font-size:13px;font-weight:700;text-transform:uppercase;padding:16px 20px;border-radius:2px;box-shadow:0 8px 16px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);outline:0;letter-spacing:0.04em;transition:all 0.15s ease;cursor:pointer}button:hover{box-shadow:0 3px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);transform:translateY(1px)}";
+const appHomeCss = "";
 
 let AppHome = class {
   constructor(hostRef) {
     registerInstance(this, hostRef);
   }
+  async _getData(event) {
+    this.history.push(`/tags-ressources/${event.target.value}`, {}); // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
+  }
   render() {
-    return (h("div", { class: "app-home" }, h("p", null, "Welcome to the Stencil App Starter. You can use this starter to build entire apps all with web components using Stencil! Check out our docs on", ' ', h("a", { href: "https://stenciljs.com" }, "stenciljs.com"), " to get started."), h("stencil-route-link", { url: "/profile/stencil" }, h("button", null, "Profile page"))));
+    return (h("div", { class: "app-home" }, h("p", null, h("h1", null, "Accueil"), h("a", { href: "https://stenciljs.com" }, "stenciljs.com"), " to get started."), h("button", { value: 'sante', onClick: (event) => this._getData(event) }, "Sant\u00E9"), h("br", null), h("button", { value: 'education', onClick: (event) => this._getData(event) }, "Education"), h("br", null), h("button", { value: 'sport', onClick: (event) => this._getData(event) }, "Sports"), h("br", null), h("button", { value: 'association', onClick: (event) => this._getData(event) }, "Associations"), h("br", null), h("button", { value: 'emploi', onClick: (event) => this._getData(event) }, "Emploi"), h("br", null), h("button", { value: 'senior', onClick: (event) => this._getData(event) }, "S\u00E9nior"), h("br", null), h("stencil-route-link", { url: "/profile/stencil" }, h("button", null, "Profile page"))));
   }
 };
 AppHome.style = appHomeCss;

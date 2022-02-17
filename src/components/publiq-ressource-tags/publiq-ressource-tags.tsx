@@ -1,15 +1,16 @@
 import { Component, h, State,Prop } from '@stencil/core';
-
+import { RouterHistory } from '@stencil/router';
 import { Ressources } from '../../utils/Ressources';
 
 @Component({
     tag: 'publiq-ressource-tags',
-    shadow: true,
+    shadow: false,
   })
   export class publiqRessourceTags {
     @Prop() match:any;
     @State() mesRessources:Ressources[];
     @State() message: string;
+    @Prop() history: RouterHistory;
 
     async componentWillLoad() {
         this._getData();
@@ -32,6 +33,9 @@ import { Ressources } from '../../utils/Ressources';
             console.log('fetch failed', err);
         }
     }
+    async redirect(event){
+        this.history.push(`/afficherRessource/${event.target.value}`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
+}
 
     render(){
         if(this.mesRessources){
@@ -41,6 +45,7 @@ import { Ressources } from '../../utils/Ressources';
                     {this.mesRessources.map((ressource : Ressources) =>
                         <div>
                             <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} - auteur: {ressource.prenomNomUser} - resume: {ressource.resume}</p>
+                            <button value={ressource._id} onClick={(event) => this.redirect(event)}>En savoir plus</button>
                         </div>)}
                 </div>
             )

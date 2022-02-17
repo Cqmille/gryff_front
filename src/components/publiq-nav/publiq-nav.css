@@ -1,3 +1,17 @@
-a {
+/* a {
+    text-decoration: none !important;
+} */
+
+stencil-route-link a {
+    color:rgba(255,255,255,0.55);
     text-decoration: none;
+}
+
+stencil-route-link p {
+    color:black;
+    margin: 0;
+}
+
+.dropdown-item{
+    color: black !important;
 }

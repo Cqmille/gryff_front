@@ -1,5 +1,7 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, State, Prop } from '@stencil/core';
+import { RouterHistory } from '@stencil/router';
 import {PATH} from '../../utils/path.js';
+import '@teamhive/pdf-viewer/dist/';
 
 @Component({
     tag:'user-creationressource',
@@ -7,6 +9,7 @@ import {PATH} from '../../utils/path.js';
 })
 
 export class UserCreationRessource {
+    @Prop() history: RouterHistory;
 
     @State() formNewRessource: FormData;
     @State() file: File;
@@ -34,7 +37,7 @@ export class UserCreationRessource {
             }
         });
         this.response = await response.json();
-        console.log(this.formNewRessource)
+        this.history.push(`/monEspace`, {})
     }
 
     alimRessource(event){ 
@@ -52,31 +55,41 @@ export class UserCreationRessource {
 
     render(){
         return (
-            <div>
-                <form onSubmit={(e) => this.envoiRessource(e)}>
-                    <label>type
-                        <select name='tags' onInput={(event) => this.alimRessource(event)}>
-                            <option value="sante">Santé</option>
-                            <option value="education">Education</option>
-                            <option value="sport">sport</option>
-                            <option value="association">Association</option>
-                            <option value="emploi">Emploi</option>
-                            <option value="senior">Sénior</option>
-                        </select>
-                    </label>
-                    <label>titre
-                        <input type="text" name='titre' onInput={(event) => this.alimRessource(event)}/>
-                    </label>
-                    <label>resume
-                        <textarea name='resume' onInput={(event) => this.alimRessource(event)}/>
-                    </label>
-                    <label>fichier
-                        <input type="file" name='uploaded_file' onChange={(event) => this.uploadPdf(event)}/>
-                    </label>
-                    <input type="submit" value="Submit" />
-                    <hive-pdf-viewer src="http://localhost:3000/file/doc-1644917417087.pdf"></hive-pdf-viewer>
-                </form>
-
+            <div class='row mx-3'>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <form onSubmit={(e) => this.envoiRessource(e)}>
+                        <div class="form-group">
+                            <h1 class="titre">Création d'une ressource</h1>
+                            <label class="mx-2">Type</label>
+                            <select name='tags' onInput={(event) => this.alimRessource(event)}>
+                                <option value="sante">Santé</option>
+                                <option value="education">Education</option>
+                                <option value="sport">sport</option>
+                                <option value="association">Association</option>
+                                <option value="emploi">Emploi</option>
+                                <option value="senior">Sénior</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="mx-2">Titre</label>
+                            <input type="text" class="form-control" name='titre' onInput={(event) => this.alimRessource(event)}/>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="mx-2">Resumé</label>
+                            <textarea name='resume' class="form-control" onInput={(event) => this.alimRessource(event)}/>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="mx-2">Fichier</label>
+                            <input type="file" name='uploaded_file' class="form-control" onChange={(event) => this.uploadPdf(event)}/>
+                        </div>
+                        <button type="submit" class="btn mt-2 bg-secondary border">Valider</button>
+                    </form>
+                </div>         
+                <div class="col-sm-3"></div>
+                <div>
+                <hive-pdf-viewer class= "container-fluid" src="http://localhost:3000/file/doc-1644917417087.pdf"></hive-pdf-viewer>
+                </div>
             </div>
         )
     }

@@ -1,4 +1,5 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, State, Prop } from '@stencil/core';
+import { RouterHistory } from '@stencil/router';
 
 import { Ressources } from '../../utils/Ressources';
 
@@ -8,6 +9,7 @@ import { Ressources } from '../../utils/Ressources';
 })
 
 export class UserMonespace {
+    @Prop() history: RouterHistory;
 
     @State() mesRessources:Ressources[];
     @State() message: string;
@@ -33,6 +35,9 @@ export class UserMonespace {
         }
         catch (err){
             console.log('fetch failed', err);
+            window.document.querySelector('publiq-nav').setAttribute('connected', 'false')
+
+            this.history.push(`/connexion/la connexion n'est plus valide. Veuillez vous reconnecter`, {});
         }
     }
 

@@ -4,6 +4,7 @@ import {PATH} from '../../utils/path.js';
 
 @Component({
     tag: 'user-inscription',
+    styleUrl: 'user-inscription.css',
     shadow: false,
   })
 
@@ -65,26 +66,36 @@ import {PATH} from '../../utils/path.js';
 
   render() {
     return (
-      <div>
-          <form onSubmit={(e) => this.envoiInscription(e)}>
-              <label>Nom
-                  <input type="text" name='nom' onInput={(event) => this.chargeState(event)}/>
-              </label>
-              <label>Prenom
-                  <input type="text" name='prenom' onInput={(event) => this.chargeState(event)}/>
-              </label>
-              <label>email
-                  <input type="text" name='email' onInput={(event) => this.chargeState(event)}/>
-              </label>
-              <label>Mot de passe
-                  <input type="text" name='password' onInput={(event) => this.chargeState(event)}/>
-              </label>
-              <label>Confirmation du mot de passe
-                  <input type="text" name='confirmPassword' onInput={(event) => this.chargeState(event)}/>
-              </label>
-              <input type="submit" value="Submit" />
-          </form>
-      </div>
+        <form onSubmit={(e) => this.envoiInscription(e)}>
+            <div class="row mx-3">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                    <h1 class="titre">Inscription</h1>
+                    <label class="mx-2">Nom</label>
+                    <input type="text" class="form-control" name='nom' placeholder="Dupond" onInput={(event) => this.chargeState(event)}></input>
+                    </div>
+                    <div class="form-group mt-2">
+                    <label class="mx-2">Prénom</label>
+                    <input type="text" class="form-control" name='prenom' placeholder="Jean-Louis" onInput={(event) => this.chargeState(event)}></input>
+                    </div>
+                    <div class="form-group mt-2">
+                    <label class="mx-2">Email</label>
+                    <input type="email" class="form-control" name='email' placeholder="exemple@mail.fr" onInput={(event) => this.chargeState(event)}></input>
+                    </div>
+                    <div class="form-group mt-2">
+                    <label class="mx-2">Mot de passe</label>
+                    <input type="password" class="form-control" name='password' placeholder="*******" onInput={(event) => this.chargeState(event)}></input>
+                    </div>
+                    <div class="form-group mt-2">
+                    <label class="mx-2">Confirmation mot de passe</label>
+                    <input type="password" class="form-control" name='confirmPassword' placeholder="*******" onInput={(event) => this.chargeState(event)}></input>
+                    </div>
+                    <button type="submit" class="btn mt-2 bg-secondary border">S'inscrire</button>
+                </div>         
+                <div class="col-sm-3"></div>
+            </div>
+      </form>
     );
   }
 }

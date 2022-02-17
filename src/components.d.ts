@@ -15,6 +15,8 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface ModMonespace {
+    }
     interface PublicNotFound {
     }
     interface PubliqAffressource {
@@ -22,15 +24,21 @@ export namespace Components {
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "connected": boolean;
         "history": RouterHistory;
+        "test": string;
     }
     interface PubliqRessourceTags {
+        "history": RouterHistory;
         "match": any;
     }
     interface UserConnexion {
         "history": RouterHistory;
+        "match": any;
+        "messageExt": string;
     }
     interface UserCreationressource {
+        "history": RouterHistory;
     }
     interface UserInscription {
         "history": RouterHistory;
@@ -39,6 +47,7 @@ export namespace Components {
         "history": RouterHistory;
     }
     interface UserMonespace {
+        "history": RouterHistory;
     }
 }
 declare global {
@@ -59,6 +68,12 @@ declare global {
     var HTMLAppRootElement: {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
+    };
+    interface HTMLModMonespaceElement extends Components.ModMonespace, HTMLStencilElement {
+    }
+    var HTMLModMonespaceElement: {
+        prototype: HTMLModMonespaceElement;
+        new (): HTMLModMonespaceElement;
     };
     interface HTMLPublicNotFoundElement extends Components.PublicNotFound, HTMLStencilElement {
     }
@@ -124,6 +139,7 @@ declare global {
         "app-home": HTMLAppHomeElement;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
+        "mod-monespace": HTMLModMonespaceElement;
         "public-not-found": HTMLPublicNotFoundElement;
         "publiq-affressource": HTMLPubliqAffressourceElement;
         "publiq-footer": HTMLPubliqFooterElement;
@@ -145,6 +161,8 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface ModMonespace {
+    }
     interface PublicNotFound {
     }
     interface PubliqAffressource {
@@ -152,15 +170,21 @@ declare namespace LocalJSX {
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "connected"?: boolean;
         "history"?: RouterHistory;
+        "test"?: string;
     }
     interface PubliqRessourceTags {
+        "history"?: RouterHistory;
         "match"?: any;
     }
     interface UserConnexion {
         "history"?: RouterHistory;
+        "match"?: any;
+        "messageExt"?: string;
     }
     interface UserCreationressource {
+        "history"?: RouterHistory;
     }
     interface UserInscription {
         "history"?: RouterHistory;
@@ -169,11 +193,13 @@ declare namespace LocalJSX {
         "history"?: RouterHistory;
     }
     interface UserMonespace {
+        "history"?: RouterHistory;
     }
     interface IntrinsicElements {
         "app-home": AppHome;
         "app-profile": AppProfile;
         "app-root": AppRoot;
+        "mod-monespace": ModMonespace;
         "public-not-found": PublicNotFound;
         "publiq-affressource": PubliqAffressource;
         "publiq-footer": PubliqFooter;
@@ -193,6 +219,7 @@ declare module "@stencil/core" {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "mod-monespace": LocalJSX.ModMonespace & JSXBase.HTMLAttributes<HTMLModMonespaceElement>;
             "public-not-found": LocalJSX.PublicNotFound & JSXBase.HTMLAttributes<HTMLPublicNotFoundElement>;
             "publiq-affressource": LocalJSX.PubliqAffressource & JSXBase.HTMLAttributes<HTMLPubliqAffressourceElement>;
             "publiq-footer": LocalJSX.PubliqFooter & JSXBase.HTMLAttributes<HTMLPubliqFooterElement>;
