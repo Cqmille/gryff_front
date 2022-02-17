@@ -39,13 +39,10 @@ import {PATH} from '../../utils/path.js';
             case 201:
                 this.history.replace('/inscriptionValide', {});   // Permet de charger une nouvelle page
               break;
-            case 403:
-                window.alert('cette adresse mail est déjà utilisée.');
-                break;
             default:
-                window.alert('une erreur est survenue');
+                window.confirm('cette adresse est déjà utilisé, redirection vers la page connexion');
+                this.history.replace('/connexion', {});
           }
-
     }
     else{
         window.alert("mot de passe différent");
