@@ -29,13 +29,16 @@ export namespace Components {
         "test": string;
     }
     interface PubliqRessourceTags {
+        "history": RouterHistory;
         "match": any;
     }
     interface UserConnexion {
         "history": RouterHistory;
+        "match": any;
         "messageExt": string;
     }
     interface UserCreationressource {
+        "history": RouterHistory;
     }
     interface UserInscription {
         "history": RouterHistory;
@@ -172,13 +175,16 @@ declare namespace LocalJSX {
         "test"?: string;
     }
     interface PubliqRessourceTags {
+        "history"?: RouterHistory;
         "match"?: any;
     }
     interface UserConnexion {
         "history"?: RouterHistory;
+        "match"?: any;
         "messageExt"?: string;
     }
     interface UserCreationressource {
+        "history"?: RouterHistory;
     }
     interface UserInscription {
         "history"?: RouterHistory;

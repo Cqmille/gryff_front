@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-156de0d2.js';
+import { r as registerInstance, h } from './index-25b9a15f.js';
 import { P as PATH } from './path-5d0f272b.js';
 
 const userConnexionCss = ".titre{font-size:25px}";
@@ -8,7 +8,7 @@ let UserConnexion = class {
     registerInstance(this, hostRef);
   }
   componentWillRender() {
-    console.log(this.messageExt);
+    console.log(this.match.params.message);
   }
   async envoiConnexion(e) {
     e.preventDefault();
@@ -48,8 +48,8 @@ let UserConnexion = class {
   }
   render() {
     return (h("div", null, h("form", { onSubmit: (e) => this.envoiConnexion(e) }, h("div", { class: "row mx-3" }, h("div", { class: "col-sm-3" }), h("div", { class: "col-sm-6" }, h("div", { class: "form-group" }, h("h1", { class: "titre" }, "Connexion \u00E0 mon espace"), h("label", { class: "mx-2" }, "Adresse e-mail"), h("input", { type: "email", class: "form-control", name: 'email', placeholder: "exemple@mail.fr", onInput: (event) => this.chargeState(event) })), h("div", { class: "form-group mt-2" }, h("label", { class: "mx-2" }, "Mot de passe"), h("input", { type: "password", class: "form-control", name: 'password', placeholder: "Mon mot de passe", onInput: (event) => this.chargeState(event) })), h("button", { type: "submit", class: "btn mt-2 bg-secondary border" }, "Se connecter")), h("div", { class: "col-sm-3" }))), (this.messageErr) ?
-      h("p", null, this.messageErr) : null, (this.messageExt) ?
-      h("p", null, this.messageExt) : null));
+      h("p", null, this.messageErr) : null, (this.match.params.message) ?
+      h("p", null, this.match.params.message) : null));
   }
 };
 UserConnexion.style = userConnexionCss;
