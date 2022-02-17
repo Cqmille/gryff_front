@@ -1,8 +1,6 @@
-import { Component, h, State } from '@stencil/core';
-
+import { Component, h, State,Prop } from '@stencil/core';
+import { RouterHistory } from '@stencil/router';
 import { Ressources } from '../../utils/Ressources';
-
-import { Commentaires } from '../../utils/Commentaires';
 
 @Component({
     tag:'mod-monespace',
@@ -12,14 +10,19 @@ import { Commentaires } from '../../utils/Commentaires';
 export class ModMonespace {
 
     @State() modRessource:Ressources[];
-    @State() modComment:Commentaires[];
+    @State() modComment:Ressources[];
     @State() message: string;
     @State() ressourceId: string;
     @State() etatRE: string;
+    @Prop() history: RouterHistory;
 
     async componentWillLoad() {
         this._getData();
         this.affcomment();
+    }
+
+    async goto(event){
+        this.history.push(`/afficherRessource/${event.target.value}`, {}); 
     }
 
     async validate(e) {
@@ -103,7 +106,6 @@ export class ModMonespace {
             console.log()
             if(response.status == 401) {this.message = (await response.json()).message}
             this.modComment = await response.json();
-            console.log(this.modComment)
             // console.log(this.message)
         }
         catch (err){
@@ -143,14 +145,19 @@ export class ModMonespace {
                             </p>
                         </div>)}
                         <div>
-                    {this.modComment.map((comment : Commentaires) =>
+                    {this.modComment.map((comment : Ressources) =>
                         <div>
                             <p>
-                            - commentaires
-                            - Prenom, Nom : {comment.commentaires.prenomNomUser} <br /> 
-                            - texte: {comment.commentaires.commentaireText} <br /> 
-                            - date de publication: {comment.commentaires.datePublicationComment}
-                            <button value={comment.commentaires._id} onClick={commentaireid=>this.supprimerComment(commentaireid)}>supprimer commentaire</button> <br />
+                                
+                            {comment.commentaires.map((d,idx)=>{
+                            return  (<li key={idx}>
+                            - Prenom, Nom : {d.prenomNomUser} <br /> 
+                            - texte: {d.commentaireText} <br /> 
+                            - date de publication: {d.datePublicationComment}
+                            <button value={d._id} onClick={commentaireid=>this.supprimerComment(commentaireid)}>supprimer commentaire</button> <br />
+                            <button value={comment._id}  onClick={(event) => this.goto(event)}>detail de la ressource</button> <br />
+                            </li>)
+                            })}
                             </p>
                         </div>)}
                 </div>
