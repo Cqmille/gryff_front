@@ -36,7 +36,7 @@ export class PubliqNav {
     render(){
         return (
             <header>
-                <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary d-flex flex-row">
+                <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary d-flex flex-row shadow text-light">
                     <div class="container-fluid">
                     <stencil-route-link url="/" class="navbar-brand abs">(Re)ssources Relationnelles</stencil-route-link>
                         <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNavbar">
