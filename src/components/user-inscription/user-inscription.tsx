@@ -38,9 +38,12 @@ import {PATH} from '../../utils/path.js';
         switch (response.status) {
             case 201:
                 this.history.replace('/inscriptionValide', {});   // Permet de charger une nouvelle page
-              break;
+                break;
+            case 403:
+                window.alert('adresse mail déjà utilisée');
+                break;
             default:
-                window.confirm('cette adresse est déjà utilisé, redirection vers la page connexion');
+                window.confirm('une erreur est survenue');
                 this.history.replace('/connexion', {});
           }
     }
