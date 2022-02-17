@@ -1,7 +1,7 @@
-import { r as registerInstance, e as getContext, h, g as getElement } from './index-f1e2a249.js';
+import { r as registerInstance, e as getContext, h, g as getElement } from './index-156de0d2.js';
 import { s as stripTrailingSlash, a as addLeadingSlash, h as hasBasename, b as stripBasename, c as createLocation, d as createKey, e as createPath, f as stripLeadingSlash, l as locationsAreEqual } from './location-utils-fea12957.js';
 import { s as storageAvailable, a as supportsHistory, b as supportsPopStateOnHashChange, g as getConfirmation, i as isExtraneousPopstateEvent, c as supportsGoWithoutReloadUsingHash } from './dom-utils-8e73e88b.js';
-import { A as ActiveRouter } from './active-router-62b522e9.js';
+import { A as ActiveRouter } from './active-router-5a14379d.js';
 
 const warning = (value, ...args) => {
     if (!value) {

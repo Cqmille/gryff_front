@@ -3,5 +3,6 @@ export interface UserConnected {
     token:string,
     message: string,
     nom: string,
-    prenom: string
+    prenom: string,
+    habilitation:string,
 }

@@ -1,13 +1,13 @@
-import { r as registerInstance, h } from './index-f1e2a249.js';
+import { r as registerInstance, h } from './index-156de0d2.js';
 
-const appRootCss = "header{background:#5851ff;color:white;height:56px;display:flex;align-items:center;box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.26)}h1{font-size:1.4rem;font-weight:500;color:#fff;padding:0 12px}";
+const appRootCss = "main{margin-top:70px}";
 
 let AppRoot = class {
   constructor(hostRef) {
     registerInstance(this, hostRef);
   }
   render() {
-    return (h("body", null, h("header", null, h("publiq-nav", null)), h("main", null, h("stencil-router", null, h("stencil-route-switch", { scrollTopOffset: 0 }, h("stencil-route", { url: "/", component: "app-home", exact: true }), h("stencil-route", { url: "/profile/:name", component: "app-profile" }), h("stencil-route", { url: "/connexion", component: "user-connexion" }), h("stencil-route", { url: "/monEspace", component: "user-monespace" }), h("stencil-route", { url: "/newRessource", component: "user-creationressource" }), h("stencil-route", { url: "/afficherRessource", component: "publiq-affressource" }), h("stencil-route", { component: "public-not-found" }))))));
+    return (h("body", null, h("header", null, h("publiq-nav", null)), h("main", null, h("stencil-router", null, h("stencil-route-switch", { scrollTopOffset: 0 }, h("stencil-route", { url: "/", component: "app-home", exact: true }), h("stencil-route", { url: "/profile/:name", component: "app-profile" }), h("stencil-route", { url: "/connexion", component: "user-connexion" }), h("stencil-route", { url: "/monEspace", component: "user-monespace" }), h("stencil-route", { url: "/newRessource", component: "user-creationressource" }), h("stencil-route", { url: "/afficherRessource", component: "publiq-affressource" }), h("stencil-route", { url: "/tags-ressources/:tags", component: "publiq-ressource-tags" }), h("stencil-route", { url: "/inscription", component: "user-inscription" }), h("stencil-route", { url: "/inscriptionValide", component: "user-inscription-valid" }), h("stencil-route", { url: "/monEspace2", component: "mod-monespace" }), h("stencil-route", { component: "public-not-found" }))))));
   }
 };
 AppRoot.style = appRootCss;

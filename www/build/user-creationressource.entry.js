@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-f1e2a249.js';
+import { r as registerInstance, h } from './index-156de0d2.js';
 import { P as PATH } from './path-5d0f272b.js';
 
 let UserCreationRessource = class {

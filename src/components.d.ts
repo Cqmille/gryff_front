@@ -24,13 +24,16 @@ export namespace Components {
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "connected": boolean;
         "history": RouterHistory;
+        "test": string;
     }
     interface PubliqRessourceTags {
         "match": any;
     }
     interface UserConnexion {
         "history": RouterHistory;
+        "messageExt": string;
     }
     interface UserCreationressource {
     }
@@ -41,6 +44,7 @@ export namespace Components {
         "history": RouterHistory;
     }
     interface UserMonespace {
+        "history": RouterHistory;
     }
 }
 declare global {
@@ -163,13 +167,16 @@ declare namespace LocalJSX {
     interface PubliqFooter {
     }
     interface PubliqNav {
+        "connected"?: boolean;
         "history"?: RouterHistory;
+        "test"?: string;
     }
     interface PubliqRessourceTags {
         "match"?: any;
     }
     interface UserConnexion {
         "history"?: RouterHistory;
+        "messageExt"?: string;
     }
     interface UserCreationressource {
     }
@@ -180,6 +187,7 @@ declare namespace LocalJSX {
         "history"?: RouterHistory;
     }
     interface UserMonespace {
+        "history"?: RouterHistory;
     }
     interface IntrinsicElements {
         "app-home": AppHome;
