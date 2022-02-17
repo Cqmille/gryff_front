@@ -16,6 +16,11 @@ stencil-route-link p {
     color: black !important;
 }
 
+
+.navbar{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
 li>a>p{
     color:black;
     margin: 0;
