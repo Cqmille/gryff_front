@@ -5,6 +5,7 @@ let affressource = class {
     registerInstance(this, hostRef);
   }
   async componentWillLoad() {
+    this.idRessource = this.match.params.id;
     this._getData();
   }
   async vueplus1() {
@@ -17,7 +18,7 @@ let affressource = class {
           userid: localStorage.getItem('userId')
         },
         body: JSON.stringify({
-          ressourceid: "620caeb3cf2c433f424fb471"
+          ressourceid: this.idRessource
         }),
       });
       if (response.status == 401) {
@@ -31,7 +32,7 @@ let affressource = class {
   }
   async signalerRessource() {
     try {
-      let response = await fetch(`http://localhost:3000/users/signalerUneRessource/`, {
+      let response = await fetch(`http://localhost:3000/users/signalerUneRessource`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,9 +40,10 @@ let affressource = class {
           userid: localStorage.getItem('userId')
         },
         body: JSON.stringify({
-          ressourceid: "620caeb3cf2c433f424fb471"
+          ressourceid: this.idRessource
         }),
       });
+      console.log(response);
       if (response.status == 401) {
         this.message = (await response.json()).message;
       }
@@ -75,7 +77,7 @@ let affressource = class {
   }
   async favorisRessource() {
     try {
-      let response = await fetch(`http://localhost:3000/users/favorisRessource`, {
+      let response = await fetch(`http://localhost:3000/users/favorisRessource/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +85,7 @@ let affressource = class {
           userid: localStorage.getItem('userId')
         },
         body: JSON.stringify({
-          ressourceid: "620caeb3cf2c433f424fb471"
+          ressourceid: this.idRessource
         }),
       });
       if (response.status == 401) {
@@ -105,7 +107,7 @@ let affressource = class {
           userid: localStorage.getItem('userId')
         },
         body: JSON.stringify({
-          ressourceid: "620caeb3cf2c433f424fb471"
+          ressourceid: this.idRessource
         }),
       });
       if (response.status == 401) {
@@ -172,7 +174,7 @@ let affressource = class {
           userid: localStorage.getItem('userId')
         },
         body: JSON.stringify({
-          _id: "620caeb3cf2c433f424fb471",
+          _id: this.match.params.id,
           commentaireText: this.commenttext
         }),
       });
@@ -188,7 +190,7 @@ let affressource = class {
   }
   async _getData() {
     try {
-      let response = await fetch(`http://localhost:3000/public/afficheRessource/` + "620caeb3cf2c433f424fb471", {
+      let response = await fetch(`http://localhost:3000/public/afficheRessource/` + this.match.params.id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -212,7 +214,7 @@ let affressource = class {
       const nbrVue = this.afficherRessources.stats.vuesConnecte + this.afficherRessources.stats.vuesnonConnecte;
       return (h("div", null, h("p", null, "Resumer: ", this.afficherRessources.resume, " ", h("br", null), "- Date de publication: ", this.afficherRessources.datePublication, " ", h("br", null), "- titre: ", this.afficherRessources.titre, " ", h("br", null), "- type: ", this.afficherRessources.type, " ", h("br", null), "- tags: ", this.afficherRessources.tags, " ", h("br", null), "- auteur: ", this.afficherRessources.prenomNomUser, " ", h("br", null), "- PDF:", h("hive-pdf-viewer", { src: "http://localhost:3000/file/" + this.afficherRessources.fileName }), "- stats (nombre de vue): ", nbrVue, " ", h("br", null), "- favoris ressource: ", h("button", { onClick: this.favorisRessource }, "ressourcefavoris"), " ", h("br", null), "- supprimer favoris ressource: ", h("button", { onClick: this.supprimerFavorisRessource }, "suprimer ressourcefavoris"), " ", h("br", null), "- suivre utilisateur : ", h("button", { value: this.afficherRessources.idUser, onClick: idUser => this.suivreUtilisateur(idUser) }, "suivre utilisateur"), " ", h("br", null), "- supprimer suivi utilisateur : ", h("button", { value: this.afficherRessources.idUser, onClick: idUser => this.supprimerSuivreUtilisateur(idUser) }, "supprimer suivi utilisateur"), " ", h("br", null), "- signaler ressource : ", h("button", { onClick: this.signalerRessource }, "signalerRessource"), " ", h("br", null), h("form", { onSubmit: (e) => this.addComment(e) }, h("label", null, "ajouterCommentaire", h("input", { type: "text", name: 'commenttext', onInput: (event) => this.alldata(event) })), h("input", { type: 'submit', value: 'submit' }, " "), " ", h("br", null)), "- commentaires  ", this.afficherRessources.commentaires.map((d, idx) => {
         return (h("li", { key: idx }, "- Prenom, Nom : ", d.prenomNomUser, " ", h("br", null), "- texte: ", d.commentaireText, " ", h("br", null), "- date de publication: ", d.datePublicationComment, " ", h("br", null), "- signaler commentaires : ", h("button", { value: d._id, onClick: commentaireid => this.signalerCommentaires(commentaireid) }, " signalerCommentaires"), " ", h("br", null), " "));
-      })), this.vueplus1()));
+      })), h("style", null, ".hidden", this.vueplus1())));
     }
     if (this.message) {
       return (h("div", null, h("p", null, this.message)));

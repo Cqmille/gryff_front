@@ -26,6 +26,13 @@ export class PubliqNav {
         }
     }
 
+    deconnexion(){
+        window.document.querySelector('publiq-nav').setAttribute('connected', 'false')
+        localStorage.setItem("userId",null);
+        localStorage.setItem("token", null);
+        localStorage.setItem('habilitation',null)
+    }
+
     async componentWillLoad(){
         this.checkConnexion()
     }
@@ -73,6 +80,7 @@ export class PubliqNav {
                                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
                                         <li><stencil-route-link url="/monEspace" class="nav-link"><p>Mes ressources</p></stencil-route-link></li>
                                         <li><stencil-route-link url="/newRessource" class="nav-link"><p>Créer ressource</p></stencil-route-link></li>
+                                        <li><stencil-route-link onClick={() => this.deconnexion()} url="/" class="nav-link"><p>Déconnexion</p></stencil-route-link></li>
                                     </ul>
                                 </li>
                                 </ul>
