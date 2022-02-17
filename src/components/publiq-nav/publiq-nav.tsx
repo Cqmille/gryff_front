@@ -71,8 +71,8 @@ export class PubliqNav {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> mon compte </a>
                                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                                        <li><stencil-route-link url="/monEspace" class="nav-link">mes ressources</stencil-route-link></li>
-                                        <li><stencil-route-link url="/newRessource" class="nav-link">créer ressource</stencil-route-link></li>
+                                        <li><stencil-route-link url="/monEspace" class="nav-link"><p>Mes ressources</stencil-route-link></p></li>
+                                        <li><stencil-route-link url="/newRessource" class="nav-link"><p>Créer ressource</stencil-route-link></p></li>
                                     </ul>
                                 </li>
                                 </ul>
