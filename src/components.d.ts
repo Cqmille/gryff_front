@@ -33,6 +33,7 @@ export namespace Components {
     }
     interface UserConnexion {
         "history": RouterHistory;
+        "match": any;
         "messageExt": string;
     }
     interface UserCreationressource {
@@ -176,6 +177,7 @@ declare namespace LocalJSX {
     }
     interface UserConnexion {
         "history"?: RouterHistory;
+        "match"?: any;
         "messageExt"?: string;
     }
     interface UserCreationressource {

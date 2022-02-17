@@ -37,7 +37,7 @@ export class UserMonespace {
             console.log('fetch failed', err);
             window.document.querySelector('publiq-nav').setAttribute('connected', 'false')
 
-            this.history.push(`/connexion`, {});
+            this.history.push(`/connexion/la connexion n'est plus valide. Veuillez vous reconnecter`, {});
         }
     }
 
