@@ -41,16 +41,15 @@ export class AppHome {
           </div>        
           <div class="col-sm-2"></div>
         </div> */}
-        
+
         <h1 class='text-center'>Accueil</h1>
-        <div class="row row-cols-1 row-cols-sm-3 g-4 mt-2">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2">
           <div class="col">
-            <div class="card h-100 border-primary shadow">
+            <div class="card h-100 border-primary shadow" >
               <img src="https://img.freepik.com/vecteurs-libre/personnes-patients-dans-illustration-salle-attente-medecins-dessin-anime-plat-femme-homme-personnages-dans-masques-s-asseoir-attendre-rendez-vous-doctorat-interieur-du-hall-hopital-contexte-sante-medicale_213110-393.jpg?size=626&ext=jpg" class="card-img-top h-50" alt="..."/>
               <div class="card-body">
                 <h5 class="card-title">Santé</h5>
                 <p class="card-text"><button value='sante' class = "btn btn-primary border btn-bloc " onClick={(event) => this._getData(event)}>En savoir plus</button></p>
-                <p>Ici vous trouverez les ressources en rapport avec la santé.</p>
               </div>
             </div>
           </div>
