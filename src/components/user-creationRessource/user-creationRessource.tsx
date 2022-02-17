@@ -87,9 +87,6 @@ export class UserCreationRessource {
                     </form>
                 </div>         
                 <div class="col-sm-3"></div>
-                <div>
-                <hive-pdf-viewer class= "container-fluid" src="http://localhost:3000/file/doc-1644917417087.pdf"></hive-pdf-viewer>
-                </div>
             </div>
         )
     }
