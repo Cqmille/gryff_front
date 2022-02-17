@@ -1,4 +1,5 @@
 export interface UserConnected {
+    _id:string,
     userId: string,
     token:string,
     message: string,

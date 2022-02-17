@@ -25,6 +25,8 @@ export class AppRoot {
               <stencil-route url="/inscription" component="user-inscription" />
               <stencil-route url="/inscriptionValide" component="user-inscription-valid" />
               <stencil-route url="/monEspace2" component="mod-monespace" />
+              <stencil-route url="/favorisuser" component="user-favoris" />
+              <stencil-route url="/profil/:userid" component="user-profile" />
               <stencil-route component="public-not-found" />
             </stencil-route-switch>
           </stencil-router>
