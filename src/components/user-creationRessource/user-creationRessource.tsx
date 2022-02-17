@@ -1,4 +1,5 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, State, Prop } from '@stencil/core';
+import { RouterHistory } from '@stencil/router';
 import {PATH} from '../../utils/path.js';
 
 @Component({
@@ -7,6 +8,7 @@ import {PATH} from '../../utils/path.js';
 })
 
 export class UserCreationRessource {
+    @Prop() history: RouterHistory;
 
     @State() formNewRessource: FormData;
     @State() file: File;
@@ -34,7 +36,7 @@ export class UserCreationRessource {
             }
         });
         this.response = await response.json();
-        console.log(this.formNewRessource)
+        this.history.push(`/monEspace`, {})
     }
 
     alimRessource(event){ 
