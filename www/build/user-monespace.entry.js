@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-156de0d2.js';
+import { r as registerInstance, h } from './index-25b9a15f.js';
 
 let UserMonespace = class {
   constructor(hostRef) {
@@ -27,7 +27,7 @@ let UserMonespace = class {
     catch (err) {
       console.log('fetch failed', err);
       window.document.querySelector('publiq-nav').setAttribute('connected', 'false');
-      this.history.push(`/connexion`, {});
+      this.history.push(`/connexion/la connexion n'est plus valide. Veuillez vous reconnecter`, {});
     }
   }
   render() {

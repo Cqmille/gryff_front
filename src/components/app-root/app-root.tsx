@@ -17,7 +17,7 @@ export class AppRoot {
             <stencil-route-switch scrollTopOffset={0}>
               <stencil-route url="/" component="app-home" exact={true} />
               <stencil-route url="/profile/:name" component="app-profile" />
-              <stencil-route url="/connexion" component="user-connexion" />
+              <stencil-route url="/connexion/:message" component="user-connexion" />
               <stencil-route url="/monEspace" component="user-monespace" />
               <stencil-route url="/newRessource" component="user-creationressource" />
               <stencil-route url="/afficherressource/:id" component="publiq-affressource" />

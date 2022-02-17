@@ -12,6 +12,7 @@ import { UserConnected } from '../../utils/UserConnected';
 export class UserConnexion {
 
     @Prop() history: RouterHistory;
+    @Prop() match:any;
     @Prop() messageExt: string;
 
     @State() email: String;
@@ -22,7 +23,7 @@ export class UserConnexion {
     @State() messageErr: string;
 
     componentWillRender(){
-      console.log(this.messageExt)
+      console.log(this.match.params.message)
     }
 
     async envoiConnexion(e){
@@ -83,8 +84,8 @@ export class UserConnexion {
         </form>
         {(this.messageErr)?
           <p>{this.messageErr}</p>:null}
-        {(this.messageExt)?
-          <p>{this.messageExt}</p>:null}
+        {(this.match.params.message)?
+          <p>{this.match.params.message}</p>:null}
       </div>
     );
   }

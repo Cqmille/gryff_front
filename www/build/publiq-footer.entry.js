@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-156de0d2.js';
+import { r as registerInstance, h } from './index-25b9a15f.js';
 
 let PubliqFooter = class {
   constructor(hostRef) {
