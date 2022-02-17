@@ -57,12 +57,12 @@ export class PubliqNav {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catégories </a>
                                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/sante"><p>Santé</p></stencil-route-link></li>
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/education"><p>Éducation</p></stencil-route-link></li>
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/sport"><p>Sports</p></stencil-route-link></li>
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/association"><p>Associations</p></stencil-route-link></li>
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/emploi"><p>Emploi</p></stencil-route-link></li>
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/senior"><p>Sénior</p></stencil-route-link></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/sante"><p>Santé</p></a></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/education"><p>Éducation</p></a></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/sport"><p>Sports</p></a></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/association"><p>Associations</p></a></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/emploi"><p>Emploi</p></a></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/senior"><p>Sénior</p></a></li>
                                         <li>
                                             <hr class="dropdown-divider"></hr>
                                         </li>
