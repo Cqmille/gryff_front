@@ -5,13 +5,10 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MatchResults, RouterHistory } from "@stencil/router";
+import { RouterHistory } from "@stencil/router";
 export namespace Components {
     interface AppHome {
         "history": RouterHistory;
-    }
-    interface AppProfile {
-        "match": MatchResults;
     }
     interface AppRoot {
     }
@@ -20,6 +17,7 @@ export namespace Components {
     interface PublicNotFound {
     }
     interface PubliqAffressource {
+        "match": any;
     }
     interface PubliqFooter {
     }
@@ -56,12 +54,6 @@ declare global {
     var HTMLAppHomeElement: {
         prototype: HTMLAppHomeElement;
         new (): HTMLAppHomeElement;
-    };
-    interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {
-    }
-    var HTMLAppProfileElement: {
-        prototype: HTMLAppProfileElement;
-        new (): HTMLAppProfileElement;
     };
     interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
     }
@@ -137,7 +129,6 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "app-home": HTMLAppHomeElement;
-        "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
         "mod-monespace": HTMLModMonespaceElement;
         "public-not-found": HTMLPublicNotFoundElement;
@@ -156,9 +147,6 @@ declare namespace LocalJSX {
     interface AppHome {
         "history"?: RouterHistory;
     }
-    interface AppProfile {
-        "match"?: MatchResults;
-    }
     interface AppRoot {
     }
     interface ModMonespace {
@@ -166,6 +154,7 @@ declare namespace LocalJSX {
     interface PublicNotFound {
     }
     interface PubliqAffressource {
+        "match"?: any;
     }
     interface PubliqFooter {
     }
@@ -197,7 +186,6 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "app-home": AppHome;
-        "app-profile": AppProfile;
         "app-root": AppRoot;
         "mod-monespace": ModMonespace;
         "public-not-found": PublicNotFound;
@@ -217,7 +205,6 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
-            "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "mod-monespace": LocalJSX.ModMonespace & JSXBase.HTMLAttributes<HTMLModMonespaceElement>;
             "public-not-found": LocalJSX.PublicNotFound & JSXBase.HTMLAttributes<HTMLPublicNotFoundElement>;

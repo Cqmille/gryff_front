@@ -46,7 +46,7 @@ export class UserConnexion {
 
           const navBar = window.document.querySelector('publiq-nav')
           navBar.setAttribute('connected', 'true')
-          if(this.user.habilitation=="mod"||this.user.habilitation=="admin"){
+          if(this.user.habilitation=="mod"){
               this.history.replace(`/monEspace2`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
           } else {
               this.history.replace(`/monEspace`, {}); 
