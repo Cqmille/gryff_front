@@ -79,7 +79,7 @@ export class PubliqNav {
 
                                 :<ul class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <stencil-route-link url="/connexion" class="nav-link">Connexion</stencil-route-link>	
+                                        <stencil-route-link url="/connexion/''" class="nav-link">Connexion</stencil-route-link>	
                                     </li> 
                                     <li class="nav-item">
                                         <stencil-route-link url="/inscription" class="nav-link">Inscription</stencil-route-link>	
