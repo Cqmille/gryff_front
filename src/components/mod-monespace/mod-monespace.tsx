@@ -118,6 +118,10 @@ export class ModMonespace {
         this.etatRE=event.target.value
     }
 
+    async redirect(event){
+        this.history.push(`/afficherressourceMod/${event.target.value}`, {});
+    }
+
     render(){
         if(this.modRessource && this.modComment ){
             return (
@@ -142,6 +146,7 @@ export class ModMonespace {
                             </label>
                             <input type='submit' value='submit'> </input> <br />
                             </form>
+                            <button class="btn btn-primary border text-light ms-3 mb-3" value={ressource._id} onClick={(event) => this.redirect(event)}>En savoir plus</button>
                             </p>
                         </div>)}
                         <div>
