@@ -52,10 +52,10 @@ export class PubliqNav {
                         <div class="navbar-collapse collapse" id="collapseNavbar">
                             <ul class="navbar-nav">
                                 <li class="nav-item active">
-                                <stencil-route-link url="/" class="nav-link">Accueil</stencil-route-link>
+                                <stencil-route-link url="/" class="nav-link text-light">Accueil</stencil-route-link>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catégories </a>
+                                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catégories </a>
                                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
                                         <li><a class="dropdown-item" href="/tags-ressources/sante"><p>Santé</p></a></li>
                                         <li><a class="dropdown-item" href="/tags-ressources/education"><p>Éducation</p></a></li>
@@ -70,7 +70,7 @@ export class PubliqNav {
                                     </ul>
                                 </li>
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#">Rechercher</a>
+                                    <a class="nav-link text-light" href="#">Rechercher</a>
                                 </li>
                             </ul>
                             
