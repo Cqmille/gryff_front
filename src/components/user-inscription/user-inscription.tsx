@@ -91,7 +91,7 @@ import {PATH} from '../../utils/path.js';
                     <label class="mx-2">Confirmation mot de passe</label>
                     <input type="password" class="form-control" name='confirmPassword' placeholder="*******" onInput={(event) => this.chargeState(event)}></input>
                     </div>
-                    <button type="submit" class="btn mt-2 bg-secondary border">S'inscrire</button>
+                    <button type="submit" class="btn mt-2 bg-light border">S'inscrire</button>
                 </div>         
                 <div class="col-sm-3"></div>
             </div>
