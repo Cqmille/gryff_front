@@ -49,9 +49,9 @@ import { Ressources } from '../../utils/Ressources';
                             {this.mesRessources.map((ressource : Ressources) =>
                             <div class='border border-primary bg-light rounded mb-3 listshadow'>
                                 <div class='row mt-1'><div class='col-8 col-md-8 col-sm-6'><h2 class='ms-3'>{ressource.titre}</h2></div><div class='col-2'>{ressource.prenomNomUser}</div></div>
-                                
+
                                 <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{ressource.resume}</p></div></div>
-                                
+                            
                                 <div class='row mt-1'><div class='col-8 col-sm-8'><button class="btn btn-primary border text-light ms-3 mb-3" value={ressource._id} onClick={(event) => this.redirect(event)}>En savoir plus</button></div><div class='col-8'>Publié:{ressource.datePublication}</div></div>
                             </div>)}
                         </div>     

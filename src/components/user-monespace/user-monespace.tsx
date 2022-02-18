@@ -43,7 +43,9 @@ export class UserMonespace {
     async redirect(event){
         this.history.push(`/afficherRessource/${event.target.value}`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
 }
-    
+    async redirectmodif(event){
+    this.history.push(`/modifierRessource/${event.target.value}`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
+}
     render(){
         if(this.mesRessources){
             return (
@@ -57,20 +59,14 @@ export class UserMonespace {
                                 <div class='row mt-1'><div class='col-7 col-lg-9'><h2 class='ms-3'>{ressource.titre}</h2></div><div class='col-2 fw-bold fs-4'>{ressource.etatRessource}</div></div>
                                 
                                 <div class='row ms-5 mt-3 mb-3 fs-5 '><div class='col-11'> Catégorie : {ressource.tags}</div></div>
-
-                                <div class='row mt-1'><div class='col-5 col-md-6 col-lg-8'><button class="btn btn-primary border text-light ms-1 mb-2" value={ressource._id} onClick={(event) => this.redirect(event)}>Accéder</button></div><div class='col-3 col-sm-3 fs-6 me-2'>{ressource.datePublication}</div></div>
+        
+                                <div class='row mt-1'><div class='col-5 col-sm-6'><button class="btn btn-primary border text-light ms-1 mb-2" value={ressource._id} onClick={(event) => this.redirect(event)}>Accéder</button></div><div class='col-8'>Publié:{ressource.datePublication}</div></div>
+                                <button class="btn btn-primary border text-light ms-3 mb-3" disabled value={ressource._id} onClick={(event) => this.redirectmodif(event)}>modifierRessource</button>
                             </div>)}
                         </div>     
                         <div class="col-sm-2"></div>
                     </div>
                 </div>
-
-                // <div>
-                //     {this.mesRessources.map((ressource : Ressources) =>
-                //         <div>
-                //             <p> Etat: {ressource.etatRessource} - Date de publication: {ressource.datePublication} - titre: {ressource.titre} </p>
-                //         </div>)}
-                // </div>
             )
         }
         if(this.message){
