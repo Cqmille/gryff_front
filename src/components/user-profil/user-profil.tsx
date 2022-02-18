@@ -66,11 +66,16 @@ export class userProfil {
         this.history.push(`/afficherRessource/${event.target.value}`, {}); 
     }
 
+    async gotomodifier(event){
+        this.history.push(`/modifierprofil/${event.target.value}`, {}); 
+    }
+
     render(){
         if(this.profil && this.profilRessources){
             return (
                     <div>
                         <p> 
+                        <button value={this.profil._id}  onClick={(event) => this.gotomodifier(event)}>modifierprofil</button> <br />
                         - prenom: {this.profil.prenom} 
                         - nom: {this.profil.nom} 
                         - dateNaissance: {this.profil.dateNaissance} 

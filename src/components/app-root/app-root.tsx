@@ -29,6 +29,7 @@ export class AppRoot {
               <stencil-route url="/favorisuser" component="user-favoris" />
               <stencil-route url="/profilSuivi/:userid" component="usersuivi-profile" />
               <stencil-route url="/profil" component="user-profil" />
+              <stencil-route url="/modifierprofil" component="user-modifierprofil" />
               <stencil-route component="public-not-found" />
             </stencil-route-switch>
           </stencil-router>
