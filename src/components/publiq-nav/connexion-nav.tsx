@@ -26,6 +26,8 @@ export class ConnexionNav {
                         <li><stencil-route-link url="/monEspace" class="nav-link"><p>Mes ressources</p></stencil-route-link></li>
                         <li><stencil-route-link url="/newRessource" class="nav-link"><p>Créer ressource</p></stencil-route-link></li>
                         <li><stencil-route-link onClick={() => this.deconnexion()} url="/" class="nav-link"><p>Déconnexion</p></stencil-route-link></li>
+                        <li><stencil-route-link url="/favorisuser" class="nav-link"><p>mes favoris</p></stencil-route-link></li>
+                        <li><stencil-route-link url="/profil" class="nav-link"><p>profile</p></stencil-route-link></li>
                     </ul>
                 </li>
                 </ul>

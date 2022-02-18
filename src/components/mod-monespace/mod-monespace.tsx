@@ -11,6 +11,7 @@ export class ModMonespace {
 
     @State() modRessource:Ressources[];
     @State() modComment:Ressources[];
+    @State() modsignale:Ressources[];
     @State() message: string;
     @State() ressourceId: string;
     @State() etatRE: string;
@@ -19,6 +20,7 @@ export class ModMonespace {
     async componentWillLoad() {
         this._getData();
         this.affcomment();
+        this.affress();
     }
 
     async goto(event){
@@ -27,6 +29,7 @@ export class ModMonespace {
 
     async validate(e) {
         e.preventDefault()
+        console.log(this.etatRE)
         try{
             let response = await fetch(`http://localhost:3000/moder/moderationRessource`, {
                 method: 'POST',
@@ -113,6 +116,26 @@ export class ModMonespace {
         }
     }
 
+    async affress(){
+        try{
+            let response = await fetch(`http://localhost:3000/moder/afficheRessourceSignale`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
+                }
+            })
+            console.log()
+            if(response.status == 401) {this.message = (await response.json()).message}
+            this.modsignale = await response.json();
+            // console.log(this.message)
+        }
+        catch (err){
+            console.log('fetch failed', err);
+        }
+    }
+
     async alldata(event){
         console.log(this.etatRE)
         this.etatRE=event.target.value
@@ -123,7 +146,7 @@ export class ModMonespace {
     }
 
     render(){
-        if(this.modRessource && this.modComment ){
+        if(this.modRessource && this.modComment && this.modsignale ){
             return (
                 <div>
                     {this.modRessource.map((ressource : Ressources) =>
@@ -163,6 +186,28 @@ export class ModMonespace {
                             <button value={comment._id}  onClick={(event) => this.goto(event)}>detail de la ressource</button> <br />
                             </li>)
                             })}
+                            </p>
+                        </div>)}
+                        {this.modsignale.map((signale : Ressources) =>
+                        <div>
+                            <p>
+                            Ressource signaler <br />
+                            - Prenom, Nom : {signale.prenomNomUser} <br /> 
+                            - resume: {signale.resume} <br /> 
+                            - titre: {signale.titre}
+                            <button value={signale._id}  onClick={(event) => this.goto(event)}>detail de la ressource</button> <br />
+                            <style>.hiden{this.ressourceId=signale._id}</style>
+                            <form onSubmit={(e)=>this.validate(e)}>
+                            <label>validerchoix
+                            <select name='valider' onInput={(event) => this.alldata(event)}>
+                                <option value="selectionner la variable"></option>
+                                <option value="annulerSignalement" >annulerSignalement</option>
+                                <option value="archive">Archiver</option>
+                                <option value="refuse">Refuser</option>
+                            </select>
+                            </label>
+                            <input type='submit' value='submit'> </input> <br />
+                            </form>
                             </p>
                         </div>)}
                 </div>
