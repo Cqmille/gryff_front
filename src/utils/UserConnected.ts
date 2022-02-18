@@ -6,4 +6,7 @@ export interface UserConnected {
     nom: string,
     prenom: string,
     habilitation:string,
+    dateNaissance:string,
+    ville:string,
+    profession:string
 }
