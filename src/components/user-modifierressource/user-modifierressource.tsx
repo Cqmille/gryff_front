@@ -28,7 +28,7 @@ export class userModifierRessource {
         }
     }
 
-    async _getData(e){
+    async sendModif(e){
         e.preventDefault()
         try{
             let response = await fetch(`http://localhost:3000/users/modifRessource`, {
@@ -58,7 +58,7 @@ export class userModifierRessource {
 
     async ressource(){
         try{
-            let response = await fetch(`http://localhost:3000/public/afficheRessource/` + this.match.params.id, {
+            let response = await fetch(`http://localhost:3000/users/afficheOneRessourceUser/` + this.match.params.id, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -78,10 +78,8 @@ export class userModifierRessource {
         return(
         <div>
             <p>
-            <form onSubmit={(e)=>this._getData(e)}>
+            <form onSubmit={(e)=>this.sendModif(e)}>
                         <label>Modifier Ressource <br />
-                        type:
-                            <input type="text" name='type' value={this.mesressource.type} onInput={(event) => this.alldata(event)}/> <br />
                         titre :
                             <input type="text" name='titre' value={this.mesressource.titre}  onInput={(event) => this.alldata(event)}/> <br />
                         resume :
