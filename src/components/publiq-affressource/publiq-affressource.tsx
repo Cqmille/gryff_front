@@ -10,14 +10,12 @@ import { Ressources } from '../../utils/Ressources';
 
 export class affressource {
     @Prop() match:any;
-    @Prop() history: RouterHistory;
-    @State() idRessource:string;
     @State() afficherRessources:Ressources;
+    @Prop() history: RouterHistory;
     @State() commenttext:string;
     @State() message: string;
 
     async componentWillLoad() {
-        this.idRessource= this.match.params.id;
         this._getData();
     }
 
@@ -31,7 +29,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: this.idRessource
+                    ressourceid: this.match.params.id
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -42,7 +40,7 @@ export class affressource {
         }
     }
 
-    async signalerRessource(){
+    async signalerRessource(idRessource){
         try{
             let response = await fetch(`http://localhost:3000/users/signalerUneRessource`, {
                 method: 'POST',
@@ -52,7 +50,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: this.idRessource
+                    ressourceid: idRessource.target.value
                 }),
             })
             console.log(response)
@@ -85,7 +83,7 @@ export class affressource {
         }
     }
 
-    async favorisRessource(){
+    async favorisRessource(idRessource){
         try{
             let response = await fetch(`http://localhost:3000/users/favorisRessource/`, {
                 method: 'POST',
@@ -95,7 +93,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: this.idRessource
+                    ressourceid: idRessource.target.value
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -106,7 +104,7 @@ export class affressource {
         }
     }
 
-    async supprimerFavorisRessource(){
+    async supprimerFavorisRessource(idRessource){
         try{
             let response = await fetch(`http://localhost:3000/users/supprimerFavorisRessource`, {
                 method: 'POST',
@@ -116,7 +114,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: this.idRessource
+                    ressourceid: idRessource.target.value
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -238,11 +236,11 @@ export class affressource {
                                 Auteur: {this.afficherRessources.prenomNomUser} <br />
                                 vers profil utilisateur : <button value={this.afficherRessources.idUser}  onClick={(event) => this.gotoprofile(event)}>profil de l'utilisateur</button> <br />
                                 Resumé: {this.afficherRessources.resume} <br />
-                                Favoris ressource: <button onClick={this.favorisRessource}>ressourcefavoris</button> <br />
-                                Supprimer favoris ressource: <button onClick={this.supprimerFavorisRessource}>suprimer ressourcefavoris</button> <br />
+                                Favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.favorisRessource(idRessource)}>ressourcefavoris</button> <br />
+                                Supprimer favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.supprimerFavorisRessource(idRessource)}>suprimer ressourcefavoris</button> <br />
                                 Suivre utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button> <br />
                                 Supprimer suivi utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button> <br />
-                                Signaler ressource : <button onClick={this.signalerRessource}>signalerRessource</button> <br />
+                                Signaler ressource : <button value={this.afficherRessources._id} onClick={idRessource=>this.signalerRessource(idRessource)}>signalerRessource</button> <br />
 
                                 <form onSubmit={(e)=>this.addComment(e)}>
                                         <label>ajouterCommentaire
