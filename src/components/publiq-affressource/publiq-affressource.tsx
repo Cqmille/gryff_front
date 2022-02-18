@@ -1,5 +1,5 @@
 import { Component, h, State,Prop } from '@stencil/core';
-
+import { RouterHistory } from '@stencil/router';
 import { Ressources } from '../../utils/Ressources';
 
 @Component({
@@ -11,6 +11,7 @@ import { Ressources } from '../../utils/Ressources';
 export class affressource {
     @Prop() match:any;
     @State() afficherRessources:Ressources;
+    @Prop() history: RouterHistory;
     @State() commenttext:string;
     @State() message: string;
 
