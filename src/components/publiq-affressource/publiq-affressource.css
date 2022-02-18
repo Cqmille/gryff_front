@@ -32,11 +32,12 @@
 }
 
 .icone {
-    opacity: 20%;
+    opacity: 35%;
 }
 
 .icone:hover {
     opacity: 80%;
+    cursor: pointer;
 }
 
 .btncomment {
@@ -50,6 +51,12 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
+.bloc-description{
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
 .bloc-commentaire{
     width: 100%;
     background-color: white;
@@ -57,10 +64,25 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.text1 {
-    font-size: 13px;
+.titre {
+    font-size:24px;
+    color:#56575b;
+}
+
+.nom-user {
+    font-size: 17px;
     font-weight: 500;
     color: #56575b;
+}
+
+.description {
+    font-size: 15px;
+    font-weight: 500;
+    color: #56575b;
+}
+
+.text1 {
+
 }
 
 .text2 {
@@ -69,8 +91,6 @@
     margin-left: 6px;
     color: #56575b
 }
-
-
 
 .text3o {
     color: #00a5f4

@@ -228,55 +228,64 @@ export class affressource {
                     <div class="container bottom-page-ressource pb-2">
                         <div class="row">
                             <div class="col-sm-6">
-                                Date de publication: {this.afficherRessources.datePublication} <br />
-                                Titre: {this.afficherRessources.titre} <br />
-                                Nombre vues: {nbrVue} <br />
-                                Type: {this.afficherRessources.type} <br />
-                                Tags: {this.afficherRessources.tags} <br />
-                                Auteur: {this.afficherRessources.prenomNomUser} <br />
-                                vers profil utilisateur : <button value={this.afficherRessources.idUser}  onClick={(event) => this.gotoprofile(event)}>profil de l'utilisateur</button> <br />
-                                Resumé: {this.afficherRessources.resume} <br />
-                                Favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.favorisRessource(idRessource)}>ressourcefavoris</button> <br />
-                                Supprimer favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.supprimerFavorisRessource(idRessource)}>suprimer ressourcefavoris</button> <br />
-                                Suivre utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button> <br />
-                                Supprimer suivi utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button> <br />
-                                Signaler ressource : <button value={this.afficherRessources._id} onClick={idRessource=>this.signalerRessource(idRessource)}>signalerRessource</button> <br />
+                                <div class="bloc-commentaire pb-2 mb-3">
+                                    <div class="d-flex justify-content-center pt-3 mx-3">
+                                        <p class="titre">{this.afficherRessources.titre}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end align-items-start nom-user">
+                                        <div><p>de {this.afficherRessources.prenomNomUser}</p></div>
+                                        <div class="nostyle mx-1"><img class="icone" src="/bootstrap-files/person-fill.svg" width="25" height="25"></img></div>
+                                    </div>
+                                    <div class="d-flex justify-content-end mb-3">
+                                        <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart.svg" width="35" height="35"></img></div>
+                                        <div hidden class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart-fill.svg" width="35" height="35"></img></div>
+                                        <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/download.svg" width="35" height="35"></img></div>
+                                    </div>
+                                    <div class="d-flex justify-content-center text-center description mx-2">
+                                        <i>{this.afficherRessources.resume}</i>
+                                    </div>
+                                </div>
 
-                                <form onSubmit={(e)=>this.addComment(e)}>
-                                        <label>ajouterCommentaire
-                                            <input type="text" name='commenttext' onInput={(event) => this.alldata(event)}/>
-                                        </label>
-                                        <input type='submit' value='submit'> </input> <br />
-                                </form>
+                                {/* <div>
+                                    Date de publication: {this.afficherRessources.datePublication} <br />
+                                    Titre: {this.afficherRessources.titre} <br />
+                                    Nombre vues: {nbrVue} <br />
+                                    Type: {this.afficherRessources.type} <br />
+                                    Tags: {this.afficherRessources.tags} <br />
+                                    Auteur: {this.afficherRessources.prenomNomUser} <br />
+                                    vers profil utilisateur : <button value={this.afficherRessources.idUser}  onClick={(event) => this.gotoprofile(event)}>profil de l'utilisateur</button> <br />
+                                    Resumé: {this.afficherRessources.resume} <br />
+                                    Favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.favorisRessource(idRessource)}>ressourcefavoris</button> <br />
+                                    Supprimer favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.supprimerFavorisRessource(idRessource)}>suprimer ressourcefavoris</button> <br />
+                                    Suivre utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button> <br />
+                                    Supprimer suivi utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button> <br />
+                                    Signaler ressource : <button value={this.afficherRessources._id} onClick={idRessource=>this.signalerRessource(idRessource)}>signalerRessource</button> <br />
 
+                                    <form onSubmit={(e)=>this.addComment(e)}>
+                                            <label>ajouterCommentaire
+                                                <input type="text" name='commenttext' onInput={(event) => this.alldata(event)}/>
+                                            </label>
+                                            <input type='submit' value='submit'> </input> <br />
+                                    </form>
+
+                                </div> */}
                             </div>
                             <div class="col-sm-6">
-                                <p> 
-                                    {this.afficherRessources.commentaires.map((d,idx)=>{
-                                    return  (
-                                    <div class="pb-2 commentaire">
-                                        <div class="bloc-commentaire py-1 px-2"> <span class="text1">{d.commentaireText}</span>
-                                            <div class="d-flex justify-content-between align-items-center pt-2">
-                                                <div class="d-flex">
-                                                    <div><i class="text2">{d.prenomNomUser} </i></div>
-                                                    <div><i class="date ">, le {d.datePublicationComment.substr(0, 10)}</i></div>
-                                                </div>
-                                                
-                                                <button class="nostyle align-middle" value={d._id} onClick={commentaireid => this.signalerCommentaires(commentaireid)}><img class="icone" src="/bootstrap-files/exclamation-diamond.svg" width="18" height="18"></img></button>
+                                {this.afficherRessources.commentaires.map((d,idx)=>{
+                                return  (
+                                <div class="pb-2 commentaire">
+                                    <div class="bloc-commentaire py-1 px-2"> <span class="text1">{d.commentaireText}</span>
+                                        <div class="d-flex justify-content-between align-items-center pt-2">
+                                            <div class="d-flex">
+                                                <div><i class="text2">{d.prenomNomUser} </i></div>
+                                                <div><i class="date ">, le {d.datePublicationComment.substr(0, 10)}</i></div>
                                             </div>
+                                            
+                                            <button class="nostyle align-middle" value={d._id} onClick={commentaireid => this.signalerCommentaires(commentaireid)}><img class="icone" src="/bootstrap-files/exclamation-diamond.svg" width="18" height="18"></img></button>
                                         </div>
-                                    
-                                        {/* <li key={idx}>
-                                        - Prenom, Nom : {d.prenomNomUser} <br /> 
-                                        - texte: {d.commentaireText} <br /> 
-                                        - date de publication: {d.datePublicationComment} <br />
-                                        - signaler commentaires : <button value={d._id} onClick={commentaireid => this.signalerCommentaires(commentaireid)}> signalerCommentaires</button> <br /> 
-                                        </li> */}
                                     </div>
-                                    )
-                                    
-                                    })}
-                                </p>
+                                </div>
+                                )})}
                             </div>
                         </div>
                     </div>
