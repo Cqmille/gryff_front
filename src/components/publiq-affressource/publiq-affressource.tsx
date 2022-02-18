@@ -1,4 +1,5 @@
 import { Component, h, State,Prop } from '@stencil/core';
+import { RouterHistory } from '@stencil/router';
 import { Ressources } from '../../utils/Ressources';
 
 @Component({
@@ -9,6 +10,7 @@ import { Ressources } from '../../utils/Ressources';
 
 export class affressource {
     @Prop() match:any;
+    @Prop() history: RouterHistory;
     @State() idRessource:string;
     @State() afficherRessources:Ressources;
     @State() commenttext:string;
@@ -212,12 +214,15 @@ export class affressource {
         this.commenttext=(event.target.value)
     }
 
+    async gotoprofile(event){
+        this.history.push(`/profilSuivi/${event.target.value}`, {}); 
+    }
+
     render(){
         if(this.afficherRessources){
             const nbrVue=this.afficherRessources.stats.vuesConnecte + this.afficherRessources.stats.vuesnonConnecte
             return (
                 <div>
-
                     <div class="container pb-3">
                         <hive-pdf-viewer class="mx-auto pdf-frame " src={"http://localhost:3000/file/"+this.afficherRessources.fileName}></hive-pdf-viewer>
                     </div>
@@ -231,6 +236,7 @@ export class affressource {
                                 Type: {this.afficherRessources.type} <br />
                                 Tags: {this.afficherRessources.tags} <br />
                                 Auteur: {this.afficherRessources.prenomNomUser} <br />
+                                vers profil utilisateur : <button value={this.afficherRessources.idUser}  onClick={(event) => this.gotoprofile(event)}>profil de l'utilisateur</button> <br />
                                 Resumé: {this.afficherRessources.resume} <br />
                                 Favoris ressource: <button onClick={this.favorisRessource}>ressourcefavoris</button> <br />
                                 Supprimer favoris ressource: <button onClick={this.supprimerFavorisRessource}>suprimer ressourcefavoris</button> <br />

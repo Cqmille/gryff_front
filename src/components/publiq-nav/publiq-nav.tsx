@@ -1,4 +1,4 @@
-import { Component, h,Prop, Watch } from '@stencil/core';
+import { Component, h,Prop} from '@stencil/core';
 import { RouterHistory } from '@stencil/router';
 import {PATH} from '../../utils/path.js';
 @Component({
@@ -26,6 +26,13 @@ export class PubliqNav {
         }
     }
 
+    deconnexion(){
+        window.document.querySelector('publiq-nav').setAttribute('connected', 'false')
+        localStorage.setItem("userId",null);
+        localStorage.setItem("token", null);
+        localStorage.setItem('habilitation',null)
+    }
+
     async componentWillLoad(){
         this.checkConnexion()
     }
@@ -36,7 +43,7 @@ export class PubliqNav {
     render(){
         return (
             <header>
-                <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary d-flex flex-row shadow text-light">
+                <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary d-flex flex-row text-light">
                     <div class="container-fluid">
                     <stencil-route-link url="/" class="navbar-brand abs">(Re)ssources Relationnelles</stencil-route-link>
                         <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNavbar">
@@ -50,12 +57,12 @@ export class PubliqNav {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catégories </a>
                                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/sante"><p>Santé</p></stencil-route-link></li>
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/education"><p>Éducation</p></stencil-route-link></li>
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/sport"><p>Sports</p></stencil-route-link></li>
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/association"><p>Associations</p></stencil-route-link></li>
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/emploi"><p>Emploi</p></stencil-route-link></li>
-                                        <li><stencil-route-link class="dropdown-item" url="/tags-ressources/senior"><p>Sénior</p></stencil-route-link></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/sante"><p>Santé</p></a></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/education"><p>Éducation</p></a></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/sport"><p>Sports</p></a></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/association"><p>Associations</p></a></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/emploi"><p>Emploi</p></a></li>
+                                        <li><a class="dropdown-item" href="/tags-ressources/senior"><p>Sénior</p></a></li>
                                         <li>
                                             <hr class="dropdown-divider"></hr>
                                         </li>
@@ -66,17 +73,9 @@ export class PubliqNav {
                                     <a class="nav-link" href="#">Rechercher</a>
                                 </li>
                             </ul>
+                            
                             {this.connected?
-                                <ul class="navbar-nav ms-auto">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> mon compte </a>
-                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                                        <li><stencil-route-link url="/monEspace" class="nav-link"><p>Mes ressources</p></stencil-route-link></li>
-                                        <li><stencil-route-link url="/newRessource" class="nav-link"><p>Créer ressource</p></stencil-route-link></li>
-                                    </ul>
-                                </li>
-                                </ul>
-
+                            <connexion-nav class="navbar-nav ms-auto" habilitation= {localStorage.getItem('habilitation')}></connexion-nav>
                                 :<ul class="navbar-nav ms-auto">
                                     <li class="nav-item">
                                         <stencil-route-link url="/connexion/''" class="nav-link">Connexion</stencil-route-link>	
