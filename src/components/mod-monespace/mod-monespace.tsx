@@ -203,7 +203,6 @@ export class ModMonespace {
                                 <option value="selectionner la variable"></option>
                                 <option value="annulerSignalement" >annulerSignalement</option>
                                 <option value="archive">Archiver</option>
-                                <option value="refuse">Refuser</option>
                             </select>
                             </label>
                             <input type='submit' value='submit'> </input> <br />

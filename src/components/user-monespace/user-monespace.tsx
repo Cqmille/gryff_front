@@ -41,7 +41,7 @@ export class UserMonespace {
         }
     }
     async redirect(event){
-        this.history.push(`/afficherRessource/${event.target.value}`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
+        this.history.push(`/afficherressourceUser/${event.target.value}`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
 }
     async redirectmodif(event){
     this.history.push(`/modifierRessource/${event.target.value}`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
@@ -61,7 +61,7 @@ export class UserMonespace {
                                 <div class='row ms-5 mt-3 mb-3 fs-5 '><div class='col-11'> Catégorie : {ressource.tags}</div></div>
 
                                 <div class='row mt-3'><div class='col-8 col-sm-8'><button class="btn btn-primary border text-light ms-3 mb-3" value={ressource._id} onClick={(event) => this.redirect(event)}>Accéder</button></div><div class='col-8'>Publié:{ressource.datePublication}</div></div>
-                                <button class="btn btn-primary border text-light ms-3 mb-3" disabled value={ressource._id} onClick={(event) => this.redirectmodif(event)}>modifierRessource</button>
+                                <button class="btn btn-primary border text-light ms-3 mb-3" value={ressource._id} onClick={(event) => this.redirectmodif(event)}>modifierRessource</button>
                             </div>)}
                         </div>     
                         <div class="col-sm-2"></div>
