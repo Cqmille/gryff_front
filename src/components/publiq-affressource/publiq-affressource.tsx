@@ -1,5 +1,5 @@
 import { Component, h, State,Prop } from '@stencil/core';
-
+import { RouterHistory } from '@stencil/router';
 import { Ressources } from '../../utils/Ressources';
 @Component({
     tag:'publiq-affressource',
@@ -8,6 +8,7 @@ import { Ressources } from '../../utils/Ressources';
 
 export class affressource {
     @Prop() match:any;
+    @Prop() history: RouterHistory;
     @State() idRessource:string;
     @State() afficherRessources:Ressources;
     @State() commenttext:string;
@@ -213,6 +214,10 @@ export class affressource {
         this.commenttext=(event.target.value)
     }
 
+    async gotoprofile(event){
+        this.history.push(`/profilSuivi/${event.target.value}`, {}); 
+    }
+
     render(){
         if(this.afficherRessources){
             const nbrVue=this.afficherRessources.stats.vuesConnecte + this.afficherRessources.stats.vuesnonConnecte
@@ -225,6 +230,7 @@ export class affressource {
                     - type: {this.afficherRessources.type} <br />
                     - tags: {this.afficherRessources.tags} <br />
                     - auteur: {this.afficherRessources.prenomNomUser} <br />
+                    - vers profil utilisateur : <button value={this.afficherRessources.idUser}  onClick={(event) => this.gotoprofile(event)}>profil de l'utilisateur</button> <br />
                     - PDF:<hive-pdf-viewer src={"http://localhost:3000/file/"+this.afficherRessources.fileName}></hive-pdf-viewer>
                     - stats (nombre de vue): {nbrVue} <br />
                     - favoris ressource: <button onClick={this.favorisRessource}>ressourcefavoris</button> <br />
