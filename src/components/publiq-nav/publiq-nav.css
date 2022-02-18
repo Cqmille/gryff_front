@@ -21,15 +21,13 @@ stencil-route-link p {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-/* .navlink{
+ /* .navlink{
     color:rgb(255, 255, 255);
-}
-
-li>a{
-    color:rgb(255, 255, 255);
-    margin: 0;
-    align-items: center;
 } */
+
+.navbar :hover{
+    color:rgb(9, 90, 100) !important;
+} 
 
 li>a>p{
     color:black;
