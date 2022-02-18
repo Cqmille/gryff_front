@@ -25,7 +25,7 @@ export class userModifierProfil {
         this.getprofil();
     }
 
-    async _getData(e){
+    async modifProfile(e){
         e.preventDefault()
         try{
             let response = await fetch(`http://localhost:3000/users/modifierMonProfil`, {
@@ -76,7 +76,7 @@ export class userModifierProfil {
         return(
         <div>
             <p>
-            <form onSubmit={(e)=>this._getData(e)}>
+            <form onSubmit={(e)=>this.modifProfile(e)}>
                         <label>Modifier Profil <br />
                         Ville:
                             <input type="text" name='ville' value={this.profil.ville} onInput={(event) => this.alldata(event)}/> <br />

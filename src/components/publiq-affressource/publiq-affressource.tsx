@@ -1,8 +1,10 @@
 import { Component, h, State,Prop } from '@stencil/core';
 
 import { Ressources } from '../../utils/Ressources';
+
 @Component({
     tag:'publiq-affressource',
+    styleUrl: 'publiq-affressource.css',
     shadow: false,
 })
 
@@ -11,8 +13,6 @@ export class affressource {
     @State() afficherRessources:Ressources;
     @State() commenttext:string;
     @State() message: string;
-
-    
 
     async componentWillLoad() {
         this._getData();
@@ -211,39 +211,74 @@ export class affressource {
         this.commenttext=(event.target.value)
     }
 
+    async gotoprofile(event){
+        this.history.push(`/profilSuivi/${event.target.value}`, {}); 
+    }
+
     render(){
         if(this.afficherRessources){
             const nbrVue=this.afficherRessources.stats.vuesConnecte + this.afficherRessources.stats.vuesnonConnecte
             return (
                 <div>
-                    <p> 
-                    Resumer: {this.afficherRessources.resume} <br />
-                    - Date de publication: {this.afficherRessources.datePublication} <br />
-                    - titre: {this.afficherRessources.titre} <br />
-                    - type: {this.afficherRessources.type} <br />
-                    - tags: {this.afficherRessources.tags} <br />
-                    - auteur: {this.afficherRessources.prenomNomUser} <br />
-                    - PDF:<hive-pdf-viewer src={"http://localhost:3000/file/"+this.afficherRessources.fileName}></hive-pdf-viewer>
-                    - stats (nombre de vue): {nbrVue} <br />
-                    - favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.favorisRessource(idRessource)}>ressourcefavoris</button> <br />
-                    - supprimer favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.supprimerFavorisRessource(idRessource)}>suprimer ressourcefavoris</button> <br />
-                    - suivre utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button> <br />
-                    - supprimer suivi utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button> <br />
-                    - signaler ressource : <button value={this.afficherRessources._id} onClick={idRessource=>this.signalerRessource(idRessource)}>signalerRessource</button> <br />
-                    <form onSubmit={(e)=>this.addComment(e)}>
-                        <label>ajouterCommentaire
-                            <input type="text" name='commenttext' onInput={(event) => this.alldata(event)}/>
-                        </label>
-                            <input type='submit' value='submit'> </input> <br />
-                    </form>
-                    - commentaires  {this.afficherRessources.commentaires.map((d,idx)=>{
-                        return  (<li key={idx}>
-                            - Prenom, Nom : {d.prenomNomUser} <br /> 
-                            - texte: {d.commentaireText} <br /> 
-                            - date de publication: {d.datePublicationComment} <br />
-                            - signaler commentaires : <button value={d._id} onClick={commentaireid => this.signalerCommentaires(commentaireid)}> signalerCommentaires</button> <br /> </li>)
-                    })}
-                    </p>
+                    <div class="container pb-3">
+                        <hive-pdf-viewer class="mx-auto pdf-frame " src={"http://localhost:3000/file/"+this.afficherRessources.fileName}></hive-pdf-viewer>
+                    </div>
+
+                    <div class="container bottom-page-ressource pb-2">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                Date de publication: {this.afficherRessources.datePublication} <br />
+                                Titre: {this.afficherRessources.titre} <br />
+                                Nombre vues: {nbrVue} <br />
+                                Type: {this.afficherRessources.type} <br />
+                                Tags: {this.afficherRessources.tags} <br />
+                                Auteur: {this.afficherRessources.prenomNomUser} <br />
+                                vers profil utilisateur : <button value={this.afficherRessources.idUser}  onClick={(event) => this.gotoprofile(event)}>profil de l'utilisateur</button> <br />
+                                Resumé: {this.afficherRessources.resume} <br />
+                                Favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.favorisRessource(idRessource)}>ressourcefavoris</button> <br />
+                                Supprimer favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.supprimerFavorisRessource(idRessource)}>suprimer ressourcefavoris</button> <br />
+                                Suivre utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button> <br />
+                                Supprimer suivi utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button> <br />
+                                Signaler ressource : <button value={this.afficherRessources._id} onClick={idRessource=>this.signalerRessource(idRessource)}>signalerRessource</button> <br />
+
+                                <form onSubmit={(e)=>this.addComment(e)}>
+                                        <label>ajouterCommentaire
+                                            <input type="text" name='commenttext' onInput={(event) => this.alldata(event)}/>
+                                        </label>
+                                        <input type='submit' value='submit'> </input> <br />
+                                </form>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <p> 
+                                    {this.afficherRessources.commentaires.map((d,idx)=>{
+                                    return  (
+                                    <div class="pb-2 commentaire">
+                                        <div class="bloc-commentaire py-1 px-2"> <span class="text1">{d.commentaireText}</span>
+                                            <div class="d-flex justify-content-between align-items-center pt-2">
+                                                <div class="d-flex">
+                                                    <div><i class="text2">{d.prenomNomUser} </i></div>
+                                                    <div><i class="date ">, le {d.datePublicationComment.substr(0, 10)}</i></div>
+                                                </div>
+                                                
+                                                <button class="nostyle align-middle" value={d._id} onClick={commentaireid => this.signalerCommentaires(commentaireid)}><img class="icone" src="/bootstrap-files/exclamation-diamond.svg" width="18" height="18"></img></button>
+                                            </div>
+                                        </div>
+                                    
+                                        {/* <li key={idx}>
+                                        - Prenom, Nom : {d.prenomNomUser} <br /> 
+                                        - texte: {d.commentaireText} <br /> 
+                                        - date de publication: {d.datePublicationComment} <br />
+                                        - signaler commentaires : <button value={d._id} onClick={commentaireid => this.signalerCommentaires(commentaireid)}> signalerCommentaires</button> <br /> 
+                                        </li> */}
+                                    </div>
+                                    )
+                                    
+                                    })}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <style>.hidden{this.vueplus1()}</style> 
                 </div>
             )
