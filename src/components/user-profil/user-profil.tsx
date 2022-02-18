@@ -8,8 +8,7 @@ import { Ressources } from '../../utils/Ressources';
 })
 
 export class userProfil {
-
-    @Prop() match:any;
+    
     @Prop() history: RouterHistory;
 
     @State() profilRessources:Ressources[];
