@@ -273,7 +273,7 @@ export class affressource {
                             <div class="col-sm-6">
                                 {this.afficherRessources.commentaires.map((d,idx)=>{
                                 return  (
-                                <div class="pb-2 commentaire">
+                                <div class="pb-2 commentaire" key={idx}>
                                     <div class="bloc-commentaire py-1 px-2"> <span class="text1">{d.commentaireText}</span>
                                         <div class="d-flex justify-content-between align-items-center pt-2">
                                             <div class="d-flex">
