@@ -190,8 +190,8 @@ export class ModMonespace {
                                         
                                         {/* <div class='row ms-2 mt-3 mb-3 fs-5 '><div class='col-11'> Catégorie : {ressource.tags}</div></div> */}
                                         <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{d.commentaireText}</p></div></div>
-                                        <div class='row mt-1'><div class='col-5 col-sm-6'><button value={comment._id} onClick={commentaireid=>this.supprimerComment(commentaireid)}>supprimer commentaire</button> <br />
-                                        <button value={comment._id}  onClick={(event) => this.goto(event)}>detail de la ressource</button> <br /></div></div>
+                                        <div class='row mt-1'><div class='col-5 col-sm-6'><button class="btn btn-primary border text-light ms-1 mb-2" value={comment._id} onClick={commentaireid=>this.supprimerComment(commentaireid)}>supprimer commentaire</button> <br />
+                                        <button class="btn btn-primary border text-light ms-1 mb-2" value={comment._id}  onClick={(event) => this.goto(event)}>detail de la ressource</button> <br /></div></div>
                                     </div>)})} 
                                 <div class="col-sm-2"></div>
                                 </div>  
