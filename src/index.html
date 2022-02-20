@@ -19,6 +19,12 @@
   <link rel="apple-touch-icon" href="/assets/icon/icon.png">
   <link rel="icon" type="image/x-icon" href="/assets/icon/favicon.ico">
   <link rel="manifest" href="/manifest.json">
+  <script>
+    // Si le navigateur a un service worker, on installe 'sw.js'
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.register('service-worker.js')
+    }
+  </script>
 </head>
 
 
