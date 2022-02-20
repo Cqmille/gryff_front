@@ -148,46 +148,85 @@ export class ModMonespace {
     render(){
         if(this.modRessource && this.modComment && this.modsignale ){
             return (
-                <div>
+                <div class='container'>
+                    <h1 class='uppercase text-center mb-2'>Ressources en attentes</h1>
                     {this.modRessource.map((ressource : Ressources) =>
-                        <div>
-                            <p> 
-                            - Etat: {ressource.etatRessource} 
-                            - Date de publication: {ressource.datePublication} 
-                            - titre: {ressource.titre} 
-                            - resume: {ressource.resume}
-                            - Prenom Nom {ressource.prenomNomUser}
-                            <style>.hiden{this.ressourceId=ressource._id}</style>
-                            <form onSubmit={(e)=>this.validate(e)}>
-                            <label>validerchoix
-                            <select name='valider' onInput={(event) => this.alldata(event)}>
-                                <option value="selectionner la variable"></option>
-                                <option value="valide" >valider</option>
-                                <option value="archive">Archiver</option>
-                                <option value="refuse">Refuser</option>
-                            </select>
-                            </label>
-                            <input type='submit' value='submit'> </input> <br />
-                            </form>
-                            <button class="btn btn-primary border text-light ms-3 mb-3" value={ressource._id} onClick={(event) => this.redirect(event)}>En savoir plus</button>
-                            </p>
-                        </div>)}
-                        <div>
-                    {this.modComment.map((comment : Ressources) =>
-                        <div>
-                            <p>
+                        <div class="row mx-3">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8 ">
+                                <div class='border border-primary bg-light rounded mb-3 listshadow'>
+                                    <div class='row mt-1'><div class='col-7 col-lg-9'><h2 class='ms-3'>{ressource.titre}</h2></div><div class='col-2 fw-bold fs-4'>{ressource.etatRessource}</div></div>
+                                    
+                                    <div class='row ms-2 mt-3 mb-3 fs-5 '><div class='col-11'> Catégorie : {ressource.tags}</div></div>
+                                    <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{ressource.resume}</p></div></div>
+                                    <style>.hiden{this.ressourceId=ressource._id}</style>
+                                        <form class='ms-3' onSubmit={(e)=>this.validate(e)}>
+                                        <label>validerchoix
+                                        <select name='valider' class='ms-3' onInput={(event) => this.alldata(event)}>
+                                            <option value="selectionner la variable"></option>
+                                            <option value="valide" >valider</option>
+                                            <option value="archive">Archiver</option>
+                                            <option value="refuse">Refuser</option>
+                                        </select>
+                                        </label>
+                                        <input class='ms-2' type='submit' value='Envoyer'> </input> <br />
+                                        </form>
+                                    <div class='row mt-1'><div class='col-5 col-sm-6'><button class="btn btn-primary border text-light ms-1 mb-2" value={ressource._id} onClick={(event) => this.redirect(event)}>Accéder</button></div><div class='col-8 col-lg-6'>Publié:{ressource.datePublication}</div></div>
                                 
-                            {comment.commentaires.map((d,idx)=>{
-                            return  (<li key={idx}>
-                            - Prenom, Nom : {d.prenomNomUser} <br /> 
-                            - texte: {d.commentaireText} <br /> 
-                            - date de publication: {d.datePublicationComment}
-                            <button value={d._id} onClick={commentaireid=>this.supprimerComment(commentaireid)}>supprimer commentaire</button> <br />
-                            <button value={comment._id}  onClick={(event) => this.goto(event)}>detail de la ressource</button> <br />
-                            </li>)
-                            })}
-                            </p>
+                                </div>
+                            </div>     
+                            <div class="col-sm-2"></div>
                         </div>)}
+                        <h1 class='uppercase text-center mb-2'>Commentaires signaler</h1>
+                        {this.modComment.map((comment : Ressources) =>
+                        <div>
+                            <div class="row mx-3">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-8 ">
+                                {comment.commentaires.map((d)=>{
+                                    return(
+                                    <div class='border border-primary bg-light rounded mb-3 listshadow'>
+                                        <div class='row mt-1'><div class='col-7 col-lg-9'><h2 class='ms-3'>{d.prenomNomUser}</h2></div><div class='col-2 fw-bold fs-4'>{d.datePublicationComment}</div></div>
+                                        
+                                        {/* <div class='row ms-2 mt-3 mb-3 fs-5 '><div class='col-11'> Catégorie : {ressource.tags}</div></div> */}
+                                        <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{d.commentaireText}</p></div></div>
+                                        <div class='row mt-1'><div class='col-5 col-sm-6'><button class="btn btn-primary border text-light ms-1 mb-2" value={comment._id} onClick={commentaireid=>this.supprimerComment(commentaireid)}>supprimer commentaire</button> <br />
+                                        <button class="btn btn-primary border text-light ms-1 mb-2" value={comment._id}  onClick={(event) => this.goto(event)}>detail de la ressource</button> <br /></div></div>
+                                    </div>)})} 
+                                <div class="col-sm-2"></div>
+                                </div>  
+                            </div>
+                        </div> )}
+
+
+                        <h1 class='uppercase text-center mb-2'>Ressources signaler</h1>
+                    {this.modsignale.map((signale : Ressources) =>
+                        <div class="row mx-3">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8 ">
+                                <div class='border border-primary bg-light rounded mb-3 listshadow'>
+                                    <div class='row mt-1'><div class='col-7 col-lg-9'><h2 class='ms-3'>{signale.titre}</h2></div><div class='col-2 fw-bold fs-4'>{signale.etatRessource}</div></div>
+                                    
+                                    <div class='row ms-2 mt-3 mb-3 fs-5 '><div class='col-11'> Catégorie : {signale.tags}</div></div>
+                                    <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{signale.resume}</p></div></div>
+                                    <style>.hiden{this.ressourceId=signale._id}</style>
+                                    <form onSubmit={(e)=>this.validate(e)}>
+                                        <label>validerchoix
+                                        <select name='valider' onInput={(event) => this.alldata(event)}>
+                                            <option value="selectionner la variable"></option>
+                                            <option value="annulerSignalement" >annulerSignalement</option>
+                                            <option value="archive">Archiver</option>
+                                        </select>
+                                        </label>
+                                        <input type='submit' value='submit'> </input> <br />
+                                        </form>
+                                    <div class='row mt-1'><div class='col-5 col-sm-6'><button class="btn btn-primary border text-light ms-1 mb-2" value={signale._id} onClick={(event) => this.redirect(event)}>Accéder</button></div><div class='col-8 col-lg-6'>Publié:{signale.datePublication}</div></div>
+                                
+                                </div>
+                            </div>     
+                            <div class="col-sm-2"></div>
+                        </div>)}
+{/* 
                         {this.modsignale.map((signale : Ressources) =>
                         <div>
                             <p>
@@ -208,8 +247,8 @@ export class ModMonespace {
                             <input type='submit' value='submit'> </input> <br />
                             </form>
                             </p>
-                        </div>)}
-                </div>
+                        </div>
+                        )} */}
                 </div>
             )
         }

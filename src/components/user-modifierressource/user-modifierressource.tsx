@@ -76,17 +76,25 @@ export class userModifierRessource {
     render(){
         if(this.mesressource){
         return(
-        <div>
+        <div class='container'>
             <p>
             <form onSubmit={(e)=>this.sendModif(e)}>
-                        <label>Modifier Ressource <br />
-                        titre :
-                            <input type="text" name='titre' value={this.mesressource.titre}  onInput={(event) => this.alldata(event)}/> <br />
-                        resume :
-                            <input type="text" name='resume' value={this.mesressource.resume} onInput={(event) => this.alldata(event)}/> <br />
-                        </label>
-                        <br />
-                            <input type='submit' value='submit'> </input> <br />
+            <div class="row mx-3">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                    <h1 class="titre">Modifier la ressource</h1>
+                    <label class="mx-2">Titre</label>
+                    <input type="text" class="form-control" name='titre' value={this.mesressource.titre}  onInput={(event) => this.alldata(event)}/> <br />
+                    </div>
+                    <div class="form-group mt-2">
+                    <label class="mx-2">Resumer</label>
+                    <input type="text" class="form-control" name='resume' value={this.mesressource.resume} onInput={(event) => this.alldata(event)}/> <br />
+                    </div>
+                    <button type="submit" class="btn mt-2 bg-light border">Modifier</button>
+                </div>         
+                <div class="col-sm-3"></div>
+            </div>
             </form>
             </p>
         </div>

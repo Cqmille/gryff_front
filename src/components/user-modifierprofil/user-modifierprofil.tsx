@@ -75,19 +75,24 @@ export class userModifierProfil {
         if(this.profil)
         return(
         <div>
-            <p>
             <form onSubmit={(e)=>this.modifProfile(e)}>
-                        <label>Modifier Profil <br />
-                        Ville:
-                            <input type="text" name='ville' value={this.profil.ville} onInput={(event) => this.alldata(event)}/> <br />
-                            <label>
-                        Proffession :
-                            <input type="text" name='profession' value={this.profil.profession} onInput={(event) => this.alldata(event)}/> <br />
-                            </label>
-                        </label>
-                        <br />
-                            <input type='submit' value='submit'> </input> <br />
+            <div class="row mx-3">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                    <h1 class="titre">Modifier Profil</h1>
+                    <label class="mx-2">Ville</label>
+                    <input type="text" class="form-control" name='ville' value={this.profil.ville} onInput={(event) => this.alldata(event)}/> <br />
+                    </div>
+                    <div class="form-group mt-2">
+                    <label class="mx-2">Proffession</label>
+                    <input type="text" class="form-control" name='profession' value={this.profil.profession} onInput={(event) => this.alldata(event)}/> <br />
+                    </div>
+                    <button type="submit" class="btn mt-2 bg-light border">Modifier</button>
+                </div>         
+                <div class="col-sm-3"></div>
+            </div>
+                        
             </form>
-            </p>
         </div>
         )}}
