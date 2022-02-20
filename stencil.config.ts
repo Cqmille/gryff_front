@@ -17,6 +17,7 @@ export const config: Config = {
           src: '../node_modules/@teamhive/pdf-viewer/dist/pdf-viewer/pdf-viewer-assets',
           dest: 'build/pdf-viewer-assets' 
         },
+        { src: 'service-worker.js' },
         {
           src: '../src/global/bootstrap',
           dest: 'bootstrap-files'
