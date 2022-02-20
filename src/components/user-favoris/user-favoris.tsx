@@ -1,4 +1,4 @@
-import { Component, h, State,Prop } from '@stencil/core';
+ import { Component, h, State,Prop } from '@stencil/core';
 import { RouterHistory } from '@stencil/router';
 import { UserConnected } from '../../utils/UserConnected';
 import { Ressources } from '../../utils/Ressources';
@@ -72,18 +72,43 @@ export class userFavoris {
     render(){
         if(this.favorisressource && this.utilidateurfavoris){
             return (
-                <div>
-                    {this.favorisressource.map((favoris : Ressources) =>
-                        <div>
-                            <p> - Date de publication: {favoris.datePublication} - titre: {favoris.titre} resume: {favoris.resume}</p>
-                            <button value={favoris._id}  onClick={(event) => this.goto(event)}>detail de la ressource</button> <br />
-                        </div>)}
+                <div class='container'>
+                     <h1 class=' text-center'>Mes ressources favoris</h1>
+                    <div class="row mx-3 mt-5">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8 ">
+                            {this.favorisressource.map((favoris : Ressources) =>
+                            <div class='border border-primary bg-light rounded mb-3 listshadow'>
+                                <div class='row mt-1'><div class='col-7 col-md-9 col-sm-3'><h2 class='ms-1'>{favoris.titre}</h2></div><div class='col-2'>{favoris.prenomNomUser}</div></div>
 
-                        {this.utilidateurfavoris.map((suivre : UserConnected) =>
+                                <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{favoris.resume}</p></div></div>
+                            
+                                <div class='row mt-1'><div class='col-8 col-sm-3 col-md-6'><button class="btn btn-primary border text-light ms-1 mb-1" value={favoris._id} onClick={(event) => this.goto(event)}>En savoir plus</button></div><div class='col-8 col-lg-6'>Publié:{favoris.datePublication}</div></div>
+                            </div>)}
+                        </div>     
+                        <div class="col-sm-2"></div>
+                    </div>
+                    <h1 class=' text-center'>Mes utilisateurs favoris</h1>
+                    <div class="row mx-3 mt-5">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8 ">
+                            {this.utilidateurfavoris.map((suivre : UserConnected) =>
+                            <div class='border border-primary bg-light rounded mb-3 listshadow'>
+                                <div class='row mt-1'><div class='col-7 col-md-9 col-sm-3'><h2 class='ms-1'>{suivre.prenom} {suivre.nom}</h2></div></div>
+
+                                <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'> Ville : {suivre.ville}</p> Profession : {suivre.profession}</div></div>
+                            
+                                <div class='row mt-1'><div class='col-8 col-sm-3 col-md-6'><button class="btn btn-primary border text-light ms-1 mb-1" value={suivre._id} onClick={(event) => this.gotoprofile(event)}>Profile de l'utilisateur</button></div></div>
+                            </div>)}
+                        </div>     
+                        <div class="col-sm-2"></div>
+                    </div>
+
+                        {/* {this.utilidateurfavoris.map((suivre : UserConnected) =>
                         <div>
                             <p> - prenom: {suivre.prenom} - nom: {suivre.nom}</p>
                              <button value={suivre._id}  onClick={(event) => this.gotoprofile(event)}>profil de l'utilisateur</button> <br />
-                        </div>)}
+                        </div>)} */}
                 </div>
             )
         }
