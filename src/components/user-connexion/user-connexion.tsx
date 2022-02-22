@@ -85,7 +85,7 @@ export class UserConnexion {
             <div class="col-sm-3"></div>
           </div>
         </form>
-        {(this.messageErr)?
+        {(this.messageErr != '')?
           <p>{this.messageErr}</p>:null}
         {(this.match.params.message)?
           <p>{this.match.params.message}</p>:null}
