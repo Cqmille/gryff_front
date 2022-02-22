@@ -288,14 +288,18 @@ export class affressource {
                                 </div> */}
                             </div>
                             <div class="col-sm-6">
-                                <div class="p-1 mb-2 envoi-commentaire">
-                                    <form  onSubmit={(e)=>this.addComment(e)}>
-                                        <div class="row mx-1">
-                                            <textarea class="form-control ombrage"  placeholder ="Votre commentaire" name="commenttext" id="" onInput={(event) => this.alldata(event)}></textarea>
-                                            <input class="btn btn-primary text-white mt-2 bouton-commentaire ombrage" type='submit' value='Envoyer' > </input> <br/>
-                                        </div>
-                                    </form>
-                                </div>
+                            {this.connected?
+                                    <div class="p-1 mb-2 envoi-commentaire">
+                                        <form  onSubmit={(e)=>this.addComment(e)}>
+                                            <div class="row mx-1">
+                                                <textarea class="form-control ombrage"  placeholder ="Votre commentaire" name="commenttext" id="" onInput={(event) => this.alldata(event)}></textarea>
+                                                <input class="btn btn-primary text-white mt-2 bouton-commentaire ombrage" type='submit' value='Envoyer' > </input> <br/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    :
+                                    null
+                                }
                                 {this.afficherRessources.commentaires.map((d,idx)=>{
                                 return  (
                                 <div class="pb-2 commentaire" key={idx}>
