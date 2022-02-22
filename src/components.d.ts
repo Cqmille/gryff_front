@@ -25,6 +25,7 @@ export namespace Components {
     interface PublicNotFound {
     }
     interface PubliqAffressource {
+        "connected": boolean;
         "history": RouterHistory;
         "match": any;
     }
@@ -248,6 +249,7 @@ declare namespace LocalJSX {
     interface PublicNotFound {
     }
     interface PubliqAffressource {
+        "connected"?: boolean;
         "history"?: RouterHistory;
         "match"?: any;
     }
