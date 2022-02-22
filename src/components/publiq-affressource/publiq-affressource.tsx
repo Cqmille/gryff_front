@@ -53,7 +53,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: idRessource.target.value
+                    ressourceid: idRessource
                 }),
             })
             console.log(response)
@@ -97,9 +97,11 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: idRessource.target.value
+                    ressourceid: idRessource
                 }),
-            })
+            });
+            document.getElementById('coeurVide').setAttribute('hidden','true')
+            document.getElementById('coeurPlein').removeAttribute("hidden")
             if(response.status == 401) {this.message = (await response.json()).message}
             console.log(this.message)
         }
@@ -118,7 +120,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: idRessource.target.value
+                    ressourceid: idRessource
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -205,7 +207,6 @@ export class affressource {
             })
             if(response.status == 401) {this.message = (await response.json()).message}
             this.afficherRessources = await response.json();
-            console.log(this.message)
         }
         catch (err){
             console.log('fetch failed', err);
@@ -256,8 +257,8 @@ export class affressource {
                                         <div class="nostyle mx-1" onClick={() => this.gotoprofile(this.afficherRessources.idUser)}><img class="icone" src="/bootstrap-files/person-fill.svg" width="25" height="25"></img></div>
                                     </div>
                                     <div class="d-flex justify-content-end mb-3">
-                                        <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart.svg" width="35" height="35" ></img></div>
-                                        <div hidden class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart-fill.svg" width="35" height="35"></img></div>
+                                        <div id='coeurVide' class="nostyle mx-2" onClick={()=>this.favorisRessource(this.afficherRessources._id)}><img class="icone" src="/bootstrap-files/heart.svg" width="35" height="35" ></img></div>
+                                        <div id='coeurPlein' hidden class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart-fill.svg" width="35" height="35"></img></div>
                                         <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/download.svg" width="35" height="35"></img></div>
                                     </div>
                                     <div class="d-flex justify-content-center text-center description mx-2">
