@@ -1,6 +1,7 @@
 import { Component, h, State,Prop } from '@stencil/core';
 import { RouterHistory } from '@stencil/router';
 import { Ressources } from '../../utils/Ressources';
+import {PATH} from '../../utils/path.js';
 
 @Component({
     tag:'publiq-affressource',
@@ -14,9 +15,11 @@ export class affressource {
     @Prop() history: RouterHistory;
     @State() commenttext:string;
     @State() message: string;
+    @Prop() connected: boolean = false;
 
     async componentWillLoad() {
         this._getData();
+        this.checkConnexion();
     }
 
     async vueplus1(){
@@ -215,6 +218,20 @@ export class affressource {
     async gotoprofile(event){
         this.history.push(`/profilSuivi/${event.target.value}`, {}); 
     }
+   
+    async checkConnexion(){
+        let response = await fetch(PATH.back+'/users/testAuth',{
+            method:'POST',
+            headers: {
+                authorization: localStorage.getItem('token'),
+                userid: localStorage.getItem('userId')
+            }
+        });
+        if(response.status == 201){
+            this.connected = true
+        }
+    }
+    
 
     render(){
         if(this.afficherRessources){
@@ -237,7 +254,7 @@ export class affressource {
                                         <div class="nostyle mx-1"><img class="icone" src="/bootstrap-files/person-fill.svg" width="25" height="25"></img></div>
                                     </div>
                                     <div class="d-flex justify-content-end mb-3">
-                                        <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart.svg" width="35" height="35"></img></div>
+                                        <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart.svg" width="35" height="35" ></img></div>
                                         <div hidden class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart-fill.svg" width="35" height="35"></img></div>
                                         <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/download.svg" width="35" height="35"></img></div>
                                     </div>
@@ -271,6 +288,14 @@ export class affressource {
                                 </div> */}
                             </div>
                             <div class="col-sm-6">
+                                <div class="p-1 mb-2 envoi-commentaire">
+                                    <form  onSubmit={(e)=>this.addComment(e)}>
+                                        <div class="row mx-1">
+                                            <textarea class="form-control ombrage"  placeholder ="Votre commentaire" name="commenttext" id="" onInput={(event) => this.alldata(event)}></textarea>
+                                            <input class="btn btn-primary text-white mt-2 bouton-commentaire ombrage" type='submit' value='Envoyer' > </input> <br/>
+                                        </div>
+                                    </form>
+                                </div>
                                 {this.afficherRessources.commentaires.map((d,idx)=>{
                                 return  (
                                 <div class="pb-2 commentaire" key={idx}>
