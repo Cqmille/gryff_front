@@ -66,6 +66,7 @@ export class affressource {
     }
     
     async signalerCommentaires(commentaireid){
+        console.log(commentaireid)
         try{
             let response = await fetch(`http://localhost:3000/users/signalerUnCommentaire`, {
                 method: 'POST',
@@ -75,7 +76,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    commentaireid: commentaireid.target.value
+                    commentaireid: commentaireid
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -215,8 +216,8 @@ export class affressource {
         this.commenttext=(event.target.value)
     }
 
-    async gotoprofile(event){
-        this.history.push(`/profilSuivi/${event.target.value}`, {}); 
+    async gotoprofile(idUser){
+        this.history.push(`/profilSuivi/${idUser}`, {}); 
     }
    
     async checkConnexion(){
@@ -249,9 +250,10 @@ export class affressource {
                                     <div class="d-flex justify-content-center pt-3 mx-3">
                                         <p class="titre">{this.afficherRessources.titre}</p>
                                     </div>
+                                    {/* <button value={this.afficherRessources._id} onClick={idRessource=>this.signalerRessource(idRessource)}>signalerRessource</button> */}
                                     <div class="d-flex justify-content-end align-items-start nom-user">
                                         <div><p>de {this.afficherRessources.prenomNomUser}</p></div>
-                                        <div class="nostyle mx-1"><img class="icone" src="/bootstrap-files/person-fill.svg" width="25" height="25"></img></div>
+                                        <div class="nostyle mx-1" onClick={() => this.gotoprofile(this.afficherRessources.idUser)}><img class="icone" src="/bootstrap-files/person-fill.svg" width="25" height="25"></img></div>
                                     </div>
                                     <div class="d-flex justify-content-end mb-3">
                                         <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart.svg" width="35" height="35" ></img></div>
@@ -310,7 +312,7 @@ export class affressource {
                                                 <div><i class="date ">, le {d.datePublicationComment.substr(0, 10)}</i></div>
                                             </div>
                                             
-                                            <button class="nostyle align-middle" value={d._id} onClick={commentaireid => this.signalerCommentaires(commentaireid)}><img class="icone" src="/bootstrap-files/exclamation-diamond.svg" width="18" height="18"></img></button>
+                                            <button class="nostyle align-middle" onClick={() => this.signalerCommentaires(d._id)}><img class="icone" src="/bootstrap-files/exclamation-diamond.svg" width="18" height="18"></img></button>
                                         </div>
                                     </div>
                                 </div>
