@@ -237,7 +237,7 @@ export class affressource {
                                         <div class="nostyle mx-1"><img class="icone" src="/bootstrap-files/person-fill.svg" width="25" height="25"></img></div>
                                     </div>
                                     <div class="d-flex justify-content-end mb-3">
-                                        <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart.svg" width="35" height="35"></img></div>
+                                        <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart.svg" width="35" height="35" ></img></div>
                                         <div hidden class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart-fill.svg" width="35" height="35"></img></div>
                                         <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/download.svg" width="35" height="35"></img></div>
                                     </div>
@@ -271,6 +271,16 @@ export class affressource {
                                 </div> */}
                             </div>
                             <div class="col-sm-6">
+                                <div class="pb-2 commentaire"> 
+                                    <div class="pb-2 bloc-commentaire py-1 px-2">
+                                        <form  onSubmit={(e)=>this.addComment(e)}>
+                                                    <label class="form-group">Votre commentaire
+                                                        <textarea class="form-control" name="commenttext" id="" onInput={(event) => this.alldata(event)}></textarea>
+                                                    </label>
+                                                    <input class="btn btn-primary btn-block mb-2" type='submit' value='envoyer' > </input> <br/>
+                                        </form>
+                                    </div>
+                                </div>
                                 {this.afficherRessources.commentaires.map((d,idx)=>{
                                 return  (
                                 <div class="pb-2 commentaire">
