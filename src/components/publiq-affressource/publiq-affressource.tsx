@@ -251,7 +251,6 @@ export class affressource {
                                     <div class="d-flex justify-content-center pt-3 mx-3">
                                         <p class="titre">{this.afficherRessources.titre}</p>
                                     </div>
-                                    {/* <button value={this.afficherRessources._id} onClick={idRessource=>this.signalerRessource(idRessource)}>signalerRessource</button> */}
                                     <div class="d-flex justify-content-end align-items-start nom-user">
                                         <div><p>de {this.afficherRessources.prenomNomUser}</p></div>
                                         <div class="nostyle mx-1" onClick={() => this.gotoprofile(this.afficherRessources.idUser)}><img class="icone" src="/bootstrap-files/person-fill.svg" width="25" height="25"></img></div>
@@ -289,6 +288,14 @@ export class affressource {
                                     </form>
 
                                 </div> */}
+                                <button value={this.afficherRessources._id} onClick={idRessource=>this.favorisRessource(idRessource)}>ressourcefavoris</button>
+                                <button value={this.afficherRessources._id} onClick={idRessource=>this.supprimerFavorisRessource(idRessource)}>suprimer ressourcefavoris</button>
+                                <button value={this.afficherRessources._id} onClick={idRessource=>this.signalerRessource(idRessource)}>signalerRessource</button>
+                                <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button>
+                                <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button>
+                                {nbrVue}
+
+
                             </div>
                             <div class="col-sm-6">
                             {this.connected?
