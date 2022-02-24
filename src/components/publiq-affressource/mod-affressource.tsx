@@ -4,6 +4,7 @@ import { RouterHistory } from '@stencil/router';
 import { Ressources } from '../../utils/Ressources';
 @Component({
     tag:'mod-affressource',
+    styleUrl: 'mod-affressource.css',
     shadow: false,
 })
 
@@ -48,17 +49,25 @@ export class affressource {
         if(this.afficherRessources){
             return (
                 <div>
-                    <button class="btn btn-primary border text-light ms-3 mb-3" onClick={() => this.history.goBack()}> retour à la liste</button>
-                    <p> 
-                    Resumer: {this.afficherRessources.resume} <br />
-                    - Date de publication: {this.afficherRessources.datePublication} <br />
-                    - titre: {this.afficherRessources.titre} <br />
-                    - type: {this.afficherRessources.type} <br />
-                    - tags: {this.afficherRessources.tags} <br />
-                    - auteur: {this.afficherRessources.prenomNomUser} <br />
-                    - PDF:<hive-pdf-viewer src={"http://localhost:3000/file/"+this.afficherRessources.fileName}></hive-pdf-viewer>
-                    </p>
-                </div>
+                    <div class="container pb-3">
+                        <hive-pdf-viewer class="mx-auto pdf-frame " src={"http://localhost:3000/file/"+this.afficherRessources.fileName}></hive-pdf-viewer>
+                    </div>
+
+                    <div class="container bottom-page-ressource pb-2">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="bloc-commentaire pb-2 mb-3">
+                                    <div class="d-flex justify-content-center pt-3 mx-3">
+                                        <p class="titre">{this.afficherRessources.titre}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center text-center description mx-2">
+                                        <i>{this.afficherRessources.resume}</i>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>
             )
         }
         if(this.message){
