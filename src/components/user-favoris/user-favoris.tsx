@@ -68,6 +68,48 @@ export class userFavoris {
             console.log('fetch failed', err);
         }
     }
+    
+    async supprimerFavorisRessource(idRessource){
+        try{
+            let response = await fetch(`http://localhost:3000/users/supprimerFavorisRessource`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
+                },
+                body: JSON.stringify({
+                    ressourceid: idRessource
+                }),
+            })
+            if(response.status == 401) {this.message = (await response.json()).message}
+            console.log(this.message)
+        }
+        catch (err){
+            console.log('fetch failed', err);
+        }
+    }
+
+    async supprimerSuivreUtilisateur(idUser){
+        try{
+            let response = await fetch(`http://localhost:3000/users/supprimerSuivieUser`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
+                },
+                body: JSON.stringify({
+                    utilisateursSuivis: idUser
+                }),
+            })
+            if(response.status == 401) {this.message = (await response.json()).message}
+            console.log(this.message)
+        }
+        catch (err){
+            console.log('fetch failed', err);
+        }
+    }
 
     render(){
         if(this.favorisressource && this.utilidateurfavoris){
@@ -83,7 +125,8 @@ export class userFavoris {
 
                                 <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{favoris.resume}</p></div></div>
                             
-                                <div class='row mt-1'><div class='col-8 col-sm-3 col-md-6'><button class="btn btn-primary border text-light ms-1 mb-1" value={favoris._id} onClick={(event) => this.goto(event)}>En savoir plus</button></div><div class='col-8 col-lg-6'>Publié:{favoris.datePublication}</div></div>
+                                <div class='row mt-1'><div class='col-8 col-sm-3 col-md-6'><button class="btn btn-primary border text-light ms-1 mb-1" value={favoris._id} onClick={(event) => this.goto(event)}>Accéder</button></div><div class='col-8 col-lg-6'>Publié:{favoris.datePublication}</div></div>
+                                <button class="btn btn-primary text-light btn-danger mb-2 mx-1" onClick={()=>this.supprimerFavorisRessource(favoris._id)}>suprimer</button>
                             </div>)}
                         </div>     
                         <div class="col-sm-2"></div>
@@ -98,7 +141,8 @@ export class userFavoris {
 
                                 <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'> Ville : {suivre.ville}</p> Profession : {suivre.profession}</div></div>
                             
-                                <div class='row mt-1'><div class='col-8 col-sm-3 col-md-6'><button class="btn btn-primary border text-light ms-1 mb-1" value={suivre._id} onClick={(event) => this.gotoprofile(event)}>Profile de l'utilisateur</button></div></div>
+                                <div class='row mt-1'><div class='col-8 col-sm-3 col-md-6'><button class="btn btn-primary border text-light ms-1 mb-1" value={suivre._id} onClick={(event) => this.gotoprofile(event)}>Profile</button></div></div>
+                                <button class="btn btn-primary text-light btn-danger mb-2 mx-1" onClick={()=>this.supprimerSuivreUtilisateur(suivre._id)}>supprimer</button>
                             </div>)}
                         </div>     
                         <div class="col-sm-2"></div>
