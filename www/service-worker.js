@@ -1,3 +1,5 @@
+// Version faite maison
+
 /*
 
 self.addEventListener('install', (event) => { // on écoute l'evenement install du sw
@@ -26,14 +28,17 @@ self.addEventListener('install', (event) => { // on écoute l'evenement install 
 
 */
 
+
+// Version avec le module workbox-sw.js
+
 importScripts(
     'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js',
   );
   
   if (workbox) {
-    console.log(`Yay! Workbox is loaded 🎉`);
+    console.log(`Workbox is loaded`);
   } else {
-    console.log(`Boo! Workbox didn't load 😬`);
+    console.log(`Boo! Workbox didn't load`);
   }
 
   workbox.routing.registerRoute(

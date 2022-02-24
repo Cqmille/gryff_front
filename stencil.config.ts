@@ -21,6 +21,10 @@ export const config: Config = {
         {
           src: '../src/global/bootstrap',
           dest: 'bootstrap-files'
+        },
+        {
+          src: '../src/global/logo',
+          dest: 'svg'
         }
       ],
     },

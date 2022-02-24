@@ -130,3 +130,14 @@
     border-radius: 50%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
+.form-control { width: 100%; }
+
+.btn-primary {
+    color: white;
+}
+
+.ombrage {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 6px;    
+}

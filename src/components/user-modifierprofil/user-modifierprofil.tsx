@@ -85,7 +85,7 @@ export class userModifierProfil {
                     <input type="text" class="form-control" name='ville' value={this.profil.ville} onInput={(event) => this.alldata(event)}/> <br />
                     </div>
                     <div class="form-group mt-2">
-                    <label class="mx-2">Proffession</label>
+                    <label class="mx-2">Profession</label>
                     <input type="text" class="form-control" name='profession' value={this.profil.profession} onInput={(event) => this.alldata(event)}/> <br />
                     </div>
                     <button type="submit" class="btn mt-2 bg-light border">Modifier</button>

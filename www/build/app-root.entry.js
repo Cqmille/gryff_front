@@ -1,6 +1,6 @@
 import { r as registerInstance, h } from './index-25b9a15f.js';
 
-const appRootCss = "main{margin-top:70px}";
+const appRootCss = "main{margin-top:85px}";
 
 let AppRoot = class {
   constructor(hostRef) {

@@ -2,6 +2,17 @@
     text-decoration: none !important;
 } */
 
+
+#logo {
+    max-height: 40px;
+}
+
+@media (max-width: 380px) {
+  #logo {
+    max-height: 26px;
+  }
+}
+
 stencil-route-link a {
     color:rgb(255, 255, 255);
     text-decoration: none;
@@ -34,3 +45,9 @@ li>a>p{
     margin: 0;
     align-items: center;
 }
+
+@media (max-width: 380px) {
+    .menu-left {
+        text-align: start;
+    }
+  }
