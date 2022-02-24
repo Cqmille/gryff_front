@@ -1,7 +1,8 @@
 {
-  "name": "Stencil Starter",
-  "short_name": "Stencil",
+  "name": "Ressources Relationnelles",
+  "short_name": "Ressources Rel",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "icons": [{
     "src": "assets/icon/icon.png",

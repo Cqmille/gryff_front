@@ -46,8 +46,11 @@ export class UserConnexion {
 
           const navBar = window.document.querySelector('publiq-nav')
           navBar.setAttribute('connected', 'true')
-
-          this.history.replace(`/monEspace`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
+          if(this.user.habilitation=="mod"){
+              this.history.replace(`/monEspace2`, {});   // Permet de charger une nouvelle page (ici c'est l'accueil car aucun)
+          } else {
+              this.history.replace(`/monEspace`, {}); 
+          }
         } else {
           this.messageErr = this.user.message
         }
@@ -77,14 +80,12 @@ export class UserConnexion {
                 <label class="mx-2">Mot de passe</label>
                 <input type="password" class="form-control" name='password' placeholder="Mon mot de passe" onInput={(event) => this.chargeState(event)}></input>
               </div>
-              <button type="submit" class="btn mt-2 bg-secondary border">Se connecter</button>
+              <button type="submit" class="btn mt-2 bg-light border">Se connecter</button>
             </div>         
             <div class="col-sm-3"></div>
           </div>
         </form>
-        {(this.messageErr)?
-          <p>{this.messageErr}</p>:null}
-        {(this.match.params.message)?
+        {(this.match.params.message === !null)?
           <p>{this.match.params.message}</p>:null}
       </div>
     );

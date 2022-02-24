@@ -83,13 +83,10 @@ export class UserCreationRessource {
                             <label class="mx-2">Fichier</label>
                             <input type="file" name='uploaded_file' class="form-control" onChange={(event) => this.uploadPdf(event)}/>
                         </div>
-                        <button type="submit" class="btn mt-2 bg-secondary border">Valider</button>
+                        <button type="submit" class="btn mt-2 bg-light border">Valider</button>
                     </form>
                 </div>         
                 <div class="col-sm-3"></div>
-                <div>
-                <hive-pdf-viewer class= "container-fluid" src="http://localhost:3000/file/doc-1644917417087.pdf"></hive-pdf-viewer>
-                </div>
             </div>
         )
     }

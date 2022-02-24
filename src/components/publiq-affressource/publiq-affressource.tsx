@@ -1,23 +1,25 @@
 import { Component, h, State,Prop } from '@stencil/core';
-
+import { RouterHistory } from '@stencil/router';
 import { Ressources } from '../../utils/Ressources';
+import {PATH} from '../../utils/path.js';
+
 @Component({
     tag:'publiq-affressource',
+    styleUrl: 'publiq-affressource.css',
     shadow: false,
 })
 
 export class affressource {
     @Prop() match:any;
-    @State() idRessource:string;
     @State() afficherRessources:Ressources;
+    @Prop() history: RouterHistory;
     @State() commenttext:string;
     @State() message: string;
-
-    
+    @Prop() connected: boolean = false;
 
     async componentWillLoad() {
-        this.idRessource= this.match.params.id;
         this._getData();
+        this.checkConnexion();
     }
 
     async vueplus1(){
@@ -30,7 +32,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: this.idRessource
+                    ressourceid: this.match.params.id
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -41,7 +43,7 @@ export class affressource {
         }
     }
 
-    async signalerRessource(){
+    async signalerRessource(idRessource){
         try{
             let response = await fetch(`http://localhost:3000/users/signalerUneRessource`, {
                 method: 'POST',
@@ -51,7 +53,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: this.idRessource
+                    ressourceid: idRessource
                 }),
             })
             console.log(response)
@@ -64,6 +66,7 @@ export class affressource {
     }
     
     async signalerCommentaires(commentaireid){
+        console.log(commentaireid)
         try{
             let response = await fetch(`http://localhost:3000/users/signalerUnCommentaire`, {
                 method: 'POST',
@@ -73,7 +76,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    commentaireid: commentaireid.target.value
+                    commentaireid: commentaireid
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -84,7 +87,7 @@ export class affressource {
         }
     }
 
-    async favorisRessource(){
+    async favorisRessource(idRessource){
         try{
             let response = await fetch(`http://localhost:3000/users/favorisRessource/`, {
                 method: 'POST',
@@ -94,9 +97,11 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: this.idRessource
+                    ressourceid: idRessource
                 }),
-            })
+            });
+            document.getElementById('coeurVide').setAttribute('hidden','true')
+            document.getElementById('coeurPlein').removeAttribute("hidden")
             if(response.status == 401) {this.message = (await response.json()).message}
             console.log(this.message)
         }
@@ -105,7 +110,7 @@ export class affressource {
         }
     }
 
-    async supprimerFavorisRessource(){
+    async supprimerFavorisRessource(idRessource){
         try{
             let response = await fetch(`http://localhost:3000/users/supprimerFavorisRessource`, {
                 method: 'POST',
@@ -115,7 +120,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    ressourceid: this.idRessource
+                    ressourceid: idRessource
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -202,7 +207,6 @@ export class affressource {
             })
             if(response.status == 401) {this.message = (await response.json()).message}
             this.afficherRessources = await response.json();
-            console.log(this.message)
         }
         catch (err){
             console.log('fetch failed', err);
@@ -213,39 +217,110 @@ export class affressource {
         this.commenttext=(event.target.value)
     }
 
+    async gotoprofile(idUser){
+        this.history.push(`/profilSuivi/${idUser}`, {}); 
+    }
+   
+    async checkConnexion(){
+        let response = await fetch(PATH.back+'/users/testAuth',{
+            method:'POST',
+            headers: {
+                authorization: localStorage.getItem('token'),
+                userid: localStorage.getItem('userId')
+            }
+        });
+        if(response.status == 201){
+            this.connected = true
+        }
+    }
+    
+
     render(){
         if(this.afficherRessources){
             const nbrVue=this.afficherRessources.stats.vuesConnecte + this.afficherRessources.stats.vuesnonConnecte
             return (
                 <div>
-                    <p> 
-                    Resumer: {this.afficherRessources.resume} <br />
-                    - Date de publication: {this.afficherRessources.datePublication} <br />
-                    - titre: {this.afficherRessources.titre} <br />
-                    - type: {this.afficherRessources.type} <br />
-                    - tags: {this.afficherRessources.tags} <br />
-                    - auteur: {this.afficherRessources.prenomNomUser} <br />
-                    - PDF:<hive-pdf-viewer src={"http://localhost:3000/file/"+this.afficherRessources.fileName}></hive-pdf-viewer>
-                    - stats (nombre de vue): {nbrVue} <br />
-                    - favoris ressource: <button onClick={this.favorisRessource}>ressourcefavoris</button> <br />
-                    - supprimer favoris ressource: <button onClick={this.supprimerFavorisRessource}>suprimer ressourcefavoris</button> <br />
-                    - suivre utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button> <br />
-                    - supprimer suivi utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button> <br />
-                    - signaler ressource : <button onClick={this.signalerRessource}>signalerRessource</button> <br />
-                    <form onSubmit={(e)=>this.addComment(e)}>
-                        <label>ajouterCommentaire
-                            <input type="text" name='commenttext' onInput={(event) => this.alldata(event)}/>
-                        </label>
-                            <input type='submit' value='submit'> </input> <br />
-                    </form>
-                    - commentaires  {this.afficherRessources.commentaires.map((d,idx)=>{
-                        return  (<li key={idx}>
-                            - Prenom, Nom : {d.prenomNomUser} <br /> 
-                            - texte: {d.commentaireText} <br /> 
-                            - date de publication: {d.datePublicationComment} <br />
-                            - signaler commentaires : <button value={d._id} onClick={commentaireid => this.signalerCommentaires(commentaireid)}> signalerCommentaires</button> <br /> </li>)
-                    })}
-                    </p>
+                    <div class="container pb-3">
+                        <hive-pdf-viewer class="mx-auto pdf-frame " src={"http://localhost:3000/file/"+this.afficherRessources.fileName}></hive-pdf-viewer>
+                    </div>
+
+                    <div class="container bottom-page-ressource pb-2">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="bloc-commentaire pb-2 mb-3">
+                                    <div class="d-flex justify-content-center pt-3 mx-3">
+                                        <p class="titre">{this.afficherRessources.titre}</p>
+                                    </div>
+                                    {/* <button value={this.afficherRessources._id} onClick={idRessource=>this.signalerRessource(idRessource)}>signalerRessource</button> */}
+                                    <div class="d-flex justify-content-end align-items-start nom-user">
+                                        <div><p>de {this.afficherRessources.prenomNomUser}</p></div>
+                                        <div class="nostyle mx-1" onClick={() => this.gotoprofile(this.afficherRessources.idUser)}><img class="icone" src="/bootstrap-files/person-fill.svg" width="25" height="25"></img></div>
+                                    </div>
+                                    <div class="d-flex justify-content-end mb-3">
+                                        <div id='coeurVide' class="nostyle mx-2" onClick={()=>this.favorisRessource(this.afficherRessources._id)}><img class="icone" src="/bootstrap-files/heart.svg" width="35" height="35" ></img></div>
+                                        <div id='coeurPlein' hidden class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart-fill.svg" width="35" height="35"></img></div>
+                                        <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/download.svg" width="35" height="35"></img></div>
+                                    </div>
+                                    <div class="d-flex justify-content-center text-center description mx-2">
+                                        <i>{this.afficherRessources.resume}</i>
+                                    </div>
+                                </div>
+
+                                {/* <div>
+                                    Date de publication: {this.afficherRessources.datePublication} <br />
+                                    Titre: {this.afficherRessources.titre} <br />
+                                    Nombre vues: {nbrVue} <br />
+                                    Type: {this.afficherRessources.type} <br />
+                                    Tags: {this.afficherRessources.tags} <br />
+                                    Auteur: {this.afficherRessources.prenomNomUser} <br />
+                                    vers profil utilisateur : <button value={this.afficherRessources.idUser}  onClick={(event) => this.gotoprofile(event)}>profil de l'utilisateur</button> <br />
+                                    Resumé: {this.afficherRessources.resume} <br />
+                                    Favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.favorisRessource(idRessource)}>ressourcefavoris</button> <br />
+                                    Supprimer favoris ressource: <button value={this.afficherRessources._id} onClick={idRessource=>this.supprimerFavorisRessource(idRessource)}>suprimer ressourcefavoris</button> <br />
+                                    Suivre utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button> <br />
+                                    Supprimer suivi utilisateur : <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button> <br />
+                                    Signaler ressource : <button value={this.afficherRessources._id} onClick={idRessource=>this.signalerRessource(idRessource)}>signalerRessource</button> <br />
+
+                                    <form onSubmit={(e)=>this.addComment(e)}>
+                                            <label>ajouterCommentaire
+                                                <input type="text" name='commenttext' onInput={(event) => this.alldata(event)}/>
+                                            </label>
+                                            <input type='submit' value='submit'> </input> <br />
+                                    </form>
+
+                                </div> */}
+                            </div>
+                            <div class="col-sm-6">
+                            {this.connected?
+                                    <div class="p-1 mb-2 envoi-commentaire">
+                                        <form  onSubmit={(e)=>this.addComment(e)}>
+                                            <div class="row mx-1">
+                                                <textarea class="form-control ombrage"  placeholder ="Votre commentaire" name="commenttext" id="" onInput={(event) => this.alldata(event)}></textarea>
+                                                <input class="btn btn-primary text-white mt-2 bouton-commentaire ombrage" type='submit' value='Envoyer' > </input> <br/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    :
+                                    null
+                                }
+                                {this.afficherRessources.commentaires.map((d,idx)=>{
+                                return  (
+                                <div class="pb-2 commentaire" key={idx}>
+                                    <div class="bloc-commentaire py-1 px-2"> <span class="text1">{d.commentaireText}</span>
+                                        <div class="d-flex justify-content-between align-items-center pt-2">
+                                            <div class="d-flex">
+                                                <div><i class="text2">{d.prenomNomUser} </i></div>
+                                                <div><i class="date ">, le {d.datePublicationComment.substr(0, 10)}</i></div>
+                                            </div>
+                                            
+                                            <button class="nostyle align-middle" onClick={() => this.signalerCommentaires(d._id)}><img class="icone" src="/bootstrap-files/exclamation-diamond.svg" width="18" height="18"></img></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                )})}
+                            </div>
+                        </div>
+                    </div>
                     <style>.hidden{this.vueplus1()}</style> 
                 </div>
             )
