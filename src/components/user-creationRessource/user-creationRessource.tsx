@@ -63,6 +63,7 @@ export class UserCreationRessource {
                             <h1 class="titre">Création d'une ressource</h1>
                             <label class="mx-2">Type</label>
                             <select name='tags' onInput={(event) => this.alimRessource(event)}>
+                                <option value="selectionner la variable"></option>
                                 <option value="sante">Santé</option>
                                 <option value="education">Education</option>
                                 <option value="sport">sport</option>
