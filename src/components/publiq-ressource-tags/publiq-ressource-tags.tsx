@@ -48,11 +48,11 @@ import { Ressources } from '../../utils/Ressources';
                         <div class="col-sm-8 ">
                             {this.mesRessources.map((ressource : Ressources) =>
                             <div class='border border-primary bg-light rounded mb-3 listshadow'>
-                                <div class='row mt-1'><div class='col-7 col-md-9 col-sm-3'><h2 class='ms-1'>{ressource.titre}</h2></div><div class='col-2'>{ressource.prenomNomUser}</div></div>
+                                <div class='row mt-1'><div class='col-7 col-md-10 col-sm-3'><h2 class='ms-1'>{ressource.titre}</h2></div><div class='col-2'>{ressource.prenomNomUser}</div></div>
 
                                 <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{ressource.resume}</p></div></div>
                             
-                                <div class='row mt-1'><div class='col-8 col-sm-3 col-md-6'><button class="btn btn-primary border text-light ms-1 mb-1" value={ressource._id} onClick={(event) => this.redirect(event)}>En savoir plus</button></div><div class='col-8 col-lg-6'>Publié le : {ressource.datePublication}</div></div>
+                                <div class='row mt-1'><div class='col-8 col-sm-3 col-md-8'><button class="btn btn-primary border text-light ms-1 mb-1" value={ressource._id} onClick={(event) => this.redirect(event)}>En savoir plus</button></div><div class='col-8 col-md-4'>Publié:{ressource.datePublication}</div></div>
                             </div>)}
                         </div>     
                         <div class="col-sm-2"></div>

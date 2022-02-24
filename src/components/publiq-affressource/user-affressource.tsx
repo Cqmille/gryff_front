@@ -45,6 +45,73 @@ export class affressource {
         this.commenttext=(event.target.value)
     }
 
+    async favorisRessource(idRessource){
+        try{
+            let response = await fetch(`http://localhost:3000/users/favorisRessource/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
+                },
+                body: JSON.stringify({
+                    ressourceid: idRessource
+                }),
+            });
+            document.getElementById('coeurVide').setAttribute('hidden','true')
+            document.getElementById('coeurPlein').removeAttribute("hidden")
+            if(response.status == 401) {this.message = (await response.json()).message}
+            console.log(this.message)
+        }
+        catch (err){
+            console.log('fetch failed', err);
+        }
+    }
+        async gotoprofile(idUser){
+            this.history.push(`/profilSuivi/${idUser}`, {}); 
+        }
+        async vueplus1(){
+            try{
+                let response = await fetch(`http://localhost:3000/public/statressource`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        authorization: localStorage.getItem('token'),
+                        userid: localStorage.getItem('userId')
+                    },
+                    body: JSON.stringify({
+                        ressourceid: this.match.params.id
+                    }),
+                })
+                if(response.status == 401) {this.message = (await response.json()).message}
+                console.log(this.message)
+            }
+            catch (err){
+                console.log('fetch failed', err);
+            }
+        }
+        async signalerCommentaires(commentaireid){
+            console.log(commentaireid)
+            try{
+                let response = await fetch(`http://localhost:3000/users/signalerUnCommentaire`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        authorization: localStorage.getItem('token'),
+                        userid: localStorage.getItem('userId')
+                    },
+                    body: JSON.stringify({
+                        commentaireid: commentaireid
+                    }),
+                })
+                if(response.status == 401) {this.message = (await response.json()).message}
+                console.log(this.message)
+            }
+            catch (err){
+                console.log('fetch failed', err);
+            }
+        }
+
     render(){
         if(this.afficherRessources){
             return (
@@ -60,14 +127,33 @@ export class affressource {
                                     <div class="d-flex justify-content-center pt-3 mx-3">
                                         <p class="titre">{this.afficherRessources.titre}</p>
                                     </div>
+                                    
                                     <div class="d-flex justify-content-center text-center description mx-2">
                                         <i>{this.afficherRessources.resume}</i>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-sm-6">
+                                {this.afficherRessources.commentaires.map((d,idx)=>{
+                                return  (
+                                <div class="pb-2 commentaire" key={idx}>
+                                    <div class="bloc-commentaire py-1 px-2"> <span class="text1">{d.commentaireText}</span>
+                                        <div class="d-flex justify-content-between align-items-center pt-2">
+                                            <div class="d-flex">
+                                                <div><i class="text2">{d.prenomNomUser} </i></div>
+                                                <div><i class="date ">, le {d.datePublicationComment.substr(0, 10)}</i></div>
+                                            </div>
+                                            
+                                            <button class="nostyle align-middle" onClick={() => this.signalerCommentaires(d._id)}><img class="icone" src="/bootstrap-files/exclamation-diamond.svg" width="18" height="18"></img></button>
+                                        </div>
+                                    </div>
                                 </div>
-                                </div>
-                                </div>
-                                </div>
+                                )})}
+                            </div>
+                        </div>
+                    </div>
+                    <style>.hidden{this.vueplus1()}</style> 
+                </div>
 )
 }
                  {/* <div>
