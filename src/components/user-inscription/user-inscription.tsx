@@ -38,15 +38,15 @@ import {PATH} from '../../utils/path.js';
                 
         switch (response.status) {
             case 201:
-                this.history.replace('/inscriptionValide', {});   // Permet de charger une nouvelle page
+                this.history.replace('/connexion/"', {});   // Permet de charger une nouvelle page
               break;
             case 403:
-                window.alert('cette adresse mail est déjà utilisée.');
+                window.alert('adresse mail déjà utilisée');
                 break;
             default:
-                window.alert('une erreur est survenue');
+                window.confirm('une erreur est survenue');
+                this.history.replace('/connexion', {});
           }
-
     }
     else{
         window.alert("mot de passe différent");
@@ -61,7 +61,7 @@ import {PATH} from '../../utils/path.js';
             case 'password': this.password = event.target.value; break;
             case 'confirmPassword': this.confirmPassword = event.target.value; break;
         }
-        console.log('passe: ' + this.password +'email: ' + this.email+ 'nom:' + this.nom + 'prenom:'+ this.prenom + 'confirmPassword'+ this.confirmPassword)
+        //console.log('passe: ' + this.password +'email: ' + this.email+ 'nom:' + this.nom + 'prenom:'+ this.prenom + 'confirmPassword'+ this.confirmPassword)
     }
 
   render() {
