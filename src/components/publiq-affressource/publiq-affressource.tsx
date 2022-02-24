@@ -110,27 +110,6 @@ export class affressource {
         }
     }
 
-    async supprimerFavorisRessource(idRessource){
-        try{
-            let response = await fetch(`http://localhost:3000/users/supprimerFavorisRessource`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: localStorage.getItem('token'),
-                    userid: localStorage.getItem('userId')
-                },
-                body: JSON.stringify({
-                    ressourceid: idRessource
-                }),
-            })
-            if(response.status == 401) {this.message = (await response.json()).message}
-            console.log(this.message)
-        }
-        catch (err){
-            console.log('fetch failed', err);
-        }
-    }
-
     async suivreUtilisateur(idUser){
         try{
             let response = await fetch(`http://localhost:3000/users/suivreUser`, {
@@ -141,28 +120,7 @@ export class affressource {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    utilisateursSuivis: idUser.target.value
-                }),
-            })
-            if(response.status == 401) {this.message = (await response.json()).message}
-            console.log(this.message)
-        }
-        catch (err){
-            console.log('fetch failed', err);
-        }
-    }
-
-    async supprimerSuivreUtilisateur(idUser){
-        try{
-            let response = await fetch(`http://localhost:3000/users/supprimerSuivieUser`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: localStorage.getItem('token'),
-                    userid: localStorage.getItem('userId')
-                },
-                body: JSON.stringify({
-                    utilisateursSuivis: idUser.target.value
+                    utilisateursSuivis: idUser
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
@@ -254,11 +212,14 @@ export class affressource {
                                     <div class="d-flex justify-content-end align-items-start nom-user">
                                         <div><p>de {this.afficherRessources.prenomNomUser}</p></div>
                                         <div class="nostyle mx-1" onClick={() => this.gotoprofile(this.afficherRessources.idUser)}><img class="icone" src="/bootstrap-files/person-fill.svg" width="25" height="25"></img></div>
+                                        <div class="text-primary h4 suivreUser" onClick={()=>this.suivreUtilisateur(this.afficherRessources.idUser)}>＋</div>
                                     </div>
                                     <div class="d-flex justify-content-end mb-3">
+                                    <div class="h4 text-muted">{nbrVue}👁</div> 
                                         <div id='coeurVide' class="nostyle mx-2" onClick={()=>this.favorisRessource(this.afficherRessources._id)}><img class="icone" src="/bootstrap-files/heart.svg" width="35" height="35" ></img></div>
                                         <div id='coeurPlein' hidden class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart-fill.svg" width="35" height="35"></img></div>
                                         <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/download.svg" width="35" height="35"></img></div>
+                                        <div class="h3 signalerRess" onClick={()=>this.signalerRessource(this.afficherRessources._id)}>⚠️</div>
                                     </div>
                                     <div class="d-flex justify-content-center text-center description mx-2">
                                         <i>{this.afficherRessources.resume}</i>
@@ -288,12 +249,6 @@ export class affressource {
                                     </form>
 
                                 </div> */}
-                                <button value={this.afficherRessources._id} onClick={idRessource=>this.favorisRessource(idRessource)}>ressourcefavoris</button>
-                                <button value={this.afficherRessources._id} onClick={idRessource=>this.supprimerFavorisRessource(idRessource)}>suprimer ressourcefavoris</button>
-                                <button value={this.afficherRessources._id} onClick={idRessource=>this.signalerRessource(idRessource)}>signalerRessource</button>
-                                <button value={this.afficherRessources.idUser} onClick={idUser=>this.suivreUtilisateur(idUser)}>suivre utilisateur</button>
-                                <button value={this.afficherRessources.idUser} onClick={idUser=>this.supprimerSuivreUtilisateur(idUser)}>supprimer suivi utilisateur</button>
-                                {nbrVue}
 
 
                             </div>
