@@ -191,6 +191,9 @@ export class affressource {
             this.connected = true
         }
     }
+    // async downloadPDF(pdf){
+    //     DownloadFile(`http://localhost:3000/file/${pdf}`, {}); 
+    // }
     
 
     render(){
@@ -218,7 +221,7 @@ export class affressource {
                                     <div class="h4 text-muted">{nbrVue}👁</div> 
                                         <div id='coeurVide' class="nostyle mx-2" onClick={()=>this.favorisRessource(this.afficherRessources._id)}><img class="icone" src="/bootstrap-files/heart.svg" width="35" height="35" ></img></div>
                                         <div id='coeurPlein' hidden class="nostyle mx-2"><img class="icone" src="/bootstrap-files/heart-fill.svg" width="35" height="35"></img></div>
-                                        <div class="nostyle mx-2"><img class="icone" src="/bootstrap-files/download.svg" width="35" height="35"></img></div>
+                                        <div class="nostyle mx-2" ><a href={'http://localhost:3000/file/'+this.afficherRessources.fileName} target="_blank"><img class="icone" src="/bootstrap-files/download.svg" width="35" height="35"></img></a></div>
                                         <div class="h3 signalerRess" onClick={()=>this.signalerRessource(this.afficherRessources._id)}>⚠️</div>
                                     </div>
                                     <div class="d-flex justify-content-center text-center description mx-2">
