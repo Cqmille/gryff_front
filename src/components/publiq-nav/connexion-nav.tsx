@@ -19,7 +19,7 @@ export class ConnexionNav {
     render(){
         if(this.habilitation == 'user'){
             return (
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Mon compte </a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
@@ -34,9 +34,9 @@ export class ConnexionNav {
             )
         } else if(this.habilitation == 'mod'){
             return(
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Mon compte </a>
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Mon compte </a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
                         <li><stencil-route-link url="/monEspace2" class="nav-link"><p>Modération</p></stencil-route-link></li>
                         <li><stencil-route-link onClick={() => this.deconnexion()} url="/" class="nav-link"><p>Déconnexion</p></stencil-route-link></li>

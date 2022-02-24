@@ -78,8 +78,6 @@ export class userProfil {
                         <div class="col-sm-2"></div>
                         <div class="col-sm-8 ">
                             <div class='border border-primary bg-light rounded mb-3 listshadow'>
-                                <div class='row mt-1'><div class='col-7 col-md-9 col-sm-3'><h2 class='ms-1 h4'>Date de naissance: {this.profil.dateNaissance}</h2></div></div>
-
                                 <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>Ville : {this.profil.ville} <p>Profession : {this.profil.profession}</p></p></div></div>
                             
                                 <div class='row mt-1'><div class='col-8 col-sm-3 col-md-6'><button class="btn btn-primary border text-light ms-1 mb-1" value={this.profil._id}  onClick={(event) => this.gotomodifier(event)}>modifierprofil</button></div></div>
