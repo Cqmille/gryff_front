@@ -58,6 +58,7 @@ let affressource = class {
     }
   }
   async signalerCommentaires(commentaireid) {
+    console.log(commentaireid);
     try {
       let response = await fetch(`http://localhost:3000/users/signalerUnCommentaire`, {
         method: 'POST',
@@ -67,7 +68,7 @@ let affressource = class {
           userid: localStorage.getItem('userId')
         },
         body: JSON.stringify({
-          commentaireid: commentaireid.target.value
+          commentaireid: commentaireid
         }),
       });
       if (response.status == 401) {
@@ -214,8 +215,8 @@ let affressource = class {
   async alldata(event) {
     this.commenttext = (event.target.value);
   }
-  async gotoprofile(event) {
-    this.history.push(`/profilSuivi/${event.target.value}`, {});
+  async gotoprofile(idUser) {
+    this.history.push(`/profilSuivi/${idUser}`, {});
   }
   async checkConnexion() {
     let response = await fetch(PATH.back + '/users/testAuth', {
@@ -232,11 +233,11 @@ let affressource = class {
   render() {
     if (this.afficherRessources) {
       const nbrVue = this.afficherRessources.stats.vuesConnecte + this.afficherRessources.stats.vuesnonConnecte;
-      return (h("div", null, h("div", { class: "container pb-3" }, h("hive-pdf-viewer", { class: "mx-auto pdf-frame ", src: "http://localhost:3000/file/" + this.afficherRessources.fileName })), h("div", { class: "container bottom-page-ressource pb-2" }, h("div", { class: "row" }, h("div", { class: "col-sm-6" }, h("div", { class: "bloc-commentaire pb-2 mb-3" }, h("div", { class: "d-flex justify-content-center pt-3 mx-3" }, h("p", { class: "titre" }, this.afficherRessources.titre)), h("div", { class: "d-flex justify-content-end align-items-start nom-user" }, h("div", null, h("p", null, "de ", this.afficherRessources.prenomNomUser)), h("div", { class: "nostyle mx-1" }, h("img", { class: "icone", src: "/bootstrap-files/person-fill.svg", width: "25", height: "25" }))), h("div", { class: "d-flex justify-content-end mb-3" }, h("div", { id: 'coeurVide', class: "nostyle mx-2", onClick: () => this.favorisRessource(this.afficherRessources._id) }, h("img", { class: "icone", src: "/bootstrap-files/heart.svg", width: "35", height: "35" })), h("div", { id: 'coeurPlein', hidden: true, class: "nostyle mx-2" }, h("img", { class: "icone", src: "/bootstrap-files/heart-fill.svg", width: "35", height: "35" })), h("div", { class: "nostyle mx-2" }, h("img", { class: "icone", src: "/bootstrap-files/download.svg", width: "35", height: "35" }))), h("div", { class: "d-flex justify-content-center text-center description mx-2" }, h("i", null, this.afficherRessources.resume)))), h("div", { class: "col-sm-6" }, this.connected ?
+      return (h("div", null, h("div", { class: "container pb-3" }, h("hive-pdf-viewer", { class: "mx-auto pdf-frame ", src: "http://localhost:3000/file/" + this.afficherRessources.fileName })), h("div", { class: "container bottom-page-ressource pb-2" }, h("div", { class: "row" }, h("div", { class: "col-sm-6" }, h("div", { class: "bloc-commentaire pb-2 mb-3" }, h("div", { class: "d-flex justify-content-center pt-3 mx-3" }, h("p", { class: "titre" }, this.afficherRessources.titre)), h("div", { class: "d-flex justify-content-end align-items-start nom-user" }, h("div", null, h("p", null, "de ", this.afficherRessources.prenomNomUser)), h("div", { class: "nostyle mx-1", onClick: () => this.gotoprofile(this.afficherRessources.idUser) }, h("img", { class: "icone", src: "/bootstrap-files/person-fill.svg", width: "25", height: "25" }))), h("div", { class: "d-flex justify-content-end mb-3" }, h("div", { id: 'coeurVide', class: "nostyle mx-2", onClick: () => this.favorisRessource(this.afficherRessources._id) }, h("img", { class: "icone", src: "/bootstrap-files/heart.svg", width: "35", height: "35" })), h("div", { id: 'coeurPlein', hidden: true, class: "nostyle mx-2" }, h("img", { class: "icone", src: "/bootstrap-files/heart-fill.svg", width: "35", height: "35" })), h("div", { class: "nostyle mx-2" }, h("img", { class: "icone", src: "/bootstrap-files/download.svg", width: "35", height: "35" }))), h("div", { class: "d-flex justify-content-center text-center description mx-2" }, h("i", null, this.afficherRessources.resume)))), h("div", { class: "col-sm-6" }, this.connected ?
         h("div", { class: "p-1 mb-2 envoi-commentaire" }, h("form", { onSubmit: (e) => this.addComment(e) }, h("div", { class: "row mx-1" }, h("textarea", { class: "form-control ombrage", placeholder: "Votre commentaire", name: "commenttext", id: "", onInput: (event) => this.alldata(event) }), h("input", { class: "btn btn-primary text-white mt-2 bouton-commentaire ombrage", type: 'submit', value: 'Envoyer' }, " "), " ", h("br", null))))
         :
           null, this.afficherRessources.commentaires.map((d, idx) => {
-        return (h("div", { class: "pb-2 commentaire", key: idx }, h("div", { class: "bloc-commentaire py-1 px-2" }, " ", h("span", { class: "text1" }, d.commentaireText), h("div", { class: "d-flex justify-content-between align-items-center pt-2" }, h("div", { class: "d-flex" }, h("div", null, h("i", { class: "text2" }, d.prenomNomUser, " ")), h("div", null, h("i", { class: "date " }, ", le ", d.datePublicationComment.substr(0, 10)))), h("button", { class: "nostyle align-middle", value: d._id, onClick: commentaireid => this.signalerCommentaires(commentaireid) }, h("img", { class: "icone", src: "/bootstrap-files/exclamation-diamond.svg", width: "18", height: "18" }))))));
+        return (h("div", { class: "pb-2 commentaire", key: idx }, h("div", { class: "bloc-commentaire py-1 px-2" }, " ", h("span", { class: "text1" }, d.commentaireText), h("div", { class: "d-flex justify-content-between align-items-center pt-2" }, h("div", { class: "d-flex" }, h("div", null, h("i", { class: "text2" }, d.prenomNomUser, " ")), h("div", null, h("i", { class: "date " }, ", le ", d.datePublicationComment.substr(0, 10)))), h("button", { class: "nostyle align-middle", onClick: () => this.signalerCommentaires(d._id) }, h("img", { class: "icone", src: "/bootstrap-files/exclamation-diamond.svg", width: "18", height: "18" }))))));
       })))), h("style", null, ".hidden", this.vueplus1())));
     }
     if (this.message) {

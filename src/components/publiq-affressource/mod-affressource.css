@@ -1,0 +1,143 @@
+.pdf-frame {
+    Width: 100%; 
+    height: 700px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 6px;
+}
+
+.addtxt {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 13px;
+    background-color: #e5e8ed;
+}
+
+.date {
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 4px;
+    color: #828386;
+    text-decoration: ;
+}
+
+.bouton1 {
+    width: 40px;
+    height: 40px;
+}
+
+.nostyle {
+    border: none;
+    background-color: transparent;
+}
+
+.icone {
+    opacity: 35%;
+}
+
+.icone:hover {
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.btncomment {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 13px;
+    color: #56575b;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.bloc-description{
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.bloc-commentaire{
+    width: 100%;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.titre {
+    font-size:24px;
+    color:#56575b;
+}
+
+.nom-user {
+    font-size: 17px;
+    font-weight: 500;
+    color: #56575b;
+}
+
+.description {
+    font-size: 15px;
+    font-weight: 500;
+    color: #56575b;
+}
+
+.text1 {
+
+}
+
+.text2 {
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 6px;
+    color: #56575b
+}
+
+.text3o {
+    color: #00a5f4
+}
+
+.text4 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #828386
+}
+
+.text4i {
+    color: #00a5f4
+}
+
+.text4o {
+    color: white
+}
+
+.thumbup {
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 5px
+}
+
+.thumbupo {
+    color: #17a2b8
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+ }
+
+
+.circle {
+    border-radius: 50%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.form-control { width: 100%; }
+
+.btn-primary {
+    color: white;
+}
+
+.ombrage {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 6px;    
+}
