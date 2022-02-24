@@ -14,6 +14,7 @@ export class ModMonespace {
     @State() modsignale:Ressources[];
     @State() message: string;
     @State() ressourceId: string;
+    @State() ressourceIdsignale: string;
     @State() etatRE: string;
     @Prop() history: RouterHistory;
 
@@ -159,7 +160,7 @@ export class ModMonespace {
                                     
                                     <div class='row ms-2 mt-3 mb-3 fs-5 '><div class='col-11'> Catégorie : {ressource.tags}</div></div>
                                     <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{ressource.resume}</p></div></div>
-                                    <style>.hiden{this.ressourceId=ressource._id}</style>
+                                    {this.ressourceId=ressource._id}
                                         <form class='ms-3' onSubmit={(e)=>this.validate(e)}>
                                         <label>validerchoix
                                         <select name='valider' class='ms-3' onInput={(event) => this.alldata(event)}>
@@ -209,7 +210,7 @@ export class ModMonespace {
                                     
                                     <div class='row ms-2 mt-3 mb-3 fs-5 '><div class='col-11'> Catégorie : {signale.tags}</div></div>
                                     <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{signale.resume}</p></div></div>
-                                    <style>.hiden{this.ressourceId=signale._id}</style>
+                                    <style>.hiden{this.ressourceIdsignale=signale._id}</style>
                                     <form onSubmit={(e)=>this.validate(e)}>
                                         <label>validerchoix
                                         <select name='valider' onInput={(event) => this.alldata(event)}>
