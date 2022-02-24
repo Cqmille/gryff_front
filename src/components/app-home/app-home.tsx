@@ -52,7 +52,7 @@ async _getDataCard(string){
             <div id='education' class="card h-100 border-primary  " onClick={() => this._getDataCard('education')}>
               <img src="https://media.istockphoto.com/vectors/young-people-group-reading-books-study-learning-knowledge-and-vector-vector-id1207872886?k=20&m=1207872886&s=612x612&w=0&h=ofiu2dykMZGean-wJcFZqu4W4bi0yLgcosOYtOQaJUQ=" class="card-img-top h-75" alt="..."/>
               <div class="card-body">
-                <h3 class="card-title text-center text-primary">Education</h3>
+                <h3 class="card-title text-center text-primary">Éducation</h3>
               </div>
             </div>
           </div>

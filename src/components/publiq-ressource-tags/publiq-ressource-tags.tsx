@@ -52,7 +52,7 @@ import { Ressources } from '../../utils/Ressources';
 
                                 <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{ressource.resume}</p></div></div>
                             
-                                <div class='row mt-1'><div class='col-8 col-sm-3 col-md-6'><button class="btn btn-primary border text-light ms-1 mb-1" value={ressource._id} onClick={(event) => this.redirect(event)}>En savoir plus</button></div><div class='col-8 col-lg-6'>Publié:{ressource.datePublication}</div></div>
+                                <div class='row mt-1'><div class='col-8 col-sm-3 col-md-6'><button class="btn btn-primary border text-light ms-1 mb-1" value={ressource._id} onClick={(event) => this.redirect(event)}>En savoir plus</button></div><div class='col-8 col-lg-6'>Publié le : {ressource.datePublication}</div></div>
                             </div>)}
                         </div>     
                         <div class="col-sm-2"></div>

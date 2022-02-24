@@ -61,12 +61,12 @@ export class UserCreationRessource {
                     <form onSubmit={(e) => this.envoiRessource(e)}>
                         <div class="form-group">
                             <h1 class="titre">Création d'une ressource</h1>
-                            <label class="mx-2">Type</label>
+                            <label class="mx-2">Catégorie</label>
                             <select name='tags' onInput={(event) => this.alimRessource(event)}>
                                 <option value="selectionner la variable"></option>
                                 <option value="sante">Santé</option>
-                                <option value="education">Education</option>
-                                <option value="sport">sport</option>
+                                <option value="education">Éducation</option>
+                                <option value="sport">Sport</option>
                                 <option value="association">Association</option>
                                 <option value="emploi">Emploi</option>
                                 <option value="senior">Sénior</option>
@@ -77,7 +77,7 @@ export class UserCreationRessource {
                             <input type="text" class="form-control" name='titre' onInput={(event) => this.alimRessource(event)}/>
                         </div>
                         <div class="form-group mt-2">
-                            <label class="mx-2">Resumé</label>
+                            <label class="mx-2">Résumé</label>
                             <textarea name='resume' class="form-control" onInput={(event) => this.alimRessource(event)}/>
                         </div>
                         <div class="form-group mt-2">
