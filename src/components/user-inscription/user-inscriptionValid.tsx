@@ -13,7 +13,7 @@ import { RouterHistory } from '@stencil/router';
     return (
       <div>
           <p>
-            Compte créer avec succès, vous pouvez vous connecter.
+            Compte créer avec succès.
             Vous pouvez vous <a href="/connexion">connecté</a> 
           </p>
       </div>

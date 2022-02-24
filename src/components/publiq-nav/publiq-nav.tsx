@@ -1,4 +1,4 @@
-import { Component, h,Prop, Watch } from '@stencil/core';
+import { Component, h,Prop} from '@stencil/core';
 import { RouterHistory } from '@stencil/router';
 import {PATH} from '../../utils/path.js';
 @Component({
