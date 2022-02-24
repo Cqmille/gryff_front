@@ -76,7 +76,7 @@ export class userFavorisProfil {
                             <div class='border border-primary bg-light rounded mb-3 listshadow'>
                                 <div class='row mt-1'><div class='col-7 col-md-12 col-sm-3 text-center'><h2 class='ms-1 h4'> {this.profil.prenom}  {this.profil.nom} </h2></div></div>
 
-                                <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'><p>Date de naissance: {this.profil.dateNaissance} </p> Ville : {this.profil.ville} <p>Profession : {this.profil.profession}</p></p></div></div>
+                                <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>Ville : {this.profil.ville} <p>Profession : {this.profil.profession}</p></p></div></div>
                             
                             </div>
                         </div>     
