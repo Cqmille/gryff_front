@@ -83,6 +83,7 @@ export class userFavoris {
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
+            window.location.reload()
             console.log(this.message)
         }
         catch (err){
@@ -104,6 +105,7 @@ export class userFavoris {
                 }),
             })
             if(response.status == 401) {this.message = (await response.json()).message}
+            window.location.reload()
             console.log(this.message)
         }
         catch (err){
