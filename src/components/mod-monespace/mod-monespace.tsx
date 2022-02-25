@@ -54,6 +54,32 @@ export class ModMonespace {
         }
     }
 
+    async pasvalidate(e) {
+        e.preventDefault()
+        console.log(this.etatRE)
+        try{
+            let response = await fetch(`http://localhost:3000/moder/moderationRessource`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('token'),
+                    userid: localStorage.getItem('userId')
+                },
+                body: JSON.stringify({
+                    ressourceid: this.ressourceIdsignale,
+                    etatRessource: this.etatRE
+                }),
+            })
+            console.log()
+            if(response.status == 401) {this.message = (await response.json()).message}
+            window.location.reload()
+            // console.log(this.message)
+        }
+        catch (err){
+            console.log('fetch failed', err);
+        }
+    }
+
     async supprimerComment(commentaireid) {
         try{
             let response = await fetch(`http://localhost:3000/moder/moderationComment`, {
@@ -64,7 +90,7 @@ export class ModMonespace {
                     userid: localStorage.getItem('userId')
                 },
                 body: JSON.stringify({
-                    commentaireid: commentaireid.target.value,
+                    commentaireid: commentaireid,
                 }),
             })
             console.log()
@@ -178,7 +204,7 @@ export class ModMonespace {
                             </div>     
                             <div class="col-sm-2"></div>
                         </div>)}
-                        <h1 class='uppercase text-center mb-2'>Commentaires signaler</h1>
+                        <h1 class='uppercase text-center mb-2'>Commentaires signalées</h1>
                         {this.modComment.map((comment : Ressources) =>
                         <div>
                             <div class="row mx-3">
@@ -191,7 +217,7 @@ export class ModMonespace {
                                         
                                         {/* <div class='row ms-2 mt-3 mb-3 fs-5 '><div class='col-11'> Catégorie : {ressource.tags}</div></div> */}
                                         <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{d.commentaireText}</p></div></div>
-                                        <div class='row mt-1'><div class='col-5 col-sm-6'><button class="btn btn-primary border text-light ms-1 mb-2" value={comment._id} onClick={commentaireid=>this.supprimerComment(commentaireid)}>supprimer commentaire</button> <br />
+                                        <div class='row mt-1'><div class='col-5 col-sm-6'><button class="btn btn-primary border text-light ms-1 mb-2" onClick={()=>this.supprimerComment(comment._id)}>supprimer commentaire</button> <br />
                                         <button class="btn btn-primary border text-light ms-1 mb-2" value={comment._id}  onClick={(event) => this.goto(event)}>detail de la ressource</button> <br /></div></div>
                                     </div>)})} 
                                 <div class="col-sm-2"></div>
@@ -200,7 +226,7 @@ export class ModMonespace {
                         </div> )}
 
 
-                        <h1 class='uppercase text-center mb-2'>Ressources signaler</h1>
+                        <h1 class='uppercase text-center mb-2'>Ressources signalées</h1>
                     {this.modsignale.map((signale : Ressources) =>
                         <div class="row mx-3">
                             <div class="col-sm-2"></div>
@@ -211,7 +237,7 @@ export class ModMonespace {
                                     <div class='row ms-2 mt-3 mb-3 fs-5 '><div class='col-11'> Catégorie : {signale.tags}</div></div>
                                     <div class='row ms-5 mt-1 mb-1 fs-5 '><div class='col-11'><p class='truncate'>{signale.resume}</p></div></div>
                                     <style>.hiden{this.ressourceIdsignale=signale._id}</style>
-                                    <form onSubmit={(e)=>this.validate(e)}>
+                                    <form onSubmit={(e)=>this.pasvalidate(e)}>
                                         <label>validerchoix
                                         <select name='valider' onInput={(event) => this.alldata(event)}>
                                             <option value="selectionner la variable"></option>
