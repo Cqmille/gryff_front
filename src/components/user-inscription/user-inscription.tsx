@@ -14,11 +14,11 @@ import {PATH} from '../../utils/path.js';
 
     @State() nom: string;
     @State() prenom: string;   
-    @State() email: String;
-    @State() ville: String;
-    @State() profession: String;
-    @State() password: String;
-    @State() confirmPassword: String;
+    @State() email: string;
+    @State() ville: string;
+    @State() profession: string;
+    @State() password: string;
+    @State() confirmPassword: string;
     @State() reponseServer: JSON;
 
     async envoiInscription(e){
@@ -78,12 +78,12 @@ import {PATH} from '../../utils/path.js';
                 <div class="col-sm-6">
                     <div class="form-group">
                     <h1 class="titre">Inscription</h1>
-                    <label class="mx-2">Nom</label>
-                    <input type="text" class="form-control" name='nom' placeholder="Dupond" onInput={(event) => this.chargeState(event)}></input>
-                    </div>
                     <div class="form-group mt-2">
                     <label class="mx-2">Prénom</label>
                     <input type="text" class="form-control" name='prenom' placeholder="Jean-Louis" onInput={(event) => this.chargeState(event)}></input>
+                    </div>
+                    <label class="mx-2">Nom</label>
+                    <input type="text" class="form-control" name='nom' placeholder="Dupond" onInput={(event) => this.chargeState(event)}></input>
                     </div>
                     <div class="form-group mt-2">
                     <label class="mx-2">Email</label>

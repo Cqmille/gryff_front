@@ -24,9 +24,9 @@ export class ConnexionNav {
                     <a class="nav-link dropdown-toggle text-light" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Mon compte </a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
                         <li><stencil-route-link url="/monEspace" class="nav-link"><p>Mes ressources</p></stencil-route-link></li>
-                        <li><stencil-route-link url="/favorisuser" class="nav-link"><p>mes favoris</p></stencil-route-link></li>
+                        <li><stencil-route-link url="/favorisuser" class="nav-link"><p>Mes favoris</p></stencil-route-link></li>
                         <li><stencil-route-link url="/newRessource" class="nav-link"><p>Créer ressource</p></stencil-route-link></li>
-                        <li><stencil-route-link url="/profil" class="nav-link"><p>profile</p></stencil-route-link></li>
+                        <li><stencil-route-link url="/profil" class="nav-link"><p>Profile</p></stencil-route-link></li>
                         <li><stencil-route-link onClick={() => this.deconnexion()} url="/" class="nav-link"><p>Déconnexion</p></stencil-route-link></li>
                     </ul>
                 </li>
