@@ -11,6 +11,9 @@
   #logo {
     max-height: 26px;
   }
+  .menu-left {
+    text-align: start;
+}
 }
 
 stencil-route-link a {
@@ -45,9 +48,9 @@ li>a>p{
     margin: 0;
     align-items: center;
 }
-
+/* 
 @media (max-width: 380px) {
     .menu-left {
         text-align: start;
     }
-  }
+  } */

@@ -176,7 +176,7 @@ export class ModMonespace {
         if(this.modRessource && this.modComment && this.modsignale ){
             return (
                 <div class='container'>
-                    <h1 class='uppercase text-center mb-2'>Ressources en attentes</h1>
+                    <h1 class='uppercase text-center mb-2'>Ressources en attente</h1>
                     {this.modRessource.map((ressource : Ressources) =>
                         <div class="row mx-3">
                             <div class="col-sm-2"></div>
@@ -204,7 +204,7 @@ export class ModMonespace {
                             </div>     
                             <div class="col-sm-2"></div>
                         </div>)}
-                        <h1 class='uppercase text-center mb-2'>Commentaires signalées</h1>
+                        <h1 class='uppercase text-center mb-2'>Commentaires signalés</h1>
                         {this.modComment.map((comment : Ressources) =>
                         <div>
                             <div class="row mx-3">

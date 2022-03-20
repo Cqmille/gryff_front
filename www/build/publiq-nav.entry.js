@@ -1,7 +1,7 @@
 import { r as registerInstance, h } from './index-25b9a15f.js';
 import { P as PATH } from './path-5d0f272b.js';
 
-const publiqNavCss = "#logo{max-height:40px}stencil-route-link a{color:rgb(255, 255, 255);text-decoration:none}stencil-route-link p{color:black;margin:0}.dropdown-item{color:black !important}.navbar{box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px}.navbar :hover{color:rgb(9, 90, 100) !important}li>a>p{color:black;margin:0;align-items:center}";
+const publiqNavCss = "#logo{max-height:40px}@media (max-width: 380px){#logo{max-height:26px}.menu-left{text-align:start}}stencil-route-link a{color:rgb(255, 255, 255);text-decoration:none}stencil-route-link p{color:black;margin:0}.dropdown-item{color:black !important}.navbar{box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px}.navbar :hover{color:rgb(9, 90, 100) !important}li>a>p{color:black;margin:0;align-items:center}";
 
 let PubliqNav = class {
   constructor(hostRef) {
