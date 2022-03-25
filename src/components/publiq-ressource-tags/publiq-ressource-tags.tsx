@@ -48,7 +48,7 @@ import { Ressources } from '../../utils/Ressources';
                     <div class="row justify-content-center">
                         <div class="col-sm-8">
                             {this.mesRessources.map((ressource : Ressources) =>
-                            <div class='bloc-ressource p-2'>
+                            <div class='bloc-ressource p-2 mb-3'>
                                 <div class="row d-flex align-items-baseline">
                                     <div class="d-flex justify-content-between">
                                         <h2 class=''>{ressource.titre}</h2>
